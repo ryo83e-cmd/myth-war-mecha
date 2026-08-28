@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- 背景：出土した黒曜石・スレート石板 -->
+  <rect width="64" height="64" rx="12" fill="#080c14"/>
+  <rect width="56" height="56" x="4" y="4" rx="8" fill="none" stroke="#223044" stroke-width="1.5"/>
+
+  <!-- 四隅の古代封印楔（金銅） -->
+  <polygon points="4,12 12,4 4,4" fill="#b38747"/>
+  <polygon points="60,12 52,4 60,4" fill="#b38747"/>
+  <polygon points="4,52 12,60 4,60" fill="#b38747"/>
+  <polygon points="60,52 52,60 60,60" fill="#b38747"/>
+
+  <!-- 【神聖碑文 "M"】考古学的な金工・神殿柱風シルエット -->
+  <!-- 左主柱 -->
+  <polygon points="12,48 18,48 18,18 12,18" fill="#e5b95f"/>
+  <polygon points="10,18 20,18 15,14" fill="#b38747"/>
+  <polygon points="10,48 20,48 15,52" fill="#b38747"/>
+
+  <!-- 右主柱 -->
+  <polygon points="46,48 52,48 52,18 46,18" fill="#e5b95f"/>
+  <polygon points="44,18 54,18 49,14" fill="#b38747"/>
+  <polygon points="44,48 54,48 49,52" fill="#b38747"/>
+
+  <!-- 中央の楔型 V字（Mを完成させる神聖幾何学ライン） -->
+  <polygon points="18,18 32,38 32,46 18,26" fill="#e5b95f"/>
+  <polygon points="46,18 32,38 32,46 46,26" fill="#c99e4b"/>
+  
+  <!-- 中央頂点（神格の核・レリックストーン） -->
+  <polygon points="32,24 37,31 32,38 27,31" fill="#e5b95f"/>
+  <polygon points="32,27 35,31 32,35 29,31" fill="#080c14"/>
+</svg>
