@@ -101,9 +101,9 @@ body {
 .myth-header-core {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
 .title-cluster {
@@ -113,12 +113,13 @@ body {
 
 .myth-main-title {
   font-family: var(--font-serif);
-  font-size: 2.3rem;
+  font-size: clamp(1.4rem, 5.5vw, 2.3rem); /* 画面幅に合わせて自動縮小 */
   font-weight: 900;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em; /* スマホで見切れないよう字間を微調整 */
   color: #ffffff;
   text-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
-  line-height: 1.1;
+  line-height: 1.15;
+  word-break: break-word;
 }
 
 .myth-sub-wrapper {
@@ -147,12 +148,13 @@ body {
 .codex-seal {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   background: rgba(212, 175, 55, 0.04);
   border: 1px solid var(--border-gold);
-  padding: 0.45rem 0.85rem;
+  padding: 0.4rem 0.75rem;
   border-radius: 2px;
   position: relative;
+  margin-top: 0.4rem;
 }
 
 .codex-seal::before {
