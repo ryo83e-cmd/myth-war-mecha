@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MITH WAR MECHA // GLOBAL EXCAVATION ARCHIVE</title>
+  <title>MYTH WAR MECHA // GLOBAL EXCAVATION ARCHIVE</title>
   <style>
     :root {
-      --bg-color: #080a0f;
-      --card-bg: #111620;
+      --bg-color: #05070c;
+      --card-bg: #0c111a;
       --accent-cyan: #00f0ff;
       --accent-gold: #e5b95f;
       --text-main: #e2e8f0;
       --text-dim: #798b9f;
-      --border-color: #1e293b;
-      --border-bright: #00f0ff55;
+      --border-color: #1a2332;
+      --border-bright: #00f0ff44;
     }
 
     * {
@@ -30,13 +30,10 @@
       line-height: 1.6;
     }
 
-    .bg-grid {
+    .space-bg {
       position: fixed;
       inset: 0;
-      background-image: 
-        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background: radial-gradient(circle at 50% 30%, #0d1527 0%, #030508 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -44,47 +41,48 @@
     header {
       position: relative;
       z-index: 10;
-      padding: 2rem 1.5rem 1rem;
+      padding: 2.2rem 1.5rem 1rem;
       text-align: center;
       border-bottom: 1px solid var(--border-color);
-      background: linear-gradient(180deg, rgba(8,10,15,0.95) 0%, rgba(8,10,15,0.8) 100%);
-      backdrop-filter: blur(8px);
+      background: linear-gradient(180deg, rgba(5,7,12,0.95) 0%, rgba(5,7,12,0.7) 100%);
+      backdrop-filter: blur(10px);
     }
 
     .hud-badge {
       display: inline-block;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
       color: var(--accent-cyan);
       border: 1px solid var(--border-bright);
-      padding: 0.2rem 0.6rem;
+      padding: 0.25rem 0.75rem;
       border-radius: 2px;
       margin-bottom: 0.75rem;
       text-transform: uppercase;
+      background: rgba(0, 240, 255, 0.05);
     }
 
     h1 {
-      font-size: 2.2rem;
-      letter-spacing: 0.15em;
+      font-size: 2.3rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #ffffff;
-      text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+      text-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
     }
 
     .subtitle {
       font-size: 0.85rem;
       color: var(--text-dim);
-      margin-top: 0.5rem;
-      letter-spacing: 0.05em;
+      margin-top: 0.4rem;
+      letter-spacing: 0.1em;
     }
 
     #globe-section {
       position: relative;
       z-index: 1;
       width: 100%;
-      height: 55vh;
-      min-height: 380px;
-      max-height: 550px;
+      height: 60vh;
+      min-height: 420px;
+      max-height: 600px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -105,84 +103,87 @@
 
     .globe-overlay-hint {
       position: absolute;
-      bottom: 1rem;
-      background: rgba(17, 22, 32, 0.85);
-      border: 1px solid var(--border-color);
-      padding: 0.3rem 0.8rem;
+      bottom: 1.2rem;
+      background: rgba(12, 17, 26, 0.85);
+      border: 1px solid var(--border-bright);
+      padding: 0.35rem 1rem;
       border-radius: 20px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--accent-cyan);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
       pointer-events: none;
+      backdrop-filter: blur(5px);
     }
 
     .prologue-box {
       position: relative;
       z-index: 2;
-      max-width: 900px;
-      margin: 1.5rem auto 3rem;
-      padding: 1.5rem;
+      max-width: 950px;
+      margin: 1.5rem auto 3.5rem;
+      padding: 1.75rem;
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-left: 3px solid var(--accent-gold);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
     .prologue-title {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--accent-gold);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.6rem;
       text-transform: uppercase;
+      font-weight: bold;
     }
 
     .prologue-text {
       font-size: 0.95rem;
       color: var(--text-main);
-      line-height: 1.8;
+      line-height: 1.85;
     }
 
     main {
       position: relative;
       z-index: 2;
-      max-width: 1100px;
+      max-width: 1150px;
       margin: 0 auto;
-      padding: 0 1.5rem 5rem;
+      padding: 0 1.5rem 6rem;
     }
 
     .section-header {
-      font-size: 1.2rem;
-      letter-spacing: 0.15em;
+      font-size: 1.15rem;
+      letter-spacing: 0.2em;
       color: var(--accent-cyan);
       border-bottom: 1px solid var(--border-color);
       padding-bottom: 0.75rem;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .faction-card {
+    .sector-block {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 4px;
-      margin-bottom: 3.5rem;
+      margin-bottom: 4.5rem;
       overflow: hidden;
       scroll-margin-top: 2rem;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .faction-card:hover {
-      border-color: var(--accent-cyan);
+    .sector-block:hover {
+      border-color: rgba(0, 240, 255, 0.4);
     }
 
-    .faction-card.highlight {
+    .sector-block.highlight {
       border-color: var(--accent-cyan);
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
     }
 
-    .faction-header {
-      padding: 1.25rem 1.5rem;
-      background: rgba(0, 0, 0, 0.3);
+    .sector-header {
+      padding: 1.25rem 1.75rem;
+      background: rgba(0, 0, 0, 0.4);
       border-bottom: 1px solid var(--border-color);
       display: flex;
       justify-content: space-between;
@@ -191,37 +192,43 @@
       gap: 0.5rem;
     }
 
-    .faction-tag {
-      font-size: 0.75rem;
+    .sector-tag {
+      font-size: 0.72rem;
       color: var(--accent-cyan);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
       display: block;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.25rem;
     }
 
-    .faction-name {
-      font-size: 1.3rem;
+    .sector-name {
+      font-size: 1.4rem;
       font-weight: bold;
-      color: #fff;
+      color: #ffffff;
+      letter-spacing: 0.05em;
     }
 
-    .faction-content {
-      padding: 1.5rem;
+    .mecha-unit {
+      padding: 1.75rem;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 1.75rem;
+      border-bottom: 1px dashed var(--border-color);
     }
 
-    @media (min-width: 800px) {
-      .faction-content {
+    .mecha-unit:last-of-type {
+      border-bottom: none;
+    }
+
+    @media (min-width: 850px) {
+      .mecha-unit {
         grid-template-columns: 1.2fr 1fr;
       }
     }
 
     .image-frame {
       width: 100%;
-      min-height: 250px;
-      background: #05070a;
+      min-height: 280px;
+      background: #030508;
       border: 1px solid var(--border-color);
       display: flex;
       align-items: center;
@@ -232,16 +239,17 @@
     }
 
     .image-frame::after {
-      content: "🔍 CLICK TO EXPAND";
+      content: "🔍 CLICK TO INSPECT BLUEPRINT";
       position: absolute;
-      bottom: 0.5rem;
-      right: 0.5rem;
-      background: rgba(0,0,0,0.8);
+      bottom: 0.6rem;
+      right: 0.6rem;
+      background: rgba(0,0,0,0.85);
       border: 1px solid var(--border-bright);
       color: var(--accent-cyan);
-      font-size: 0.7rem;
-      padding: 0.2rem 0.5rem;
+      font-size: 0.68rem;
+      padding: 0.25rem 0.6rem;
       border-radius: 2px;
+      letter-spacing: 0.05em;
     }
 
     .image-frame img {
@@ -254,15 +262,22 @@
     .image-frame .placeholder {
       color: var(--text-dim);
       font-size: 0.85rem;
-      padding: 2rem;
+      padding: 2.5rem;
       text-align: center;
+    }
+
+    .mecha-name {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 0.5rem;
     }
 
     .spec-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.85rem;
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
     }
 
     .spec-table th, .spec-table td {
@@ -279,19 +294,47 @@
 
     .doctrine-box {
       margin-top: 1.25rem;
-      padding: 1rem;
-      background: rgba(0,0,0,0.25);
+      padding: 1rem 1.2rem;
+      background: rgba(0,0,0,0.35);
       border-left: 2px solid var(--accent-cyan);
       font-size: 0.85rem;
       color: var(--text-main);
+    }
+
+    .story-section {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1.5rem 1.75rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .story-tag {
+      font-size: 0.72rem;
+      color: var(--accent-gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    .story-title {
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      font-weight: bold;
+    }
+
+    .story-body {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      font-style: italic;
     }
 
     #image-modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(4, 6, 10, 0.94);
-      backdrop-filter: blur(8px);
+      background: rgba(3, 5, 8, 0.95);
+      backdrop-filter: blur(10px);
       z-index: 1000;
       align-items: center;
       justify-content: center;
@@ -308,32 +351,39 @@
       max-height: 85vh;
       object-fit: contain;
       border: 1px solid var(--border-bright);
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.25);
     }
 
     #modal-caption {
-      margin-top: 0.8rem;
+      margin-top: 1rem;
       font-size: 0.9rem;
       color: var(--accent-cyan);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
     }
 
     .modal-close {
       position: absolute;
       top: 1.5rem;
       right: 2rem;
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--text-dim);
       cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: var(--accent-cyan);
     }
 
     footer {
       position: relative;
       z-index: 2;
       text-align: center;
-      padding: 2.5rem 1.5rem;
+      padding: 3rem 1.5rem;
       border-top: 1px solid var(--border-color);
       font-size: 0.75rem;
       color: var(--text-dim);
+      letter-spacing: 0.1em;
     }
   </style>
 
@@ -341,11 +391,11 @@
 </head>
 <body>
 
-  <div class="bg-grid"></div>
+  <div class="space-bg"></div>
 
   <header>
     <div class="hud-badge">GLOBAL EXCAVATION ARCHIVE // 20XX</div>
-    <h1>MITH WAR MECHA</h1>
+    <h1>MYTH WAR MECHA</h1>
     <p class="subtitle">超古代神話兵器 発掘解析データベース</p>
   </header>
 
@@ -357,9 +407,9 @@
   <section class="prologue-box">
     <div class="prologue-title">// OVERVIEW // 神話大戦の再来</div>
     <p class="prologue-text">
-      20XX年、世界各地の遺跡群より、現代工学を根底から覆す未知の兵器群「神代機体」が発掘された。<br>
-      年代測定は約10,000年前。諸国の神話伝承とは、かつてこの星で繰り広げられた超古代兵器による大戦の記録に過ぎなかった。
-      遺物の再起動が進む現代、世界は再び「神話の戦争」の特異点へと突入する。
+      20XX年、世界各地の超古代遺跡群より、現代物理学の枠組みを根底から覆す未知の巨大人型兵器群「神代機体」が発掘された。<br>
+      年代測定は約10,000年前。諸国の神話・伝承とは、かつてこの星で繰り広げられた文明間最終戦争の記録に他ならなかった。
+      休眠から目覚めつつある遺物群を前に、世界は再び「神話の戦争」の特異点へと突入する。
     </p>
   </section>
 
@@ -379,7 +429,7 @@
   </div>
 
   <footer>
-    <p>&copy; MITH WAR MECHA PROJECT // GLOBAL EXCAVATION DATABASE</p>
+    <p>&copy; MYTH WAR MECHA PROJECT // GLOBAL EXCAVATION ARCHIVE</p>
   </footer>
 
   <script>
@@ -388,127 +438,217 @@
         id: "sector-greek",
         mythBadge: "GREEK MYTH",
         sectorTag: "SECTOR 01 // MEDITERRANEAN",
-        fullName: "アテナイ・ポリス連合 / アテナ [PALLAS]",
+        sectorName: "アテナイ・ポリス連合",
         lat: 38.0,
         lon: 23.7,
-        image: "athena.png",
-        specs: [
-          { label: "全高 / 重量", value: "14.2m / 23.6t" },
-          { label: "動力", value: "精神波インターフェース型神経炉" },
-          { label: "装甲材", value: "オリュンポス合金（潤愛甲）" },
-          { label: "主機", value: "中距離戦闘 / ファランクス支援機" },
-          { label: "主武装", value: "超長槍【ドーリュス】/ アイギス・シールド" }
+        mechaList: [
+          {
+            name: "アテナ [PALLAS ATHENA]",
+            image: "athena.png",
+            specs: [
+              { label: "全高 / 重量", value: "14.2m / 23.6t" },
+              { label: "動力", value: "精神波インターフェース型神経炉" },
+              { label: "装甲材", value: "オリュンポス合金（潤愛甲）" },
+              { label: "主兵装", value: "超長槍【ドーリュス】/ アイギス・シールド" }
+            ],
+            doctrineTitle: "運用ドクトリン: ファランクス陣形",
+            doctrineText: "単騎での格闘戦を主とせず、盾を連結した多層精神波フィールドによる集団防壁を形成。水上ホバー機動と長槍斉射による圧倒的制圧を行う。"
+          }
         ],
-        doctrineTitle: "運用ドクトリン: ファランクス陣形",
-        doctrineText: "単騎での格闘戦を主とせず、盾を連結した多層精神波フィールドによる集団防壁を形成。水上ホバー機動と長槍斉射による圧倒的制圧を行う。"
+        story: {
+          tag: "EXCAVATION LOG #01-A",
+          title: "エーゲ海底の鋼鉄処女",
+          text: "エーゲ海溝3,000メートルの泥中より引き揚げられたオリュンポス合金の装甲は、数千年の塩害を受けながらも鏡面のような白銀を保っていた。パイロット候補生が搭乗した瞬間、神経炉から放たれた精神波パルスは観測網全域を青く染め上げた。"
+        }
       },
       {
         id: "sector-norse",
         mythBadge: "NORSE MYTH",
         sectorTag: "SECTOR 02 // SCANDINAVIA",
-        fullName: "ヴァン神族連合 / フレイ [VANIR CLASS]",
+        sectorName: "ヴァン神族連合",
         lat: 60.0,
         lon: 15.0,
-        image: "freyr.png",
-        specs: [
-          { label: "全高 / 重量", value: "14.3m / 41.7t" },
-          { label: "動力", value: "北欧系人工筋肉弾性素子" },
-          { label: "主兵装", value: "自律戦闘剣《スキーズブラズニル》" },
-          { label: "特殊機構", value: "バーサーカーモード（出力420%解放）" },
-          { label: "運用思想", value: "「正面から叩き潰して突破する」決定打的突進戦" }
+        mechaList: [
+          {
+            name: "フレイ [VANIR CLASS]",
+            image: "freyr.png",
+            specs: [
+              { label: "全高 / 重量", value: "14.3m / 41.7t" },
+              { label: "動力", value: "北欧系人工筋肉弾性素子" },
+              { label: "主兵装", value: "自律戦闘剣《スキーズブラズニル》" },
+              { label: "特殊機構", value: "バーサーカーモード（出力420%解放）" }
+            ],
+            doctrineTitle: "運用ドクトリン: 突進・強襲",
+            doctrineText: "「豊穣は力により守られる。力は生命に戻る。」装甲展開シーケンスにより過熱を強制排熱し、精神波同調で機動・加速力を極限まで高める。"
+          }
         ],
-        doctrineTitle: "運用ドクトリン: 突進・強襲",
-        doctrineText: "「豊穣は力により守られる。力は生命に戻る。」装甲展開シーケンスにより過熱を強制排熱し、精神波同調で機動・加速力を極限まで高める。"
+        story: {
+          tag: "EXCAVATION LOG #02-B",
+          title: "永久凍土の咆哮",
+          text: "スカンディナヴィアの氷壁深くに埋もれていた巨躯は、周囲の熱を貪り喰うようにして再起動した。自律戦闘剣が宙を舞い、氷原を切り裂いた一撃の余波は、現代兵器の装甲板を紙のように断ち切った。"
+        }
       },
       {
         id: "sector-taoism",
         mythBadge: "TAOISM MYTH",
         sectorTag: "SECTOR 03 // EAST ASIA",
-        fullName: "玉虚宮 崑崙山 / 広成子 [こうせいし]",
+        sectorName: "玉虚宮 崑崙山",
         lat: 35.8,
         lon: 94.0,
-        image: "kouseishi.png",
-        specs: [
-          { label: "全高 / 重量", value: "14.1m / 18.4t" },
-          { label: "動力", value: "霊気炉「乾元」" },
-          { label: "主要法宝", value: "番天印（推定重量480t以上 / 質量制御・圧壊術式）" },
-          { label: "機体特性", value: "霊気回路循環による遠隔術式・法宝自律運用" },
-          { label: "運用思想", value: "最小の動きで最大の効果を生む盤面制圧" }
+        mechaList: [
+          {
+            name: "広成子 [こうせいし]",
+            image: "kouseishi.png",
+            specs: [
+              { label: "全高 / 重量", value: "14.1m / 18.4t" },
+              { label: "動力", value: "霊気炉「乾元」" },
+              { label: "主要法宝", value: "番天印（推定重量480t以上 / 質量制御）" },
+              { label: "運用思想", value: "最小の動きで最大の効果を生む盤面制圧" }
+            ],
+            doctrineTitle: "運用ドクトリン: 道教法宝制圧",
+            doctrineText: "「印は天の意を刻み、道は無形にして万象を制す。」機体装甲は最小限に留め、霊気隔壁と補助法宝ユニットによる空間固定・質量圧壊を行う。"
+          }
         ],
-        doctrineTitle: "運用ドクトリン: 道教法宝制圧",
-        doctrineText: "「印は天の意を刻み、道は無形にして万象を制す。」機体装甲は最小限に留め、霊気隔壁と4基の補助法宝ユニットによる空間固定・質量圧壊を行う。"
+        story: {
+          tag: "EXCAVATION LOG #03-C",
+          title: "天を穿つ金印の質量",
+          text: "崑崙山の地下鍾乳洞で発見された浮遊コア。周囲の重力定数が局所的に狂う現象が観測され、小型印章型の法宝から放たれる質量制御フィールドは一帯の山嶺を軽々と押し潰した。"
+        }
       },
       {
         id: "sector-mesopotamia",
         mythBadge: "MESOPOTAMIA MYTH",
         sectorTag: "SECTOR 04 // MESOPOTAMIA",
-        fullName: "メソポタミア神権 / エンリル [ENLIL]",
+        sectorName: "メソポタミア神権",
         lat: 33.3,
         lon: 44.3,
-        image: "enlil.png",
-        specs: [
-          { label: "全高 / 重量", value: "14.0m / 不明（重戦闘型）" },
-          { label: "装甲構造", value: "積層装甲構造（大判蛇腹状装甲）" },
-          { label: "主武装", value: "シックルソード（鎌剣）" },
-          { label: "兵装システム", value: "肩部風圧兵装システム（圧縮空気砲撃）" },
-          { label: "脚部機構", value: "踵部大型単輪タイヤ ＋ くるぶし鎌" }
+        mechaList: [
+          {
+            name: "エンリル [ENLIL]",
+            image: "enlil.png",
+            specs: [
+              { label: "全高 / 重量", value: "14.0m / 不明（重戦闘型）" },
+              { label: "装甲構造", value: "積層装甲構造（大判蛇腹状装甲）" },
+              { label: "主武装", value: "シックルソード（鎌剣） / 肩部風圧兵装" },
+              { label: "脚部機構", value: "踵部大型単輪タイヤ ＋ くるぶし鎌" }
+            ],
+            doctrineTitle: "運用ドクトリン: 歩く要塞・戦艦型ドクトリン",
+            doctrineText: "鈍重ながら圧倒的な装甲厚と肩部風圧砲で正面を維持・粉砕。接近を試みた敵をシックルソードと踵の鎌で引き裂く。"
+          }
         ],
-        doctrineTitle: "運用ドクトリン: 歩く要塞・戦艦型ドクトリン",
-        doctrineText: "鈍重ながら圧倒的な装甲厚と肩部風圧砲で正面を維持・粉砕。接近を試みた敵をシックルソードと踵の鎌で引き裂く。"
+        story: {
+          tag: "EXCAVATION LOG #04-D",
+          title: "砂塵の重嵐",
+          text: "チグリス・ユーフラテス川下流域のジグラット基礎部から現れた巨体。タイヤ機構が大地を踏み締めると同時に、肩部の風圧砲から発せられた爆風が砂漠を焦土へと変貌させた。"
+        }
       },
       {
         id: "sector-egypt",
         mythBadge: "EGYPT MYTH",
         sectorTag: "SECTOR 05 // NILE BASIN",
-        fullName: "エジプト神権 / ホルス [HORUS]",
+        sectorName: "エジプト神権",
         lat: 26.8,
         lon: 30.8,
-        image: "horus.png",
-        specs: [
-          { label: "全高 / 重量", value: "14.0m / 不明（中量級）" },
-          { label: "分類 / 特性", value: "天空戦・高機動型（王権の姿勢・反り構造）" },
-          { label: "主武装", value: "ホルスの槍 / 羽型ハンド（エネルギーブレード）" },
-          { label: "特殊形態", value: "飛行形態（ホルス・フライト）" },
-          { label: "脚部", value: "逆関節脚（跳躍・高把持力爪）" }
+        mechaList: [
+          {
+            name: "ホルス [HORUS]",
+            image: "horus.png",
+            specs: [
+              { label: "全高 / 分類", value: "14.0m / 天空戦・高機動型" },
+              { label: "主武装", value: "ホルスの槍 / 羽型ハンド（エネルギー刃）" },
+              { label: "特殊形態", value: "飛行形態（ホルス・フライト）" },
+              { label: "脚部", value: "逆関節脚（跳躍・高把持力爪）" }
+            ],
+            doctrineTitle: "運用ドクトリン: 王権の守護者・制空支配",
+            doctrineText: "ウラエウス（聖蛇）による精神波増幅と超高感度センサーを用い、上空からの精密急降下攻撃で敵の指揮中枢を壊滅させる。"
+          }
         ],
-        doctrineTitle: "運用ドクトリン: 王権の守護者・制空支配",
-        doctrineText: "ウラエウス（聖蛇）による精神波増幅と超高感度センサーを用い、上空からの精密急降下攻撃で敵の指揮中枢を壊滅させる。"
+        story: {
+          tag: "EXCAVATION LOG #05-E",
+          title: "黄金の天翔ける眼",
+          text: "ピラミッド地下の玄室で、反り上がった姿勢のまま直立していた隼頭の神代機。胸部の聖蛇センサーが起動した瞬間、眩いラピスラズリの光刃が翼を広げ、音速を超えて大気圏を切り裂いた。"
+        }
       },
       {
         id: "sector-india",
         mythBadge: "VEDIC MYTH",
         sectorTag: "SECTOR 06 // INDUS VALLEY",
-        fullName: "インド神話体系 / ヴァーユ [VAYU]",
+        sectorName: "インド神話体系",
         lat: 20.5,
         lon: 78.9,
-        image: "vayu.png",
-        specs: [
-          { label: "全高 / 分類", value: "14.0m / 天空神・風神・気神" },
-          { label: "主能力", value: "風の運用・気流操作・バリア展開" },
-          { label: "操縦方式", value: "精神波同調式コクピット" },
-          { label: "共通機構", value: "丸型ショルダーバリア（高出力エネルギー障壁）" },
-          { label: "固有装備", value: "風袋（ふうたい / 高圧気流・精神波圧縮タンク）" }
+        mechaList: [
+          {
+            name: "ヴァーユ [VAYU]",
+            image: "vayu.png",
+            specs: [
+              { label: "全高 / 分類", value: "14.0m / 天空神・風神・気神" },
+              { label: "主能力", value: "風の運用・気流操作・バリア展開" },
+              { label: "共通機構", value: "丸型ショルダーバリア（高出力エネルギー障壁）" },
+              { label: "固有装備", value: "風袋（ふうたい / 圧縮気流タンク）" }
+            ],
+            doctrineTitle: "運用ドクトリン: プラーナ循環・三次元噴射",
+            doctrineText: "装甲を持たない腹部からプラーナを循環・放出し、風袋による三次元噴射と高圧衝撃波で戦場全域の気流を支配する。"
+          }
         ],
-        doctrineTitle: "運用ドクトリン: プラーナ循環・多方向高機動",
-        doctrineText: "装甲を持たない腹部からプラーナ（生命エネルギー）を循環・放出し、風袋による三次元噴射と高圧衝撃波で戦場全域の気流を支配する。"
+        story: {
+          tag: "EXCAVATION LOG #06-F",
+          title: "呼吸する白亜の霊風",
+          text: "装甲を持たない腹部から絶え間なくエネルギーを排吸し続ける白磁の機体。背部の球体風袋から解き放たれた気流の渦は、戦場全体の空気を奪い去り、触れた敵機を分子レベルで風化させた。"
+        }
       },
       {
         id: "sector-mesoamerica",
         mythBadge: "MESOAMERICA",
         sectorTag: "SECTOR 07 // MESOAMERICA",
-        fullName: "メソアメリカ神話 / ケツァルコアルト [QUETZALCOATL]",
+        sectorName: "メソアメリカ神話",
         lat: 19.4,
         lon: -99.1,
-        image: "quetzalcoatl.png",
-        specs: [
-          { label: "全高 (頭頂部)", value: "14.0m / 重量: 不明" },
-          { label: "機体方式", value: "精神波同期式コアドライブ" },
-          { label: "構造特徴", value: "蛇型可動フレーム ＋ 羽根型推進・装甲フィン" },
-          { label: "クラスター機体", value: "ユーマ（羽の子 / スカイフィッシュ型小型群体）" },
-          { label: "主武装・能力", value: "風圧カッター / 気流竜巻 / 再生フィールド" }
+        mechaList: [
+          {
+            name: "ケツァルコアルト [QUETZALCOATL]",
+            image: "quetzalcoatl.png",
+            specs: [
+              { label: "全高 (頭頂部)", value: "14.0m / 重量: 不明" },
+              { label: "機体方式", value: "精神波同期式コアドライブ" },
+              { label: "群体ユニット", value: "ユーマ（羽の子 / スカイフィッシュ型小型群体）" },
+              { label: "主能力", value: "風圧カッター / 気流竜巻 / 再生フィールド" }
+            ],
+            doctrineTitle: "運用ドクトリン: 循環・群体攪乱・再生",
+            doctrineText: "破壊よりも秩序の再構築を重視。自らの羽根から数十機の小型群体「ユーマ」を生成・放出し、風の循環で包み込んで敵を削り制圧する。"
+          }
         ],
-        doctrineTitle: "運用ドクトリン: 循環・群体攪乱・再生",
-        doctrineText: "破壊よりも秩序の再構築を重視。自らの羽根から数十機の小型群体「ユーマ」を生成・放出し、風の循環で包み込んで敵を削り制圧する。"
+        story: {
+          tag: "EXCAVATION LOG #07-G",
+          title: "密林の羽毛蛇と群れ飛ぶ子ら",
+          text: "熱帯雨林の奥底、緑青に覆われた蛇型巨神。その翼から無数に剥離した小型飛翔体『ユーマ』の群れは、風を喰らい自己修復を繰り返しながら、侵入者を跡形もなく解体していった。"
+        }
+      },
+      {
+        id: "sector-japan",
+        mythBadge: "SHINTO MYTH",
+        sectorTag: "SECTOR 08 // FAR EAST ARCHIPELAGO",
+        sectorName: "日ノ本神代連合",
+        lat: 35.0,
+        lon: 135.7,
+        mechaList: [
+          {
+            name: "スサノオ [SUSANOO]",
+            image: "susanoo.png",
+            specs: [
+              { label: "全高 / 重量", value: "14.5m / 31.0t" },
+              { label: "動力", value: "八咫鏡型・熱核共鳴炉" },
+              { label: "主兵装", value: "十拳剣 / 天叢雲剣" },
+              { label: "運用思想", value: "荒魂（アラミタマ）暴走覚醒による単騎決戦" }
+            ],
+            doctrineTitle: "運用ドクトリン: 荒魂抜刀・神罰顕現",
+            doctrineText: "高出力熱核照射による広域薙ぎ払いと、十拳剣による近接抜刀一撃必殺。機体出力の臨界突破を前提とする。"
+          }
+        ],
+        story: {
+          tag: "EXCAVATION LOG #08-H",
+          title: "出雲深層の荒ぶる鉄魂",
+          text: "出雲大社最深部の岩戸より検知された異常な熱核反応。調査隊が見たものは、幾重もの注連縄で封じられた巨大な刀身と、黒鉄の鎧に身を包んだ巨神の沈黙の姿であった。"
+        }
       }
     ];
 
@@ -517,30 +657,41 @@
     counterEl.textContent = `${SECTORS_DATA.length} SECTORS IDENTIFIED`;
 
     SECTORS_DATA.forEach(sec => {
-      const specRows = sec.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
-      
-      const cardHTML = `
-        <article class="faction-card" id="${sec.id}">
-          <div class="faction-header">
-            <div>
-              <span class="faction-tag">${sec.sectorTag}</span>
-              <h2 class="faction-name">${sec.fullName}</h2>
+      const mechaHTML = sec.mechaList.map(m => {
+        const specRows = m.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
+        return `
+          <div class="mecha-unit">
+            <div class="image-frame" onclick="openModal('${m.image}', '${m.name}')">
+              <img src="${m.image}" alt="${m.name}" onerror="this.outerHTML='<div class=\\'placeholder\\'>[ ${m.name} // 画像: ${m.image} ]</div>'">
             </div>
-            <div class="hud-badge">${sec.mythBadge}</div>
-          </div>
-          <div class="faction-content">
-            <div class="image-frame" onclick="openModal('${sec.image}', '${sec.fullName}')">
-              <img src="${sec.image}" alt="${sec.fullName}" onerror="this.outerHTML='<div class=\\'placeholder\\'>[ ${sec.fullName} 画像: ${sec.image} を配置 ]</div>'">
-            </div>
-            <div class="faction-details">
+            <div class="mecha-details">
+              <h3 class="mecha-name">${m.name}</h3>
               <table class="spec-table">
                 ${specRows}
               </table>
               <div class="doctrine-box">
-                <strong>${sec.doctrineTitle}</strong><br>
-                ${sec.doctrineText}
+                <strong>${m.doctrineTitle}</strong><br>
+                ${m.doctrineText}
               </div>
             </div>
+          </div>
+        `;
+      }).join('');
+
+      const cardHTML = `
+        <article class="sector-block" id="${sec.id}">
+          <div class="sector-header">
+            <div>
+              <span class="sector-tag">${sec.sectorTag}</span>
+              <h2 class="sector-name">${sec.sectorName}</h2>
+            </div>
+            <div class="hud-badge">${sec.mythBadge}</div>
+          </div>
+          ${mechaHTML}
+          <div class="story-section">
+            <div class="story-tag">// ARCHIVE REPORT: ${sec.story.tag}</div>
+            <div class="story-title">${sec.story.title}</div>
+            <div class="story-body">"${sec.story.text}"</div>
           </div>
         </article>
       `;
@@ -552,7 +703,7 @@
       const modalImg = document.getElementById('modal-img');
       const caption = document.getElementById('modal-caption');
       modalImg.src = src;
-      caption.textContent = `ANALYSIS SHEET // ${title}`;
+      caption.textContent = `DEEP ARCHIVE ANALYSIS // ${title}`;
       modal.classList.add('active');
     }
 
@@ -560,16 +711,13 @@
       document.getElementById('image-modal').classList.remove('active');
     }
 
-    /* ==========================================================================
-       3D地球儀（自律生成サイバーマップテクスチャ）
-       ========================================================================== */
     const container = document.getElementById('globe-canvas');
     const width = container.clientWidth;
     const height = container.clientHeight;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.z = 230;
+    camera.position.z = 210;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(width, height);
@@ -579,87 +727,53 @@
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
-    // Canvasで大陸テクスチャを自律生成
-    function createCyberEarthTexture() {
-      const canvas = document.createElement('canvas');
-      canvas.width = 2048;
-      canvas.height = 1024;
-      const ctx = canvas.getContext('2d');
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.setCrossOrigin('anonymous');
 
-      // 海洋ベース
-      ctx.fillStyle = '#060d17';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const earthMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_atmos_2048.jpg');
+    const earthBump = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_normal_2048.jpg');
+    const earthSpec = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_specular_2048.jpg');
 
-      // 緯度経度グリッド線
-      ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
-      ctx.lineWidth = 2;
-      for (let i = 0; i <= canvas.width; i += 128) {
-        ctx.beginPath();
-        ctx.moveTo(i, 0);
-        ctx.lineTo(i, canvas.height);
-        ctx.stroke();
-      }
-      for (let j = 0; j <= canvas.height; j += 64) {
-        ctx.beginPath();
-        ctx.moveTo(0, j);
-        ctx.lineTo(canvas.width, j);
-        ctx.stroke();
-      }
-
-      // 大陸ブロック（サイバー発光スタイル）
-      ctx.fillStyle = 'rgba(0, 240, 255, 0.28)';
-      ctx.strokeStyle = '#00f0ff';
-      ctx.lineWidth = 3;
-
-      function drawLand(points) {
-        ctx.beginPath();
-        points.forEach((p, idx) => {
-          const x = ((p[0] + 180) / 360) * canvas.width;
-          const y = ((90 - p[1]) / 180) * canvas.height;
-          if (idx === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        });
-        ctx.closePath();
-        ctx.fill();
-        ctx.stroke();
-      }
-
-      // ユーラシア大陸
-      drawLand([[ -10, 36 ], [ 30, 32 ], [ 60, 25 ], [ 80, 10 ], [ 105, 10 ], [ 120, 22 ], [ 145, 45 ], [ 170, 65 ], [ 100, 75 ], [ 30, 70 ], [ -5, 60 ], [ -10, 42 ]]);
-      // アフリカ大陸
-      drawLand([[ -17, 32 ], [ 32, 31 ], [ 51, 11 ], [ 40, -10 ], [ 30, -34 ], [ 18, -34 ], [ 10, 5 ], [ -17, 15 ]]);
-      // 北米大陸
-      drawLand([[ -168, 65 ], [ -140, 70 ], [ -60, 60 ], [ -65, 45 ], [ -80, 25 ], [ -105, 20 ], [ -125, 33 ], [ -165, 55 ]]);
-      // 南米大陸
-      drawLand([[ -80, 10 ], [ -35, -5 ], [ -40, -22 ], [ -65, -55 ], [ -75, -45 ], [ -80, -5 ]]);
-      // オーストラリア
-      drawLand([[ 115, -22 ], [ 150, -15 ], [ 152, -38 ], [ 130, -35 ], [ 115, -34 ]]);
-      // 日本列島
-      drawLand([[ 130, 32 ], [ 136, 35 ], [ 141, 41 ], [ 145, 44 ], [ 140, 36 ], [ 131, 33 ]]);
-
-      return new THREE.CanvasTexture(canvas);
-    }
-
-    const earthTexture = createCyberEarthTexture();
-
-    // 地球本体
-    const earthGeo = new THREE.SphereGeometry(70, 64, 64);
-    const earthMat = new THREE.MeshBasicMaterial({
-      map: earthTexture,
-      transparent: true,
-      opacity: 0.95
+    const earthMat = new THREE.MeshPhongMaterial({
+      map: earthMap,
+      bumpMap: earthBump,
+      bumpScale: 0.05,
+      specularMap: earthSpec,
+      specular: new THREE.Color(0x223344),
+      shininess: 15
     });
-    const earthMesh = new THREE.Mesh(earthGeo, earthMat);
+    const earthMesh = new THREE.Mesh(new THREE.SphereGeometry(70, 64, 64), earthMat);
     globeGroup.add(earthMesh);
 
-    // 外周ワイヤーフレーム
-    const wireMat = new THREE.MeshBasicMaterial({
-      color: 0x00f0ff,
-      wireframe: true,
+    const cloudsMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_clouds_1024.png');
+    const cloudsMat = new THREE.MeshLambertMaterial({
+      map: cloudsMap,
       transparent: true,
-      opacity: 0.08
+      opacity: 0.4,
+      blending: THREE.AdditiveBlending
     });
-    globeGroup.add(new THREE.Mesh(new THREE.SphereGeometry(70.8, 32, 24), wireMat));
+    const cloudsMesh = new THREE.Mesh(new THREE.SphereGeometry(70.8, 64, 64), cloudsMat);
+    globeGroup.add(cloudsMesh);
+
+    const atmosphereMat = new THREE.MeshBasicMaterial({
+      color: 0x00d4ff,
+      side: THREE.BackSide,
+      transparent: true,
+      opacity: 0.18
+    });
+    const atmosphereMesh = new THREE.Mesh(new THREE.SphereGeometry(74.5, 64, 64), atmosphereMat);
+    scene.add(atmosphereMesh);
+
+    const ambientLight = new THREE.AmbientLight(0x404855, 1.2);
+    scene.add(ambientLight);
+
+    const sunLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    sunLight.position.set(180, 80, 150);
+    scene.add(sunLight);
+
+    const rimLight = new THREE.DirectionalLight(0x00f0ff, 0.6);
+    rimLight.position.set(-180, -50, -100);
+    scene.add(rimLight);
 
     function latLonToVector3(lat, lon, radius) {
       const phi = (90 - lat) * (Math.PI / 180);
@@ -671,22 +785,22 @@
     }
 
     const pinObjects = [];
-    const pinGeo = new THREE.SphereGeometry(2.4, 16, 16);
-    const ringGeo = new THREE.RingGeometry(3.6, 4.8, 24);
+    const pinGeo = new THREE.SphereGeometry(1.8, 16, 16);
+    const ringGeo = new THREE.RingGeometry(2.8, 3.8, 24);
 
     SECTORS_DATA.forEach(sec => {
-      const pos = latLonToVector3(sec.lat, sec.lon, 71.2);
+      const pos = latLonToVector3(sec.lat, sec.lon, 71.5);
 
       const pinMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
       const pin = new THREE.Mesh(pinGeo, pinMat);
       pin.position.copy(pos);
-      pin.userData = { targetId: sec.id, name: sec.fullName };
+      pin.userData = { targetId: sec.id, name: sec.sectorName };
       globeGroup.add(pin);
       pinObjects.push(pin);
 
       const ringMat = new THREE.MeshBasicMaterial({ color: 0xe5b95f, side: THREE.DoubleSide });
       const ring = new THREE.Mesh(ringGeo, ringMat);
-      ring.position.copy(pos.clone().multiplyScalar(1.01));
+      ring.position.copy(pos.clone().multiplyScalar(1.005));
       ring.lookAt(pos.clone().multiplyScalar(2));
       globeGroup.add(ring);
     });
@@ -739,7 +853,8 @@
     function animate() {
       requestAnimationFrame(animate);
       if (!isDragging && autoRotate) {
-        globeGroup.rotation.y += 0.002;
+        globeGroup.rotation.y += 0.0015;
+        cloudsMesh.rotation.y += 0.0022;
       }
       renderer.render(scene, camera);
     }
