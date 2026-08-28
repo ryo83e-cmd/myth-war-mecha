@@ -4,10 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MYTH WAR MECHA // GLOBAL EXCAVATION ARCHIVE</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <style>
     :root {
       --bg-color: #05070c;
       --card-bg: #0c111a;
+      --card-inner: #080c14;
       --accent-cyan: #00f0ff;
       --accent-gold: #e5b95f;
       --text-main: #e2e8f0;
@@ -33,56 +35,58 @@
     .space-bg {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at 50% 30%, #0d1527 0%, #030508 100%);
+      background: radial-gradient(circle at 50% 25%, #0d1527 0%, #030508 100%);
       pointer-events: none;
       z-index: 0;
     }
 
+    /* 1. ヘッダー */
     header {
       position: relative;
       z-index: 10;
-      padding: 2.2rem 1.5rem 1rem;
+      padding: 1.5rem 1rem 0.8rem;
       text-align: center;
       border-bottom: 1px solid var(--border-color);
-      background: linear-gradient(180deg, rgba(5,7,12,0.95) 0%, rgba(5,7,12,0.7) 100%);
+      background: linear-gradient(180deg, rgba(5,7,12,0.95) 0%, rgba(5,7,12,0.8) 100%);
       backdrop-filter: blur(10px);
     }
 
     .hud-badge {
       display: inline-block;
-      font-size: 0.72rem;
-      letter-spacing: 0.25em;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
       color: var(--accent-cyan);
       border: 1px solid var(--border-bright);
-      padding: 0.25rem 0.75rem;
+      padding: 0.2rem 0.6rem;
       border-radius: 2px;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.4rem;
       text-transform: uppercase;
       background: rgba(0, 240, 255, 0.05);
     }
 
     h1 {
-      font-size: 2.3rem;
-      letter-spacing: 0.2em;
+      font-size: 1.8rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: #ffffff;
-      text-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
     }
 
     .subtitle {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-dim);
-      margin-top: 0.4rem;
-      letter-spacing: 0.1em;
+      margin-top: 0.2rem;
+      letter-spacing: 0.08em;
     }
 
+    /* 2. 地球儀ナビセクション */
     #globe-section {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       width: 100%;
-      height: 60vh;
-      min-height: 420px;
-      max-height: 600px;
+      height: 48vh;
+      min-height: 340px;
+      max-height: 460px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -101,134 +105,232 @@
       cursor: grabbing;
     }
 
-    .globe-overlay-hint {
-      position: absolute;
-      bottom: 1.2rem;
-      background: rgba(12, 17, 26, 0.85);
-      border: 1px solid var(--border-bright);
-      padding: 0.35rem 1rem;
-      border-radius: 20px;
-      font-size: 0.72rem;
-      color: var(--accent-cyan);
-      letter-spacing: 0.15em;
-      pointer-events: none;
+    /* ナビゲーションバー（セクター切替ボタン群） */
+    .sector-nav-bar {
+      position: relative;
+      z-index: 10;
+      max-width: 1100px;
+      margin: -1.2rem auto 1.5rem;
+      padding: 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .nav-btn {
+      background: rgba(12, 17, 26, 0.9);
+      border: 1px solid var(--border-color);
+      color: var(--text-dim);
+      padding: 0.45rem 0.9rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.2s ease;
       backdrop-filter: blur(5px);
     }
 
-    .prologue-box {
-      position: relative;
-      z-index: 2;
-      max-width: 950px;
-      margin: 1.5rem auto 3.5rem;
-      padding: 1.75rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-left: 3px solid var(--accent-gold);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    .nav-btn:hover {
+      border-color: var(--accent-cyan);
+      color: #fff;
     }
 
-    .prologue-title {
-      font-size: 0.8rem;
-      color: var(--accent-gold);
-      letter-spacing: 0.15em;
-      margin-bottom: 0.6rem;
-      text-transform: uppercase;
+    .nav-btn.active {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
       font-weight: bold;
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
     }
 
-    .prologue-text {
-      font-size: 0.95rem;
-      color: var(--text-main);
-      line-height: 1.85;
+    .nav-btn.overview-btn {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
     }
 
+    .nav-btn.overview-btn.active {
+      background: rgba(229, 185, 95, 0.15);
+      box-shadow: 0 0 12px rgba(229, 185, 95, 0.25);
+    }
+
+    /* 3. 表示部分（動的エリア） */
     main {
       position: relative;
       z-index: 2;
-      max-width: 1150px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 0 1.5rem 6rem;
+      padding: 0 1.2rem 4rem;
     }
 
-    .section-header {
-      font-size: 1.15rem;
-      letter-spacing: 0.2em;
-      color: var(--accent-cyan);
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 0.75rem;
-      margin-bottom: 2.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .sector-block {
+    .display-panel {
       background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 4px;
-      margin-bottom: 4.5rem;
-      overflow: hidden;
-      scroll-margin-top: 2rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      padding: 1.75rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      animation: fadeIn 0.3s ease;
     }
 
-    .sector-block:hover {
-      border-color: rgba(0, 240, 255, 0.4);
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .sector-block.highlight {
-      border-color: var(--accent-cyan);
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
-    }
-
-    .sector-header {
-      padding: 1.25rem 1.75rem;
-      background: rgba(0, 0, 0, 0.4);
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .sector-tag {
-      font-size: 0.72rem;
-      color: var(--accent-cyan);
+    /* プロジェクト概要表示 */
+    .overview-view .panel-tag {
+      font-size: 0.75rem;
+      color: var(--accent-gold);
       letter-spacing: 0.15em;
-      display: block;
-      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
     }
 
-    .sector-name {
+    .overview-view h2 {
       font-size: 1.4rem;
-      font-weight: bold;
-      color: #ffffff;
+      color: #fff;
+      margin-bottom: 1rem;
       letter-spacing: 0.05em;
     }
 
-    .mecha-unit {
-      padding: 1.75rem;
+    .overview-view p {
+      font-size: 0.92rem;
+      color: var(--text-main);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+
+    .overview-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .overview-meta-item {
+      background: var(--card-inner);
+      padding: 1rem;
+      border-left: 2px solid var(--accent-cyan);
+    }
+
+    .overview-meta-item .label {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-bottom: 0.25rem;
+    }
+
+    .overview-meta-item .val {
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    /* セクター詳細表示 */
+    .sector-header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .sector-title-group .tag {
+      font-size: 0.72rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.15em;
+    }
+
+    .sector-title-group h2 {
+      font-size: 1.4rem;
+      color: #fff;
+      margin-top: 0.2rem;
+    }
+
+    .back-btn {
+      background: none;
+      border: 1px solid var(--border-color);
+      color: var(--text-dim);
+      padding: 0.35rem 0.75rem;
+      font-size: 0.75rem;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    /* 機体アコーディオンリスト */
+    .mecha-accordion-item {
+      background: var(--card-inner);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    .mecha-accordion-item:hover {
+      border-color: rgba(0, 240, 255, 0.4);
+    }
+
+    .accordion-header {
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(255, 255, 255, 0.01);
+    }
+
+    .accordion-header .m-name {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .accordion-header .toggle-icon {
+      color: var(--accent-cyan);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      transition: transform 0.2s ease;
+    }
+
+    .mecha-accordion-item.open .accordion-header .toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      display: none;
+      padding: 1.25rem;
+      border-top: 1px solid var(--border-color);
+      background: #040609;
+    }
+
+    .mecha-accordion-item.open .accordion-body {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.75rem;
-      border-bottom: 1px dashed var(--border-color);
+      gap: 1.25rem;
     }
 
-    .mecha-unit:last-of-type {
-      border-bottom: none;
-    }
-
-    @media (min-width: 850px) {
-      .mecha-unit {
-        grid-template-columns: 1.2fr 1fr;
+    @media (min-width: 768px) {
+      .mecha-accordion-item.open .accordion-body {
+        grid-template-columns: 1fr 1fr;
       }
     }
 
     .image-frame {
       width: 100%;
-      min-height: 280px;
-      background: #030508;
+      min-height: 240px;
+      background: #020305;
       border: 1px solid var(--border-color);
       display: flex;
       align-items: center;
@@ -238,50 +340,28 @@
       position: relative;
     }
 
-    .image-frame::after {
-      content: "🔍 CLICK TO INSPECT BLUEPRINT";
-      position: absolute;
-      bottom: 0.6rem;
-      right: 0.6rem;
-      background: rgba(0,0,0,0.85);
-      border: 1px solid var(--border-bright);
-      color: var(--accent-cyan);
-      font-size: 0.68rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 2px;
-      letter-spacing: 0.05em;
-    }
-
     .image-frame img {
       width: 100%;
       height: auto;
-      display: block;
       object-fit: contain;
+      display: block;
     }
 
     .image-frame .placeholder {
       color: var(--text-dim);
-      font-size: 0.85rem;
-      padding: 2.5rem;
+      font-size: 0.8rem;
       text-align: center;
-    }
-
-    .mecha-name {
-      font-size: 1.25rem;
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 0.5rem;
+      padding: 1.5rem;
     }
 
     .spec-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.85rem;
-      margin-top: 0.75rem;
+      font-size: 0.82rem;
     }
 
     .spec-table th, .spec-table td {
-      padding: 0.5rem 0.75rem;
+      padding: 0.45rem 0.5rem;
       border-bottom: 1px solid var(--border-color);
       text-align: left;
     }
@@ -293,42 +373,44 @@
     }
 
     .doctrine-box {
-      margin-top: 1.25rem;
-      padding: 1rem 1.2rem;
-      background: rgba(0,0,0,0.35);
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      background: rgba(0, 240, 255, 0.03);
       border-left: 2px solid var(--accent-cyan);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-main);
     }
 
-    .story-section {
-      background: rgba(0, 0, 0, 0.2);
-      padding: 1.5rem 1.75rem;
-      border-top: 1px solid var(--border-color);
+    .story-card {
+      margin-top: 1.5rem;
+      padding: 1.2rem;
+      background: var(--card-inner);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-gold);
     }
 
-    .story-tag {
-      font-size: 0.72rem;
+    .story-card .tag {
+      font-size: 0.7rem;
       color: var(--accent-gold);
       letter-spacing: 0.15em;
-      margin-bottom: 0.4rem;
-      text-transform: uppercase;
+      margin-bottom: 0.3rem;
     }
 
-    .story-title {
-      font-size: 1.05rem;
-      color: #fff;
-      margin-bottom: 0.75rem;
+    .story-card .title {
+      font-size: 0.95rem;
       font-weight: bold;
+      color: #fff;
+      margin-bottom: 0.5rem;
     }
 
-    .story-body {
-      font-size: 0.88rem;
+    .story-card .text {
+      font-size: 0.85rem;
       color: var(--text-dim);
-      line-height: 1.8;
+      line-height: 1.75;
       font-style: italic;
     }
 
+    /* モーダル */
     #image-modal {
       display: none;
       position: fixed;
@@ -347,41 +429,36 @@
     }
 
     #modal-img {
-      max-width: 95vw;
-      max-height: 85vh;
+      max-width: 90vw;
+      max-height: 80vh;
       object-fit: contain;
       border: 1px solid var(--border-bright);
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.25);
     }
 
     #modal-caption {
       margin-top: 1rem;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--accent-cyan);
-      letter-spacing: 0.15em;
+      letter-spacing: 0.1em;
     }
 
     .modal-close {
       position: absolute;
       top: 1.5rem;
       right: 2rem;
-      font-size: 2.2rem;
+      font-size: 2rem;
       color: var(--text-dim);
       cursor: pointer;
-      transition: color 0.2s;
     }
 
-    .modal-close:hover {
-      color: var(--accent-cyan);
-    }
-
+    /* 4. フッター */
     footer {
       position: relative;
       z-index: 2;
       text-align: center;
-      padding: 3rem 1.5rem;
+      padding: 2.5rem 1rem;
       border-top: 1px solid var(--border-color);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-dim);
       letter-spacing: 0.1em;
     }
@@ -393,50 +470,49 @@
 
   <div class="space-bg"></div>
 
+  <!-- 1. ヘッダー -->
   <header>
     <div class="hud-badge">GLOBAL EXCAVATION ARCHIVE // 20XX</div>
     <h1>MYTH WAR MECHA</h1>
     <p class="subtitle">超古代神話兵器 発掘解析データベース</p>
   </header>
 
+  <!-- 2. 地球儀ナビ -->
   <section id="globe-section">
     <div id="globe-canvas"></div>
-    <div class="globe-overlay-hint">DRAG TO ROTATE // CLICK TARGET PIN TO JUMP</div>
   </section>
 
-  <section class="prologue-box">
-    <div class="prologue-title">// OVERVIEW // 神話大戦の再来</div>
-    <p class="prologue-text">
-      20XX年、世界各地の超古代遺跡群より、現代物理学の枠組みを根底から覆す未知の巨大人型兵器群「神代機体」が発掘された。<br>
-      年代測定は約10,000年前。諸国の神話・伝承とは、かつてこの星で繰り広げられた文明間最終戦争の記録に他ならなかった。
-      休眠から目覚めつつある遺物群を前に、世界は再び「神話の戦争」の特異点へと突入する。
-    </p>
-  </section>
+  <!-- ナビゲーションバー -->
+  <nav class="sector-nav-bar" id="nav-buttons-container">
+    <button class="nav-btn overview-btn active" onclick="showOverview()">OVERVIEW (全体概要)</button>
+  </nav>
 
+  <!-- 3. 表示部分 -->
   <main>
-    <div class="section-header">
-      <span>EXCAVATION SECTORS // 発掘地域一覧</span>
-      <span id="sector-counter" style="font-size:0.8rem; color:var(--text-dim);">-- SECTORS IDENTIFIED</span>
+    <div id="main-content-panel" class="display-panel">
+      <!-- JSで動的に入れ替わります -->
     </div>
-
-    <div id="sector-cards-container"></div>
   </main>
 
+  <!-- 4. フッター -->
+  <footer>
+    <p>&copy; MYTH WAR MECHA PROJECT // GLOBAL EXCAVATION ARCHIVE</p>
+  </footer>
+
+  <!-- 画像拡大モーダル -->
   <div id="image-modal" onclick="closeModal()">
     <span class="modal-close">&times;</span>
     <img id="modal-img" src="" alt="" onclick="event.stopPropagation()">
     <div id="modal-caption" onclick="event.stopPropagation()"></div>
   </div>
 
-  <footer>
-    <p>&copy; MYTH WAR MECHA PROJECT // GLOBAL EXCAVATION ARCHIVE</p>
-  </footer>
-
   <script>
+    // セクター・機体データ
     const SECTORS_DATA = [
       {
         id: "sector-greek",
         mythBadge: "GREEK MYTH",
+        btnLabel: "ギリシャ (アテナイ)",
         sectorTag: "SECTOR 01 // MEDITERRANEAN",
         sectorName: "アテナイ・ポリス連合",
         lat: 38.0,
@@ -464,6 +540,7 @@
       {
         id: "sector-norse",
         mythBadge: "NORSE MYTH",
+        btnLabel: "北欧 (ヴァン神族)",
         sectorTag: "SECTOR 02 // SCANDINAVIA",
         sectorName: "ヴァン神族連合",
         lat: 60.0,
@@ -491,6 +568,7 @@
       {
         id: "sector-taoism",
         mythBadge: "TAOISM MYTH",
+        btnLabel: "道教 (崑崙山)",
         sectorTag: "SECTOR 03 // EAST ASIA",
         sectorName: "玉虚宮 崑崙山",
         lat: 35.8,
@@ -518,6 +596,7 @@
       {
         id: "sector-mesopotamia",
         mythBadge: "MESOPOTAMIA MYTH",
+        btnLabel: "メソポタミア",
         sectorTag: "SECTOR 04 // MESOPOTAMIA",
         sectorName: "メソポタミア神権",
         lat: 33.3,
@@ -545,6 +624,7 @@
       {
         id: "sector-egypt",
         mythBadge: "EGYPT MYTH",
+        btnLabel: "エジプト",
         sectorTag: "SECTOR 05 // NILE BASIN",
         sectorName: "エジプト神権",
         lat: 26.8,
@@ -572,6 +652,7 @@
       {
         id: "sector-india",
         mythBadge: "VEDIC MYTH",
+        btnLabel: "インド (ヴェーダ)",
         sectorTag: "SECTOR 06 // INDUS VALLEY",
         sectorName: "インド神話体系",
         lat: 20.5,
@@ -599,6 +680,7 @@
       {
         id: "sector-mesoamerica",
         mythBadge: "MESOAMERICA",
+        btnLabel: "メソアメリカ",
         sectorTag: "SECTOR 07 // MESOAMERICA",
         sectorName: "メソアメリカ神話",
         lat: 19.4,
@@ -626,6 +708,7 @@
       {
         id: "sector-japan",
         mythBadge: "SHINTO MYTH",
+        btnLabel: "日本 (出雲)",
         sectorTag: "SECTOR 08 // FAR EAST ARCHIPELAGO",
         sectorName: "日ノ本神代連合",
         lat: 35.0,
@@ -652,72 +735,138 @@
       }
     ];
 
-    const cardsContainer = document.getElementById('sector-cards-container');
-    const counterEl = document.getElementById('sector-counter');
-    counterEl.textContent = `${SECTORS_DATA.length} SECTORS IDENTIFIED`;
+    const mainPanel = document.getElementById('main-content-panel');
+    const navContainer = document.getElementById('nav-buttons-container');
 
+    // ナビボタン生成
     SECTORS_DATA.forEach(sec => {
-      const mechaHTML = sec.mechaList.map(m => {
-        const specRows = m.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
-        return `
-          <div class="mecha-unit">
-            <div class="image-frame" onclick="openModal('${m.image}', '${m.name}')">
-              <img src="${m.image}" alt="${m.name}" onerror="this.outerHTML='<div class=\\'placeholder\\'>[ ${m.name} // 画像: ${m.image} ]</div>'">
+      const btn = document.createElement('button');
+      btn.className = 'nav-btn';
+      btn.id = `nav-${sec.id}`;
+      btn.textContent = sec.btnLabel;
+      btn.onclick = () => selectSector(sec.id);
+      navContainer.appendChild(btn);
+    });
+
+    // 初期表示：全体概要
+    function showOverview() {
+      updateActiveNav('overview');
+      autoRotate = true;
+      targetRotation = null;
+
+      mainPanel.innerHTML = `
+        <div class="overview-view">
+          <div class="panel-tag">// GLOBAL BRIEFING // プロジェクト概要</div>
+          <h2>超古代神話兵器 発掘解析データベース</h2>
+          <p>
+            西暦20XX年、世界各地の超古代地層・海溝・霊峰地下より、現代物理学の定義を覆す巨大人型機動兵器「神代機体」が相次いで発掘された。
+          </p>
+          <p>
+            解析の結果、世界各国に口伝・記術されてきた「神話」とは、かつてこの星で繰り広げられた文明間最終戦争の記録であることが判明。
+            上の地球儀、またはナビゲーションボタンから各発掘地域（セクター）を選択することで、所属機体の詳細スペックおよび発掘記録ログを閲覧できます。
+          </p>
+          <div class="overview-meta-grid">
+            <div class="overview-meta-item">
+              <div class="label">CONFIRMED SECTORS</div>
+              <div class="val">${SECTORS_DATA.length} 勢力 / 地域</div>
             </div>
-            <div class="mecha-details">
-              <h3 class="mecha-name">${m.name}</h3>
-              <table class="spec-table">
-                ${specRows}
-              </table>
-              <div class="doctrine-box">
-                <strong>${m.doctrineTitle}</strong><br>
-                ${m.doctrineText}
+            <div class="overview-meta-item">
+              <div class="label">ESTIMATED AGE</div>
+              <div class="val">約 10,000 年前</div>
+            </div>
+            <div class="overview-meta-item">
+              <div class="label">SYSTEM STATUS</div>
+              <div class="val" style="color:var(--accent-cyan)">STANDBY / ONLINE</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // セクター選択表示
+    function selectSector(sectorId) {
+      const sec = SECTORS_DATA.find(s => s.id === sectorId);
+      if (!sec) return;
+
+      updateActiveNav(sectorId);
+      rotateGlobeTo(sec.lat, sec.lon);
+
+      const mechaItemsHTML = sec.mechaList.map((m, idx) => {
+        const specRows = m.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
+        // デフォルトで1体目は開いた状態にする
+        const openClass = idx === 0 ? 'open' : '';
+        return `
+          <div class="mecha-accordion-item ${openClass}" id="m-item-${idx}">
+            <div class="accordion-header" onclick="toggleAccordion('m-item-${idx}')">
+              <span class="m-name">▶ ${m.name}</span>
+              <span class="toggle-icon">▼</span>
+            </div>
+            <div class="accordion-body">
+              <div class="image-frame" onclick="openModal('${m.image}', '${m.name}')">
+                <img src="${m.image}" alt="${m.name}" onerror="this.outerHTML='<div class=\\'placeholder\\'>[ ${m.name} // 画像未設定 ]</div>'">
+              </div>
+              <div class="mecha-info-block">
+                <table class="spec-table">
+                  ${specRows}
+                </table>
+                <div class="doctrine-box">
+                  <strong>${m.doctrineTitle}</strong><br>
+                  ${m.doctrineText}
+                </div>
               </div>
             </div>
           </div>
         `;
       }).join('');
 
-      const cardHTML = `
-        <article class="sector-block" id="${sec.id}">
-          <div class="sector-header">
-            <div>
-              <span class="sector-tag">${sec.sectorTag}</span>
-              <h2 class="sector-name">${sec.sectorName}</h2>
+      mainPanel.innerHTML = `
+        <div class="sector-view">
+          <div class="sector-header-flex">
+            <div class="sector-title-group">
+              <span class="tag">${sec.sectorTag}</span>
+              <h2>${sec.sectorName} <span class="hud-badge" style="margin-left:0.5rem;">${sec.mythBadge}</span></h2>
             </div>
-            <div class="hud-badge">${sec.mythBadge}</div>
+            <button class="back-btn" onclick="showOverview()">◀ 全体概要に戻る</button>
           </div>
-          ${mechaHTML}
-          <div class="story-section">
-            <div class="story-tag">// ARCHIVE REPORT: ${sec.story.tag}</div>
-            <div class="story-title">${sec.story.title}</div>
-            <div class="story-body">"${sec.story.text}"</div>
+
+          <div class="mecha-list-section">
+            ${mechaItemsHTML}
           </div>
-        </article>
+
+          <div class="story-card">
+            <div class="tag">// ARCHIVE REPORT: ${sec.story.tag}</div>
+            <div class="title">${sec.story.title}</div>
+            <div class="text">"${sec.story.text}"</div>
+          </div>
+        </div>
       `;
-      cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
-    });
-
-    function openModal(src, title) {
-      const modal = document.getElementById('image-modal');
-      const modalImg = document.getElementById('modal-img');
-      const caption = document.getElementById('modal-caption');
-      modalImg.src = src;
-      caption.textContent = `DEEP ARCHIVE ANALYSIS // ${title}`;
-      modal.classList.add('active');
     }
 
-    function closeModal() {
-      document.getElementById('image-modal').classList.remove('active');
+    function toggleAccordion(id) {
+      const item = document.getElementById(id);
+      if (item) {
+        item.classList.toggle('open');
+      }
     }
 
+    function updateActiveNav(activeId) {
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      if (activeId === 'overview') {
+        document.querySelector('.overview-btn').classList.add('active');
+      } else {
+        const targetBtn = document.getElementById(`nav-${activeId}`);
+        if (targetBtn) targetBtn.classList.add('active');
+      }
+    }
+
+    // Three.js 3D地球儀実装
     const container = document.getElementById('globe-canvas');
     const width = container.clientWidth;
     const height = container.clientHeight;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.z = 210;
+    camera.position.z = 200;
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(width, height);
@@ -742,17 +891,17 @@
       specular: new THREE.Color(0x223344),
       shininess: 15
     });
-    const earthMesh = new THREE.Mesh(new THREE.SphereGeometry(70, 64, 64), earthMat);
+    const earthMesh = new THREE.Mesh(new THREE.SphereGeometry(68, 64, 64), earthMat);
     globeGroup.add(earthMesh);
 
     const cloudsMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_clouds_1024.png');
     const cloudsMat = new THREE.MeshLambertMaterial({
       map: cloudsMap,
       transparent: true,
-      opacity: 0.4,
+      opacity: 0.35,
       blending: THREE.AdditiveBlending
     });
-    const cloudsMesh = new THREE.Mesh(new THREE.SphereGeometry(70.8, 64, 64), cloudsMat);
+    const cloudsMesh = new THREE.Mesh(new THREE.SphereGeometry(68.8, 64, 64), cloudsMat);
     globeGroup.add(cloudsMesh);
 
     const atmosphereMat = new THREE.MeshBasicMaterial({
@@ -761,7 +910,7 @@
       transparent: true,
       opacity: 0.18
     });
-    const atmosphereMesh = new THREE.Mesh(new THREE.SphereGeometry(74.5, 64, 64), atmosphereMat);
+    const atmosphereMesh = new THREE.Mesh(new THREE.SphereGeometry(72.5, 64, 64), atmosphereMat);
     scene.add(atmosphereMesh);
 
     const ambientLight = new THREE.AmbientLight(0x404855, 1.2);
@@ -786,15 +935,15 @@
 
     const pinObjects = [];
     const pinGeo = new THREE.SphereGeometry(1.8, 16, 16);
-    const ringGeo = new THREE.RingGeometry(2.8, 3.8, 24);
+    const ringGeo = new THREE.RingGeometry(2.6, 3.6, 24);
 
     SECTORS_DATA.forEach(sec => {
-      const pos = latLonToVector3(sec.lat, sec.lon, 71.5);
+      const pos = latLonToVector3(sec.lat, sec.lon, 69.5);
 
       const pinMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
       const pin = new THREE.Mesh(pinGeo, pinMat);
       pin.position.copy(pos);
-      pin.userData = { targetId: sec.id, name: sec.sectorName };
+      pin.userData = { targetId: sec.id };
       globeGroup.add(pin);
       pinObjects.push(pin);
 
@@ -810,9 +959,12 @@
     let isDragging = false;
     let prevPos = { x: 0, y: 0 };
     let autoRotate = true;
+    let targetRotation = null;
 
     container.addEventListener('pointerdown', e => {
       isDragging = true;
+      autoRotate = false;
+      targetRotation = null;
       prevPos = { x: e.clientX, y: e.clientY };
     });
 
@@ -828,6 +980,14 @@
       }
     });
 
+    // 目的の緯度経度に地球儀をスムーズに回転
+    function rotateGlobeTo(lat, lon) {
+      autoRotate = false;
+      const targetY = - (lon + 90) * (Math.PI / 180);
+      const targetX = (lat) * (Math.PI / 180) * 0.3;
+      targetRotation = { x: targetX, y: targetY };
+    }
+
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
@@ -840,22 +1000,22 @@
       const intersects = raycaster.intersectObjects(pinObjects);
 
       if (intersects.length > 0) {
-        const target = intersects[0].object.userData.targetId;
-        const el = document.getElementById(target);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
-          el.classList.add('highlight');
-          setTimeout(() => el.classList.remove('highlight'), 2000);
-        }
+        const targetId = intersects[0].object.userData.targetId;
+        selectSector(targetId);
       }
     });
 
     function animate() {
       requestAnimationFrame(animate);
-      if (!isDragging && autoRotate) {
-        globeGroup.rotation.y += 0.0015;
-        cloudsMesh.rotation.y += 0.0022;
+
+      if (targetRotation) {
+        globeGroup.rotation.y += (targetRotation.y - globeGroup.rotation.y) * 0.06;
+        globeGroup.rotation.x += (targetRotation.x - globeGroup.rotation.x) * 0.06;
+      } else if (!isDragging && autoRotate) {
+        globeGroup.rotation.y += 0.0012;
+        cloudsMesh.rotation.y += 0.0018;
       }
+
       renderer.render(scene, camera);
     }
     animate();
@@ -867,6 +1027,23 @@
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     });
+
+    // モーダル
+    function openModal(src, title) {
+      const modal = document.getElementById('image-modal');
+      const modalImg = document.getElementById('modal-img');
+      const caption = document.getElementById('modal-caption');
+      modalImg.src = src;
+      caption.textContent = `DEEP ARCHIVE ANALYSIS // ${title}`;
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('image-modal').classList.remove('active');
+    }
+
+    // 起動時実行
+    showOverview();
   </script>
 </body>
 </html>
