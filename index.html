@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MITH WAR MECHA // ARCHIVE</title>
+  <title>MITH WAR MECHA // GLOBAL EXCAVATION ARCHIVE</title>
   <style>
     :root {
-      --bg-color: #0d0f12;
-      --card-bg: #15191e;
-      --accent-color: #00e5ff;
-      --accent-warn: #ffaa00;
-      --text-main: #e0e6ed;
-      --text-dim: #7e8c9a;
-      --border-color: #263238;
+      --bg-color: #080a0f;
+      --card-bg: #111620;
+      --accent-cyan: #00f0ff;
+      --accent-gold: #e5b95f;
+      --text-main: #e2e8f0;
+      --text-dim: #798b9f;
+      --border-color: #1e293b;
+      --border-bright: #00f0ff55;
     }
 
     * {
@@ -25,149 +26,573 @@
       background-color: var(--bg-color);
       color: var(--text-main);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
       line-height: 1.6;
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
       background-image: 
-        linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
-      background-size: 30px 30px;
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
     }
 
     header {
-      padding: 2.5rem 1.5rem 1.5rem;
-      border-bottom: 1px solid var(--border-color);
-      text-align: center;
       position: relative;
+      z-index: 10;
+      padding: 2rem 1.5rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      background: linear-gradient(180deg, rgba(8,10,15,0.95) 0%, rgba(8,10,15,0.8) 100%);
+      backdrop-filter: blur(8px);
     }
 
-    .system-status {
+    .hud-badge {
+      display: inline-block;
       font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      color: var(--accent-color);
+      letter-spacing: 0.2em;
+      color: var(--accent-cyan);
+      border: 1px solid var(--border-bright);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
     }
 
     h1 {
-      font-size: 2rem;
-      letter-spacing: 0.1em;
+      font-size: 2.2rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: #ffffff;
-      text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
     }
 
-    .tagline {
+    .subtitle {
       font-size: 0.85rem;
       color: var(--text-dim);
-      margin-top: 0.25rem;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-    }
-
-    .section-title {
-      font-size: 1.1rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent-color);
-      border-left: 3px solid var(--accent-color);
-      padding-left: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .mech-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .mech-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      overflow: hidden;
-      position: relative;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .mech-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent-color);
-    }
-
-    .mech-thumb {
-      width: 100%;
-      height: 200px;
-      background-color: #080a0c;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-dim);
-      font-size: 0.85rem;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .mech-info {
-      padding: 1rem;
-    }
-
-    .mech-id {
-      font-size: 0.75rem;
-      color: var(--accent-warn);
+      margin-top: 0.5rem;
       letter-spacing: 0.05em;
     }
 
-    .mech-name {
-      font-size: 1.2rem;
-      color: #ffffff;
-      margin: 0.25rem 0 0.5rem;
+    #globe-section {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 60vh;
+      min-height: 420px;
+      max-height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
-    .mech-desc {
+    #globe-canvas {
+      width: 100%;
+      height: 100%;
+      outline: none;
+      cursor: grab;
+    }
+
+    #globe-canvas:active {
+      cursor: grabbing;
+    }
+
+    .globe-overlay-hint {
+      position: absolute;
+      bottom: 1.5rem;
+      background: rgba(17, 22, 32, 0.85);
+      border: 1px solid var(--border-color);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+      pointer-events: none;
+    }
+
+    .prologue-box {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 1.5rem auto 3rem;
+      padding: 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-gold);
+    }
+
+    .prologue-title {
       font-size: 0.85rem;
+      color: var(--accent-gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .prologue-text {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      line-height: 1.8;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    .section-header {
+      font-size: 1.2rem;
+      letter-spacing: 0.15em;
+      color: var(--accent-cyan);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faction-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      margin-bottom: 3.5rem;
+      overflow: hidden;
+      scroll-margin-top: 2rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faction-card:hover {
+      border-color: var(--accent-cyan);
+    }
+
+    .faction-card.highlight {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
+    }
+
+    .faction-header {
+      padding: 1.25rem 1.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .faction-tag {
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .faction-name {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .faction-content {
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 800px) {
+      .faction-content {
+        grid-template-columns: 1.3fr 1fr;
+      }
+    }
+
+    .image-frame {
+      width: 100%;
+      min-height: 250px;
+      background: #000;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .image-frame .placeholder {
       color: var(--text-dim);
-      line-height: 1.5;
+      font-size: 0.85rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .spec-table th, .spec-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .spec-table th {
+      color: var(--text-dim);
+      width: 32%;
+      white-space: nowrap;
+    }
+
+    .doctrine-box {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      background: rgba(0,0,0,0.25);
+      border-left: 2px solid var(--accent-cyan);
+      font-size: 0.85rem;
+      color: var(--text-main);
     }
 
     footer {
+      position: relative;
+      z-index: 2;
       text-align: center;
-      padding: 2rem 1.5rem;
+      padding: 2.5rem 1.5rem;
       border-top: 1px solid var(--border-color);
       font-size: 0.75rem;
       color: var(--text-dim);
-      margin-top: 3rem;
     }
   </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
+  <div class="bg-grid"></div>
+
   <header>
-    <div class="system-status">SYS.VER // ONLINE ARCHIVE</div>
-    <h1>Mith War Mecha</h1>
-    <p class="tagline">WORLD DESIGN &amp; MECHA ARCHIVES</p>
+    <div class="hud-badge">GLOBAL EXCAVATION ARCHIVE // 20XX</div>
+    <h1>MITH WAR MECHA</h1>
+    <p class="subtitle">超古代神話兵器 発掘解析データベース</p>
   </header>
 
-  <main>
-    <div class="section-title">Unit Specifications // 機体一覧</div>
+  <!-- 3D地球儀ナビゲーション -->
+  <section id="globe-section">
+    <div id="globe-canvas"></div>
+    <div class="globe-overlay-hint">DRAG TO ROTATE // CLICK TARGET PIN TO JUMP</div>
+  </section>
 
-    <div class="mech-grid">
-      <!-- カード例 1 -->
-      <div class="mech-card">
-        <div class="mech-thumb">[ 機体画像プレビュー ]</div>
-        <div class="mech-info">
-          <div class="mech-id">UNIT // 01</div>
-          <h2 class="mech-name">SAMPLE MECHA</h2>
-          <p class="mech-desc">機体の概要やコンセプト設定がここに入ります。後からテキストと画像を自由に差し替え可能です。</p>
-        </div>
-      </div>
+  <!-- プロローグ -->
+  <section class="prologue-box">
+    <div class="prologue-title">// OVERVIEW // 神話大戦の再来</div>
+    <p class="prologue-text">
+      20XX年、世界各地の遺跡群より、現代工学を根底から覆す未知の兵器群「神代機体」が発掘された。<br>
+      年代測定は約10,000年前。諸国の神話伝承とは、かつてこの星で繰り広げられた超古代兵器による大戦の記録に過ぎなかった。
+      遺物の再起動が進む現代、世界は再び「神話の戦争」の特異点へと突入する。
+    </p>
+  </section>
+
+  <!-- カード一覧（JSから自動レンダリング） -->
+  <main>
+    <div class="section-header">
+      <span>EXCAVATION SECTORS // 発掘地域一覧</span>
+      <span id="sector-counter" style="font-size:0.8rem; color:var(--text-dim);">-- SECTORS IDENTIFIED</span>
     </div>
+
+    <div id="sector-cards-container"></div>
   </main>
 
   <footer>
-    <p>&copy; MITH WAR MECHA PROJECT. ALL RIGHTS RESERVED.</p>
+    <p>&copy; MITH WAR MECHA PROJECT // GLOBAL EXCAVATION DATABASE</p>
   </footer>
 
+  <!-- データベース ＆ スクリプト -->
+  <script>
+    /* ==========================================================================
+       1. 神話・機体マスターデータ
+       新しいエリア・神話を追加する際は、この配列にオブジェクトを追加するだけで
+       地球儀のピンと解説カードが自動生成されます。
+       ========================================================================== */
+    const SECTORS_DATA = [
+      {
+        id: "sector-greek",
+        mythBadge: "GREEK MYTH",
+        sectorTag: "SECTOR 01 // MEDITERRANEAN",
+        fullName: "アテナイ・ポリス連合 / アテナ [PALLAS]",
+        lat: 38.0,
+        lon: 23.7,
+        image: "1000019413.png",
+        specs: [
+          { label: "全高 / 重量", value: "14.2m / 23.6t" },
+          { label: "動力", value: "精神波インターフェース型神経炉" },
+          { label: "装甲材", value: "オリュンポス合金（潤愛甲）" },
+          { label: "主機", value: "中距離戦闘 / ファランクス支援機" },
+          { label: "主武装", value: "超長槍【ドーリュス】/ アイギス・シールド" }
+        ],
+        doctrineTitle: "運用ドクトリン: ファランクス陣形",
+        doctrineText: "単騎での格闘戦を主とせず、盾を連結した多層精神波フィールドによる集団防壁を形成。水上ホバー機動と長槍斉射による圧倒的制圧を行う。"
+      },
+      {
+        id: "sector-norse",
+        mythBadge: "NORSE MYTH",
+        sectorTag: "SECTOR 02 // SCANDINAVIA",
+        fullName: "ヴァン神族連合 / フレイ [VANIR CLASS]",
+        lat: 60.0,
+        lon: 15.0,
+        image: "1000019414.png",
+        specs: [
+          { label: "全高 / 重量", value: "14.3m / 41.7t" },
+          { label: "動力", value: "北欧系人工筋肉弾性素子" },
+          { label: "主兵装", value: "自律戦闘剣《スキーズブラズニル》" },
+          { label: "特殊機構", value: "バーサーカーモード（出力420%解放）" },
+          { label: "運用思想", value: "「正面から叩き潰して突破する」決定打的突進戦" }
+        ],
+        doctrineTitle: "運用ドクトリン: 突進・強襲",
+        doctrineText: "「豊穣は力により守られる。力は生命に戻る。」装甲展開シーケンスにより過熱を強制排熱し、精神波同調で機動・加速力を極限まで高める。"
+      },
+      {
+        id: "sector-taoism",
+        mythBadge: "TAOISM MYTH",
+        sectorTag: "SECTOR 03 // EAST ASIA",
+        fullName: "玉虚宮 崑崙山 / 広成子 [こうせいし]",
+        lat: 35.8,
+        lon: 94.0,
+        image: "1000019415.png",
+        specs: [
+          { label: "全高 / 重量", value: "14.1m / 18.4t" },
+          { label: "動力", value: "霊気炉「乾元」" },
+          { label: "主要法宝", value: "番天印（推定重量480t以上 / 質量制御・圧壊術式）" },
+          { label: "機体特性", value: "霊気回路循環による遠隔術式・法宝自律運用" },
+          { label: "運用思想", value: "最小の動きで最大の効果を生む盤面制圧" }
+        ],
+        doctrineTitle: "運用ドクトリン: 道教法宝制圧",
+        doctrineText: "「印は天の意を刻み、道は無形にして万象を制す。」機体装甲は最小限に留め、霊気隔壁と4基の補助法宝ユニットによる空間固定・質量圧壊を行う。"
+      },
+      {
+        id: "sector-mesopotamia",
+        mythBadge: "MESOPOTAMIA MYTH",
+        sectorTag: "SECTOR 04 // MESOPOTAMIA",
+        fullName: "メソポタミア神権 / エンリル [ENLIL]",
+        lat: 33.3,
+        lon: 44.3,
+        image: "1000019500.png",
+        specs: [
+          { label: "全高 / 重量", value: "14.0m / 不明（重戦闘型）" },
+          { label: "装甲構造", value: "積層装甲構造（大判蛇腹状装甲）" },
+          { label: "主武装", value: "シックルソード（鎌剣）" },
+          { label: "兵装システム", value: "肩部風圧兵装システム（圧縮空気砲撃）" },
+          { label: "脚部機構", value: "踵部大型単輪タイヤ ＋ くるぶし鎌" }
+        ],
+        doctrineTitle: "運用ドクトリン: 歩く要塞・戦艦型ドクトリン",
+        doctrineText: "鈍重ながら圧倒的な装甲厚と肩部風圧砲で正面を維持・粉砕。接近を試みた敵をシックルソードと踵の鎌で引き裂く。"
+      },
+      {
+        id: "sector-egypt",
+        mythBadge: "EGYPT MYTH",
+        sectorTag: "SECTOR 05 // NILE BASIN",
+        fullName: "エジプト神権 / ホルス [HORUS]",
+        lat: 26.8,
+        lon: 30.8,
+        image: "1000019501.png",
+        specs: [
+          { label: "全高 / 重量", value: "14.0m / 不明（中量級）" },
+          { label: "分類 / 特性", value: "天空戦・高機動型（王権の姿勢・反り構造）" },
+          { label: "主武装", value: "ホルスの槍 / 羽型ハンド（エネルギーブレード）" },
+          { label: "特殊形態", value: "飛行形態（ホルス・フライト）" },
+          { label: "脚部", value: "逆関節脚（跳躍・高把持力爪）" }
+        ],
+        doctrineTitle: "運用ドクトリン: 王権の守護者・制空支配",
+        doctrineText: "ウラエウス（聖蛇）による精神波増幅と超高感度センサーを用い、上空からの精密急降下攻撃で敵の指揮中枢を壊滅させる。"
+      }
+    ];
+
+    /* ==========================================================================
+       2. カードの自動レンダリング
+       ========================================================================== */
+    const cardsContainer = document.getElementById('sector-cards-container');
+    const counterEl = document.getElementById('sector-counter');
+    counterEl.textContent = `${SECTORS_DATA.length} SECTORS IDENTIFIED`;
+
+    SECTORS_DATA.forEach(sec => {
+      const specRows = sec.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
+      
+      const cardHTML = `
+        <article class="faction-card" id="${sec.id}">
+          <div class="faction-header">
+            <div>
+              <span class="faction-tag">${sec.sectorTag}</span>
+              <h2 class="faction-name">${sec.fullName}</h2>
+            </div>
+            <div class="hud-badge">${sec.mythBadge}</div>
+          </div>
+          <div class="faction-content">
+            <div class="image-frame">
+              <img src="${sec.image}" alt="${sec.fullName}" onerror="this.outerHTML='<div class=\\'placeholder\\'>[ ${sec.fullName} 画像を配置: ${sec.image} ]</div>'">
+            </div>
+            <div class="faction-details">
+              <table class="spec-table">
+                ${specRows}
+              </table>
+              <div class="doctrine-box">
+                <strong>${sec.doctrineTitle}</strong><br>
+                ${sec.doctrineText}
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+      cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
+    });
+
+    /* ==========================================================================
+       3. 3D地球儀描画（Three.js）
+       ========================================================================== */
+    const container = document.getElementById('globe-canvas');
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    camera.position.z = 240;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const globeGroup = new THREE.Group();
+    scene.add(globeGroup);
+
+    // ワイヤーフレーム球体
+    const sphereGeo = new THREE.SphereGeometry(70, 32, 24);
+    const sphereMat = new THREE.MeshBasicMaterial({
+      color: 0x00f0ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.12
+    });
+    globeGroup.add(new THREE.Mesh(sphereGeo, sphereMat));
+
+    // 内側のダークコア球体
+    const coreMat = new THREE.MeshBasicMaterial({
+      color: 0x060911,
+      transparent: true,
+      opacity: 0.85
+    });
+    globeGroup.add(new THREE.Mesh(new THREE.SphereGeometry(69.2, 32, 24), coreMat));
+
+    // 緯度経度 -> 3D座標変換
+    function latLonToVector3(lat, lon, radius) {
+      const phi = (90 - lat) * (Math.PI / 180);
+      const theta = (lon + 180) * (Math.PI / 180);
+      const x = -(radius * Math.sin(phi) * Math.cos(theta));
+      const z = radius * Math.sin(phi) * Math.sin(theta);
+      const y = radius * Math.cos(phi);
+      return new THREE.Vector3(x, y, z);
+    }
+
+    // データからピンを自動生成
+    const pinObjects = [];
+    const pinGeo = new THREE.SphereGeometry(2.5, 12, 12);
+    const ringGeo = new THREE.RingGeometry(3.5, 4.5, 20);
+
+    SECTORS_DATA.forEach(sec => {
+      const pos = latLonToVector3(sec.lat, sec.lon, 70);
+
+      const pinMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
+      const pin = new THREE.Mesh(pinGeo, pinMat);
+      pin.position.copy(pos);
+      pin.userData = { targetId: sec.id, name: sec.fullName };
+      globeGroup.add(pin);
+      pinObjects.push(pin);
+
+      const ringMat = new THREE.MeshBasicMaterial({ color: 0xe5b95f, side: THREE.DoubleSide });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.position.copy(pos.clone().multiplyScalar(1.02));
+      ring.lookAt(pos.clone().multiplyScalar(2));
+      globeGroup.add(ring);
+    });
+
+    // ドラッグ操作
+    let isDragging = false;
+    let prevMousePos = { x: 0, y: 0 };
+    let autoRotate = true;
+
+    container.addEventListener('mousedown', e => {
+      isDragging = true;
+      prevMousePos = { x: e.clientX, y: e.clientY };
+    });
+
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    container.addEventListener('mousemove', e => {
+      if (isDragging) {
+        const deltaX = e.clientX - prevMousePos.x;
+        const deltaY = e.clientY - prevMousePos.y;
+        globeGroup.rotation.y += deltaX * 0.005;
+        globeGroup.rotation.x += deltaY * 0.005;
+        prevMousePos = { x: e.clientX, y: e.clientY };
+      }
+    });
+
+    // ピンのタップ・クリック判定
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    container.addEventListener('click', e => {
+      const rect = container.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / container.clientWidth) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / container.clientHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(pinObjects);
+
+      if (intersects.length > 0) {
+        const target = intersects[0].object.userData.targetId;
+        const el = document.getElementById(target);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+          el.classList.add('highlight');
+          setTimeout(() => el.classList.remove('highlight'), 2000);
+        }
+      }
+    });
+
+    // アニメーションループ
+    function animate() {
+      requestAnimationFrame(animate);
+      if (!isDragging && autoRotate) {
+        globeGroup.rotation.y += 0.0025;
+      }
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // 画面リサイズ対応
+    window.addEventListener('resize', () => {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    });
+  </script>
 </body>
 </html>
