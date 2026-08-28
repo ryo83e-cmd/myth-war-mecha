@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -227,6 +227,27 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .image-frame::after {
+      content: "🔍 CLICK TO EXPAND DESIGN SHEET";
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      background: rgba(0,0,0,0.75);
+      border: 1px solid var(--border-bright);
+      color: var(--accent-cyan);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+
+    .image-frame:hover::after {
+      opacity: 1;
     }
 
     .image-frame img {
@@ -234,6 +255,11 @@
       height: auto;
       display: block;
       object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .image-frame:hover img {
+      transform: scale(1.02);
     }
 
     .image-frame .placeholder {
@@ -269,6 +295,54 @@
       border-left: 2px solid var(--accent-cyan);
       font-size: 0.85rem;
       color: var(--text-main);
+    }
+
+    /* 全画面モーダル */
+    #image-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 6, 10, 0.92);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      flex-direction: column;
+    }
+
+    #image-modal.active {
+      display: flex;
+    }
+
+    #modal-img {
+      max-width: 95vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border: 1px solid var(--border-bright);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+    }
+
+    #modal-caption {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 2rem;
+      color: var(--text-dim);
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: var(--accent-cyan);
     }
 
     footer {
@@ -320,14 +394,20 @@
     <div id="sector-cards-container"></div>
   </main>
 
+  <!-- 画像拡大モーダル -->
+  <div id="image-modal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <img id="modal-img" src="" alt="" onclick="event.stopPropagation()">
+    <div id="modal-caption" onclick="event.stopPropagation()"></div>
+  </div>
+
   <footer>
     <p>&copy; MITH WAR MECHA PROJECT // GLOBAL EXCAVATION DATABASE</p>
   </footer>
 
-  <!-- データベース ＆ スクリプト -->
   <script>
     /* ==========================================================================
-       1. 神話・機体マスターデータ
+       1. 全7神話・機体マスターデータ
        ========================================================================== */
     const SECTORS_DATA = [
       {
@@ -419,6 +499,42 @@
         ],
         doctrineTitle: "運用ドクトリン: 王権の守護者・制空支配",
         doctrineText: "ウラエウス（聖蛇）による精神波増幅と超高感度センサーを用い、上空からの精密急降下攻撃で敵の指揮中枢を壊滅させる。"
+      },
+      {
+        id: "sector-india",
+        mythBadge: "VEDIC MYTH",
+        sectorTag: "SECTOR 06 // INDUS VALLEY",
+        fullName: "インド神話体系 / ヴァーユ [VAYU]",
+        lat: 20.5,
+        lon: 78.9,
+        image: "1000019510.png",
+        specs: [
+          { label: "全高 / 分類", value: "14.0m / 天空神・風神・気神" },
+          { label: "主能力", value: "風の運用・気流操作・バリア展開" },
+          { label: "操縦方式", value: "精神波同調式コクピット" },
+          { label: "共通機構", value: "丸型ショルダーバリア（高出力エネルギー障壁）" },
+          { label: "固有装備", value: "風袋（ふうたい / 高圧気流・精神波圧縮タンク）" }
+        ],
+        doctrineTitle: "運用ドクトリン: プラーナ循環・多方向高機動",
+        doctrineText: "装甲を持たない腹部からプラーナ（生命エネルギー）を循環・放出し、風袋による三次元噴射と高圧衝撃波で戦場全域の気流を支配する。"
+      },
+      {
+        id: "sector-mesoamerica",
+        mythBadge: "MESOAMERICA",
+        sectorTag: "SECTOR 07 // MESOAMERICA",
+        fullName: "メソアメリカ神話 / ケツァルコアルト [QUETZALCOATL]",
+        lat: 19.4,
+        lon: -99.1,
+        image: "1000019512.png",
+        specs: [
+          { label: "全高 (頭頂部)", value: "14.0m / 重量: 不明" },
+          { label: "機体方式", value: "精神波同期式コアドライブ" },
+          { label: "構造特徴", value: "蛇型可動フレーム ＋ 羽根型推進・装甲フィン" },
+          { label: "クラスター機体", value: "ユーマ（羽の子 / スカイフィッシュ型小型群体）" },
+          { label: "主武装・能力", value: "風圧カッター / 気流竜巻 / 再生フィールド" }
+        ],
+        doctrineTitle: "運用ドクトリン: 循環・群体攪乱・再生",
+        doctrineText: "破壊よりも秩序の再構築を重視。自らの羽根から数十機の小型群体「ユーマ」を生成・放出し、風の循環で包み込んで敵を削り制圧する。"
       }
     ];
 
@@ -442,8 +558,8 @@
             <div class="hud-badge">${sec.mythBadge}</div>
           </div>
           <div class="faction-content">
-            <div class="image-frame">
-              <img src="${sec.image}" alt="${sec.fullName}" onerror="this.outerHTML='<div class=\\'placeholder\\'>[ ${sec.fullName} 画像を配置: ${sec.image} ]</div>'">
+            <div class="image-frame" onclick="openModal('${sec.image}', '${sec.fullName}')">
+              <img src="${sec.image}" alt="${sec.fullName}" onerror="this.outerHTML='<div class=\\'placeholder\\'>[ ${sec.fullName} 画像: ${sec.image} ]</div>'">
             </div>
             <div class="faction-details">
               <table class="spec-table">
@@ -461,7 +577,23 @@
     });
 
     /* ==========================================================================
-       3. 3D地球儀描画（Three.js + テクスチャ）
+       3. モーダル表示ロジック
+       ========================================================================== */
+    function openModal(src, title) {
+      const modal = document.getElementById('image-modal');
+      const modalImg = document.getElementById('modal-img');
+      const caption = document.getElementById('modal-caption');
+      modalImg.src = src;
+      caption.textContent = `ANALYSIS SHEET // ${title}`;
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('image-modal').classList.remove('active');
+    }
+
+    /* ==========================================================================
+       4. 3D地球儀描画（Three.js + テクスチャ）
        ========================================================================== */
     const container = document.getElementById('globe-canvas');
     const width = container.clientWidth;
@@ -479,7 +611,6 @@
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
-    // テクスチャ設定（jsDelivr CDNで確実に取得）
     const textureLoader = new THREE.TextureLoader();
     textureLoader.setCrossOrigin('anonymous');
 
@@ -488,7 +619,6 @@
       () => renderer.render(scene, camera)
     );
 
-    // 地球本体
     const earthGeo = new THREE.SphereGeometry(70, 64, 64);
     const earthMat = new THREE.MeshStandardMaterial({
       map: earthMap,
@@ -499,7 +629,6 @@
     const earthMesh = new THREE.Mesh(earthGeo, earthMat);
     globeGroup.add(earthMesh);
 
-    // サイバーグリッド
     const wireMat = new THREE.MeshBasicMaterial({
       color: 0x00f0ff,
       wireframe: true,
@@ -509,7 +638,6 @@
     const wireMesh = new THREE.Mesh(new THREE.SphereGeometry(70.5, 32, 24), wireMat);
     globeGroup.add(wireMesh);
 
-    // ライティング
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
     scene.add(ambientLight);
 
@@ -517,7 +645,6 @@
     dirLight.position.set(150, 100, 150);
     scene.add(dirLight);
 
-    // 座標変換関数
     function latLonToVector3(lat, lon, radius) {
       const phi = (90 - lat) * (Math.PI / 180);
       const theta = (lon + 180) * (Math.PI / 180);
@@ -527,7 +654,6 @@
       return new THREE.Vector3(x, y, z);
     }
 
-    // ピン生成
     const pinObjects = [];
     const pinGeo = new THREE.SphereGeometry(2.2, 16, 16);
     const ringGeo = new THREE.RingGeometry(3.5, 4.5, 24);
@@ -549,10 +675,8 @@
       globeGroup.add(ring);
     });
 
-    // 初期角度調整
     globeGroup.rotation.y = -Math.PI / 2;
 
-    // 操作イベント（マウス＆タッチ）
     let isDragging = false;
     let prevPos = { x: 0, y: 0 };
     let autoRotate = true;
@@ -574,7 +698,6 @@
       }
     });
 
-    // タップ判定
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
@@ -597,7 +720,6 @@
       }
     });
 
-    // ループアニメーション
     function animate() {
       requestAnimationFrame(animate);
       if (!isDragging && autoRotate) {
