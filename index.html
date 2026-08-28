@@ -543,6 +543,114 @@
     window.addEventListener('mouseup', () => { isDragging = false; });
 
     container.addEventListener('mousemove', e => {
+    /* ==========================================================================
+       3. 3D地球儀描画（テクスチャ付きサイバーアース）
+       ========================================================================== */
+    const container = document.getElementById('globe-canvas');
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    camera.position.z = 230;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const globeGroup = new THREE.Group();
+    scene.add(globeGroup);
+
+    // テクスチャローダー
+    const textureLoader = new THREE.TextureLoader();
+
+    // サイバー風の大陸マップテクスチャ（NASA/Three.js公開マップ）
+    const earthMap = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg');
+    const earthNight = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_lights_2048.png');
+
+    // 1. 地球本体（暗いトーン＋青緑の大陸テクスチャ）
+    const earthGeo = new THREE.SphereGeometry(70, 64, 64);
+    const earthMat = new THREE.MeshStandardMaterial({
+      map: earthMap,
+      color: 0x0a2233, // ベースをダークブルーに抑制
+      roughness: 0.8,
+      metalness: 0.1,
+      emissive: 0x00f0ff,
+      emissiveMap: earthNight, // 大陸の都市光や輪郭をシアンに発光
+      emissiveIntensity: 0.6
+    });
+    const earthMesh = new THREE.Mesh(earthGeo, earthMat);
+    globeGroup.add(earthMesh);
+
+    // 2. うっすら重ねるサイバーグリッド・大気レイヤー
+    const wireMat = new THREE.MeshBasicMaterial({
+      color: 0x00f0ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.08
+    });
+    const wireMesh = new THREE.Mesh(new THREE.SphereGeometry(70.5, 32, 24), wireMat);
+    globeGroup.add(wireMesh);
+
+    // 3. ライティング（SF感のあるブルーライト）
+    const ambientLight = new THREE.AmbientLight(0x223344, 1.2);
+    scene.add(ambientLight);
+
+    const dirLight = new THREE.DirectionalLight(0x00f0ff, 1.5);
+    dirLight.position.set(150, 100, 150);
+    scene.add(dirLight);
+
+    // 4. 緯度経度 -> 3D座標変換（テクスチャのUV展開に正確に合わせる）
+    function latLonToVector3(lat, lon, radius) {
+      const phi = (90 - lat) * (Math.PI / 180);
+      const theta = (lon + 180) * (Math.PI / 180);
+      const x = -(radius * Math.sin(phi) * Math.cos(theta));
+      const z = radius * Math.sin(phi) * Math.sin(theta);
+      const y = radius * Math.cos(phi);
+      return new THREE.Vector3(x, y, z);
+    }
+
+    // 5. ピンの生成
+    const pinObjects = [];
+    const pinGeo = new THREE.SphereGeometry(2.2, 16, 16);
+    const ringGeo = new THREE.RingGeometry(3.5, 4.5, 24);
+
+    SECTORS_DATA.forEach(sec => {
+      const pos = latLonToVector3(sec.lat, sec.lon, 70.8);
+
+      // コアピン
+      const pinMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
+      const pin = new THREE.Mesh(pinGeo, pinMat);
+      pin.position.copy(pos);
+      pin.userData = { targetId: sec.id, name: sec.fullName };
+      globeGroup.add(pin);
+      pinObjects.push(pin);
+
+      // 周囲のターゲットリング
+      const ringMat = new THREE.MeshBasicMaterial({ color: 0xe5b95f, side: THREE.DoubleSide });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.position.copy(pos.clone().multiplyScalar(1.01));
+      ring.lookAt(pos.clone().multiplyScalar(2));
+      globeGroup.add(ring);
+    });
+
+    // 初期角度の微調整（日本〜地中海あたりが正面に来るように）
+    globeGroup.rotation.y = -Math.PI / 2;
+
+    // ドラッグ操作
+    let isDragging = false;
+    let prevMousePos = { x: 0, y: 0 };
+    let autoRotate = true;
+
+    container.addEventListener('mousedown', e => {
+      isDragging = true;
+      prevMousePos = { x: e.clientX, y: e.clientY };
+    });
+
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    container.addEventListener('mousemove', e => {
       if (isDragging) {
         const deltaX = e.clientX - prevMousePos.x;
         const deltaY = e.clientY - prevMousePos.y;
@@ -552,14 +660,34 @@
       }
     });
 
-    // ピンのタップ・クリック判定
+    // スマホのタッチ操作対応
+    container.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        prevMousePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => { isDragging = false; });
+
+    container.addEventListener('touchmove', e => {
+      if (isDragging && e.touches.length === 1) {
+        const deltaX = e.touches[0].clientX - prevMousePos.x;
+        const deltaY = e.touches[0].clientY - prevMousePos.y;
+        globeGroup.rotation.y += deltaX * 0.005;
+        globeGroup.rotation.x += deltaY * 0.005;
+        prevMousePos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    }, { passive: true });
+
+    // ピンクリック・タップ判定
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
-    container.addEventListener('click', e => {
+    function handlePointerSelect(clientX, clientY) {
       const rect = container.getBoundingClientRect();
-      mouse.x = ((e.clientX - rect.left) / container.clientWidth) * 2 - 1;
-      mouse.y = -((e.clientY - rect.top) / container.clientHeight) * 2 + 1;
+      mouse.x = ((clientX - rect.left) / container.clientWidth) * 2 - 1;
+      mouse.y = -((clientY - rect.top) / container.clientHeight) * 2 + 1;
 
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(pinObjects);
@@ -573,19 +701,20 @@
           setTimeout(() => el.classList.remove('highlight'), 2000);
         }
       }
-    });
+    }
+
+    container.addEventListener('click', e => handlePointerSelect(e.clientX, e.clientY));
 
     // アニメーションループ
     function animate() {
       requestAnimationFrame(animate);
       if (!isDragging && autoRotate) {
-        globeGroup.rotation.y += 0.0025;
+        globeGroup.rotation.y += 0.002;
       }
       renderer.render(scene, camera);
     }
     animate();
 
-    // 画面リサイズ対応
     window.addEventListener('resize', () => {
       const w = container.clientWidth;
       const h = container.clientHeight;
@@ -593,6 +722,7 @@
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     });
+
   </script>
 </body>
 </html>
