@@ -113,13 +113,13 @@ body {
 
 .myth-main-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.4rem, 5.5vw, 2.3rem); /* 画面幅に合わせて自動縮小 */
+  font-size: clamp(1.35rem, 6.2vw, 2.2rem); /* 画面幅に合わせて自動縮小 */
   font-weight: 900;
-  letter-spacing: 0.12em; /* スマホで見切れないよう字間を微調整 */
+  letter-spacing: 0.08em; /* スマホで見切れないよう字間を微調整 */
   color: #ffffff;
   text-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
   line-height: 1.15;
-  word-break: break-word;
+  white-space: nowrap; /* 途中で改行させず1行に収める */
 }
 
 .myth-sub-wrapper {
