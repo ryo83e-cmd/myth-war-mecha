@@ -560,6 +560,9 @@
       document.getElementById('image-modal').classList.remove('active');
     }
 
+    /* ==========================================================================
+       3D地球儀（自律生成サイバーマップテクスチャ）
+       ========================================================================== */
     const container = document.getElementById('globe-canvas');
     const width = container.clientWidth;
     const height = container.clientHeight;
@@ -576,21 +579,87 @@
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
-    const sphereGeo = new THREE.SphereGeometry(70, 32, 24);
-    const sphereMat = new THREE.MeshBasicMaterial({
+    // Canvasで大陸テクスチャを自律生成
+    function createCyberEarthTexture() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 2048;
+      canvas.height = 1024;
+      const ctx = canvas.getContext('2d');
+
+      // 海洋ベース
+      ctx.fillStyle = '#060d17';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 緯度経度グリッド線
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
+      ctx.lineWidth = 2;
+      for (let i = 0; i <= canvas.width; i += 128) {
+        ctx.beginPath();
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i, canvas.height);
+        ctx.stroke();
+      }
+      for (let j = 0; j <= canvas.height; j += 64) {
+        ctx.beginPath();
+        ctx.moveTo(0, j);
+        ctx.lineTo(canvas.width, j);
+        ctx.stroke();
+      }
+
+      // 大陸ブロック（サイバー発光スタイル）
+      ctx.fillStyle = 'rgba(0, 240, 255, 0.28)';
+      ctx.strokeStyle = '#00f0ff';
+      ctx.lineWidth = 3;
+
+      function drawLand(points) {
+        ctx.beginPath();
+        points.forEach((p, idx) => {
+          const x = ((p[0] + 180) / 360) * canvas.width;
+          const y = ((90 - p[1]) / 180) * canvas.height;
+          if (idx === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+      }
+
+      // ユーラシア大陸
+      drawLand([[ -10, 36 ], [ 30, 32 ], [ 60, 25 ], [ 80, 10 ], [ 105, 10 ], [ 120, 22 ], [ 145, 45 ], [ 170, 65 ], [ 100, 75 ], [ 30, 70 ], [ -5, 60 ], [ -10, 42 ]]);
+      // アフリカ大陸
+      drawLand([[ -17, 32 ], [ 32, 31 ], [ 51, 11 ], [ 40, -10 ], [ 30, -34 ], [ 18, -34 ], [ 10, 5 ], [ -17, 15 ]]);
+      // 北米大陸
+      drawLand([[ -168, 65 ], [ -140, 70 ], [ -60, 60 ], [ -65, 45 ], [ -80, 25 ], [ -105, 20 ], [ -125, 33 ], [ -165, 55 ]]);
+      // 南米大陸
+      drawLand([[ -80, 10 ], [ -35, -5 ], [ -40, -22 ], [ -65, -55 ], [ -75, -45 ], [ -80, -5 ]]);
+      // オーストラリア
+      drawLand([[ 115, -22 ], [ 150, -15 ], [ 152, -38 ], [ 130, -35 ], [ 115, -34 ]]);
+      // 日本列島
+      drawLand([[ 130, 32 ], [ 136, 35 ], [ 141, 41 ], [ 145, 44 ], [ 140, 36 ], [ 131, 33 ]]);
+
+      return new THREE.CanvasTexture(canvas);
+    }
+
+    const earthTexture = createCyberEarthTexture();
+
+    // 地球本体
+    const earthGeo = new THREE.SphereGeometry(70, 64, 64);
+    const earthMat = new THREE.MeshBasicMaterial({
+      map: earthTexture,
+      transparent: true,
+      opacity: 0.95
+    });
+    const earthMesh = new THREE.Mesh(earthGeo, earthMat);
+    globeGroup.add(earthMesh);
+
+    // 外周ワイヤーフレーム
+    const wireMat = new THREE.MeshBasicMaterial({
       color: 0x00f0ff,
       wireframe: true,
       transparent: true,
-      opacity: 0.15
+      opacity: 0.08
     });
-    globeGroup.add(new THREE.Mesh(sphereGeo, sphereMat));
-
-    const coreMat = new THREE.MeshBasicMaterial({
-      color: 0x070b12,
-      transparent: true,
-      opacity: 0.9
-    });
-    globeGroup.add(new THREE.Mesh(new THREE.SphereGeometry(69.2, 32, 24), coreMat));
+    globeGroup.add(new THREE.Mesh(new THREE.SphereGeometry(70.8, 32, 24), wireMat));
 
     function latLonToVector3(lat, lon, radius) {
       const phi = (90 - lat) * (Math.PI / 180);
@@ -602,11 +671,11 @@
     }
 
     const pinObjects = [];
-    const pinGeo = new THREE.SphereGeometry(2.2, 16, 16);
-    const ringGeo = new THREE.RingGeometry(3.5, 4.5, 24);
+    const pinGeo = new THREE.SphereGeometry(2.4, 16, 16);
+    const ringGeo = new THREE.RingGeometry(3.6, 4.8, 24);
 
     SECTORS_DATA.forEach(sec => {
-      const pos = latLonToVector3(sec.lat, sec.lon, 70.8);
+      const pos = latLonToVector3(sec.lat, sec.lon, 71.2);
 
       const pinMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
       const pin = new THREE.Mesh(pinGeo, pinMat);
