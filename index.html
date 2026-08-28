@@ -1,4 +1,4 @@
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -82,9 +82,9 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      height: 60vh;
-      min-height: 420px;
-      max-height: 600px;
+      height: 55vh;
+      min-height: 380px;
+      max-height: 550px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -105,10 +105,10 @@
 
     .globe-overlay-hint {
       position: absolute;
-      bottom: 1.5rem;
+      bottom: 1rem;
       background: rgba(17, 22, 32, 0.85);
       border: 1px solid var(--border-color);
-      padding: 0.4rem 1rem;
+      padding: 0.3rem 0.8rem;
       border-radius: 20px;
       font-size: 0.75rem;
       color: var(--accent-cyan);
@@ -200,7 +200,7 @@
     }
 
     .faction-name {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: bold;
       color: #fff;
     }
@@ -214,14 +214,14 @@
 
     @media (min-width: 800px) {
       .faction-content {
-        grid-template-columns: 1.3fr 1fr;
+        grid-template-columns: 1.2fr 1fr;
       }
     }
 
     .image-frame {
       width: 100%;
       min-height: 250px;
-      background: #000;
+      background: #05070a;
       border: 1px solid var(--border-color);
       display: flex;
       align-items: center;
@@ -232,22 +232,16 @@
     }
 
     .image-frame::after {
-      content: "🔍 CLICK TO EXPAND DESIGN SHEET";
+      content: "🔍 CLICK TO EXPAND";
       position: absolute;
       bottom: 0.5rem;
       right: 0.5rem;
-      background: rgba(0,0,0,0.75);
+      background: rgba(0,0,0,0.8);
       border: 1px solid var(--border-bright);
       color: var(--accent-cyan);
       font-size: 0.7rem;
-      padding: 0.2rem 0.6rem;
+      padding: 0.2rem 0.5rem;
       border-radius: 2px;
-      opacity: 0.85;
-      transition: opacity 0.2s;
-    }
-
-    .image-frame:hover::after {
-      opacity: 1;
     }
 
     .image-frame img {
@@ -255,11 +249,6 @@
       height: auto;
       display: block;
       object-fit: contain;
-      transition: transform 0.3s ease;
-    }
-
-    .image-frame:hover img {
-      transform: scale(1.02);
     }
 
     .image-frame .placeholder {
@@ -277,7 +266,7 @@
     }
 
     .spec-table th, .spec-table td {
-      padding: 0.6rem 0.75rem;
+      padding: 0.5rem 0.75rem;
       border-bottom: 1px solid var(--border-color);
       text-align: left;
     }
@@ -297,13 +286,12 @@
       color: var(--text-main);
     }
 
-    /* 全画面モーダル */
     #image-modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(4, 6, 10, 0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(4, 6, 10, 0.94);
+      backdrop-filter: blur(8px);
       z-index: 1000;
       align-items: center;
       justify-content: center;
@@ -320,11 +308,10 @@
       max-height: 85vh;
       object-fit: contain;
       border: 1px solid var(--border-bright);
-      box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
     }
 
     #modal-caption {
-      margin-top: 1rem;
+      margin-top: 0.8rem;
       font-size: 0.9rem;
       color: var(--accent-cyan);
       letter-spacing: 0.1em;
@@ -337,12 +324,6 @@
       font-size: 2rem;
       color: var(--text-dim);
       cursor: pointer;
-      line-height: 1;
-      transition: color 0.2s;
-    }
-
-    .modal-close:hover {
-      color: var(--accent-cyan);
     }
 
     footer {
@@ -368,13 +349,11 @@
     <p class="subtitle">超古代神話兵器 発掘解析データベース</p>
   </header>
 
-  <!-- 3D地球儀ナビゲーション -->
   <section id="globe-section">
     <div id="globe-canvas"></div>
     <div class="globe-overlay-hint">DRAG TO ROTATE // CLICK TARGET PIN TO JUMP</div>
   </section>
 
-  <!-- プロローグ -->
   <section class="prologue-box">
     <div class="prologue-title">// OVERVIEW // 神話大戦の再来</div>
     <p class="prologue-text">
@@ -384,7 +363,6 @@
     </p>
   </section>
 
-  <!-- カード一覧（JSから自動レンダリング） -->
   <main>
     <div class="section-header">
       <span>EXCAVATION SECTORS // 発掘地域一覧</span>
@@ -394,7 +372,6 @@
     <div id="sector-cards-container"></div>
   </main>
 
-  <!-- 画像拡大モーダル -->
   <div id="image-modal" onclick="closeModal()">
     <span class="modal-close">&times;</span>
     <img id="modal-img" src="" alt="" onclick="event.stopPropagation()">
@@ -406,9 +383,6 @@
   </footer>
 
   <script>
-    /* ==========================================================================
-       1. 全7神話・機体マスターデータ
-       ========================================================================== */
     const SECTORS_DATA = [
       {
         id: "sector-greek",
@@ -417,7 +391,7 @@
         fullName: "アテナイ・ポリス連合 / アテナ [PALLAS]",
         lat: 38.0,
         lon: 23.7,
-        image: "1000019413.png",
+        image: "athena.png",
         specs: [
           { label: "全高 / 重量", value: "14.2m / 23.6t" },
           { label: "動力", value: "精神波インターフェース型神経炉" },
@@ -435,7 +409,7 @@
         fullName: "ヴァン神族連合 / フレイ [VANIR CLASS]",
         lat: 60.0,
         lon: 15.0,
-        image: "1000019414.png",
+        image: "freyr.png",
         specs: [
           { label: "全高 / 重量", value: "14.3m / 41.7t" },
           { label: "動力", value: "北欧系人工筋肉弾性素子" },
@@ -453,7 +427,7 @@
         fullName: "玉虚宮 崑崙山 / 広成子 [こうせいし]",
         lat: 35.8,
         lon: 94.0,
-        image: "1000019415.png",
+        image: "kouseishi.png",
         specs: [
           { label: "全高 / 重量", value: "14.1m / 18.4t" },
           { label: "動力", value: "霊気炉「乾元」" },
@@ -471,7 +445,7 @@
         fullName: "メソポタミア神権 / エンリル [ENLIL]",
         lat: 33.3,
         lon: 44.3,
-        image: "1000019500.png",
+        image: "enlil.png",
         specs: [
           { label: "全高 / 重量", value: "14.0m / 不明（重戦闘型）" },
           { label: "装甲構造", value: "積層装甲構造（大判蛇腹状装甲）" },
@@ -489,7 +463,7 @@
         fullName: "エジプト神権 / ホルス [HORUS]",
         lat: 26.8,
         lon: 30.8,
-        image: "1000019501.png",
+        image: "horus.png",
         specs: [
           { label: "全高 / 重量", value: "14.0m / 不明（中量級）" },
           { label: "分類 / 特性", value: "天空戦・高機動型（王権の姿勢・反り構造）" },
@@ -507,7 +481,7 @@
         fullName: "インド神話体系 / ヴァーユ [VAYU]",
         lat: 20.5,
         lon: 78.9,
-        image: "1000019510.png",
+        image: "vayu.png",
         specs: [
           { label: "全高 / 分類", value: "14.0m / 天空神・風神・気神" },
           { label: "主能力", value: "風の運用・気流操作・バリア展開" },
@@ -525,7 +499,7 @@
         fullName: "メソアメリカ神話 / ケツァルコアルト [QUETZALCOATL]",
         lat: 19.4,
         lon: -99.1,
-        image: "1000019512.png",
+        image: "quetzalcoatl.png",
         specs: [
           { label: "全高 (頭頂部)", value: "14.0m / 重量: 不明" },
           { label: "機体方式", value: "精神波同期式コアドライブ" },
@@ -538,9 +512,6 @@
       }
     ];
 
-    /* ==========================================================================
-       2. カードの自動生成
-       ========================================================================== */
     const cardsContainer = document.getElementById('sector-cards-container');
     const counterEl = document.getElementById('sector-counter');
     counterEl.textContent = `${SECTORS_DATA.length} SECTORS IDENTIFIED`;
@@ -559,7 +530,7 @@
           </div>
           <div class="faction-content">
             <div class="image-frame" onclick="openModal('${sec.image}', '${sec.fullName}')">
-              <img src="${sec.image}" alt="${sec.fullName}" onerror="this.outerHTML='<div class=\\'placeholder\\'>[ ${sec.fullName} 画像: ${sec.image} ]</div>'">
+              <img src="${sec.image}" alt="${sec.fullName}" onerror="this.outerHTML='<div class=\\'placeholder\\'>[ ${sec.fullName} 画像: ${sec.image} を配置 ]</div>'">
             </div>
             <div class="faction-details">
               <table class="spec-table">
@@ -576,9 +547,6 @@
       cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
     });
 
-    /* ==========================================================================
-       3. モーダル表示ロジック
-       ========================================================================== */
     function openModal(src, title) {
       const modal = document.getElementById('image-modal');
       const modalImg = document.getElementById('modal-img');
@@ -592,9 +560,6 @@
       document.getElementById('image-modal').classList.remove('active');
     }
 
-    /* ==========================================================================
-       4. 3D地球儀描画（Three.js + テクスチャ）
-       ========================================================================== */
     const container = document.getElementById('globe-canvas');
     const width = container.clientWidth;
     const height = container.clientHeight;
@@ -611,39 +576,21 @@
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
-    const textureLoader = new THREE.TextureLoader();
-    textureLoader.setCrossOrigin('anonymous');
-
-    const earthMap = textureLoader.load(
-      'https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_atmos_2048.jpg',
-      () => renderer.render(scene, camera)
-    );
-
-    const earthGeo = new THREE.SphereGeometry(70, 64, 64);
-    const earthMat = new THREE.MeshStandardMaterial({
-      map: earthMap,
-      color: 0x113355,
-      roughness: 0.6,
-      metalness: 0.2
-    });
-    const earthMesh = new THREE.Mesh(earthGeo, earthMat);
-    globeGroup.add(earthMesh);
-
-    const wireMat = new THREE.MeshBasicMaterial({
+    const sphereGeo = new THREE.SphereGeometry(70, 32, 24);
+    const sphereMat = new THREE.MeshBasicMaterial({
       color: 0x00f0ff,
       wireframe: true,
       transparent: true,
-      opacity: 0.08
+      opacity: 0.15
     });
-    const wireMesh = new THREE.Mesh(new THREE.SphereGeometry(70.5, 32, 24), wireMat);
-    globeGroup.add(wireMesh);
+    globeGroup.add(new THREE.Mesh(sphereGeo, sphereMat));
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
-    scene.add(ambientLight);
-
-    const dirLight = new THREE.DirectionalLight(0x00f0ff, 1.2);
-    dirLight.position.set(150, 100, 150);
-    scene.add(dirLight);
+    const coreMat = new THREE.MeshBasicMaterial({
+      color: 0x070b12,
+      transparent: true,
+      opacity: 0.9
+    });
+    globeGroup.add(new THREE.Mesh(new THREE.SphereGeometry(69.2, 32, 24), coreMat));
 
     function latLonToVector3(lat, lon, radius) {
       const phi = (90 - lat) * (Math.PI / 180);
