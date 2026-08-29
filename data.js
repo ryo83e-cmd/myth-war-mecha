@@ -7,7 +7,7 @@ const SECTORS_DATA = [
     mythBadge: "GREEK MYTH",
     btnLabel: "ギリシャ",
     sectorTag: "SECTOR 01 // MEDITERRANEAN",
-    sectorName: "ポリス連合",
+    sectorName: "ギリシャ",
     lat: 38.0,
     lon: 23.7,
     subFactions: [
@@ -39,9 +39,9 @@ const SECTORS_DATA = [
   {
     id: "sector-norse",
     mythBadge: "NORSE MYTH",
-    btnLabel: "北欧神話体系",
+    btnLabel: "北欧",
     sectorTag: "SECTOR 02 // SCANDINAVIA",
-    sectorName: "スカンディナヴィア同盟",
+    sectorName: "北欧",
     lat: 60.0,
     lon: 15.0,
     subFactions: [
@@ -93,9 +93,9 @@ const SECTORS_DATA = [
   {
     id: "sector-taoism",
     mythBadge: "TAOISM MYTH",
-    btnLabel: "道教 (崑崙山)",
+    btnLabel: "道教",
     sectorTag: "SECTOR 03 // EAST ASIA",
-    sectorName: "玉虚宮 崑崙山",
+    sectorName: "道教",
     lat: 35.8,
     lon: 94.0,
     subFactions: [
@@ -129,7 +129,7 @@ const SECTORS_DATA = [
     mythBadge: "MESOPOTAMIA MYTH",
     btnLabel: "メソポタミア",
     sectorTag: "SECTOR 04 // MESOPOTAMIA",
-    sectorName: "メソポタミア神権",
+    sectorName: "メソポタミア",
     lat: 33.3,
     lon: 44.3,
     subFactions: [
@@ -163,12 +163,12 @@ const SECTORS_DATA = [
     mythBadge: "EGYPT MYTH",
     btnLabel: "エジプト",
     sectorTag: "SECTOR 05 // NILE BASIN",
-    sectorName: "エジプト神権",
+    sectorName: "エジプト",
     lat: 26.8,
     lon: 30.8,
     subFactions: [
       {
-        factionName: "ヘリオポリス九柱・王権守護系",
+        factionName: "ヘリオポリス",
         factionCode: "DIV-05 // ENNEAD",
         mechaList: [
           {
@@ -195,14 +195,14 @@ const SECTORS_DATA = [
   {
     id: "sector-india",
     mythBadge: "VEDIC MYTH",
-    btnLabel: "インド (ヴェーダ)",
+    btnLabel: "インド",
     sectorTag: "SECTOR 06 // INDUS VALLEY",
-    sectorName: "インド神話体系",
+    sectorName: "インド",
     lat: 20.5,
     lon: 78.9,
     subFactions: [
       {
-        factionName: "ローカパーラ (八方守護系)",
+        factionName: "ヴェーダ",
         factionCode: "DIV-06 // LOKAPALA",
         mechaList: [
           {
@@ -231,7 +231,7 @@ const SECTORS_DATA = [
     mythBadge: "MESOAMERICA",
     btnLabel: "メソアメリカ",
     sectorTag: "SECTOR 07 // MESOAMERICA",
-    sectorName: "メソアメリカ神話",
+    sectorName: "メソアメリカ",
     lat: 19.4,
     lon: -99.1,
     subFactions: [
@@ -265,7 +265,7 @@ const SECTORS_DATA = [
     mythBadge: "SHINTO MYTH",
     btnLabel: "日本",
     sectorTag: "SECTOR 08 // FAR EAST ARCHIPELAGO",
-    sectorName: "日ノ本神代連合",
+    sectorName: "日本",
     lat: 35.0,
     lon: 135.7,
     subFactions: [
