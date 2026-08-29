@@ -1,5 +1,5 @@
 // =========================================================================
-// UI DISPLAY & ACCORDION CONTROL
+// UI DISPLAY & ACCORDION CONTROL (3-TIER SUB-FACTION SUPPORT)
 // =========================================================================
 const mainPanel = document.getElementById('main-content-panel');
 const navContainer = document.getElementById('nav-buttons-container');
@@ -29,7 +29,7 @@ function showOverview() {
       </p>
       <p>
         解析の結果、世界各国に口伝・記述されてきた「神話」とは、かつてこの星で繰り広げられた文明間最終戦争の記録であることが判明。
-        上の地球儀、またはナビゲーションボタンから各発掘地域（セクター）を選択することで、所属機体の詳細諸元および発掘記録ログを閲覧できます。
+        上の地球儀、またはナビゲーションボタンから各発掘地域（セクター）を選択することで、所属部族・系統別の詳細諸元および発掘記録ログを閲覧できます。
       </p>
       <div class="overview-meta-grid">
         <div class="overview-meta-item">
@@ -42,14 +42,14 @@ function showOverview() {
         </div>
         <div class="overview-meta-item">
           <div class="label">SYSTEM STATUS</div>
-          <div class="val" style="color:var(--accent-cyan)">STANDBY / ONLINE</div>
+          <div class="val" style="color:var(--accent-gold)">STANDBY / ONLINE</div>
         </div>
       </div>
     </div>
   `;
 }
 
-// セクター選択表示
+// セクター選択表示（3層構造：セクター ➔ 部族・系統 ➔ 機体）
 function selectSector(sectorId) {
   const sec = SECTORS_DATA.find(s => s.id === sectorId);
   if (!sec) return;
@@ -57,28 +57,45 @@ function selectSector(sectorId) {
   updateActiveNav(sectorId);
   rotateGlobeTo(sec.lat, sec.lon);
 
-  const mechaItemsHTML = sec.mechaList.map((m, idx) => {
-    const specRows = m.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
-    const openClass = idx === 0 ? 'open' : '';
-    return `
-      <div class="mecha-accordion-item ${openClass}" id="m-item-${idx}">
-        <div class="accordion-header" onclick="toggleAccordion('m-item-${idx}')">
-          <span class="m-name">▶ ${m.name}</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="accordion-body">
-          <div class="image-frame" onclick="openModal('${m.image}', '${m.name}')">
-            <img src="${m.image}" alt="${m.name}" onerror="this.outerHTML='<div class=\\'placeholder\\'>[ ${m.name} // 画像未設定 ]</div>'">
+  // 部族（Sub-faction）ごとのブロックを組み立てる
+  const subFactionsHTML = sec.subFactions.map((faction, fIdx) => {
+    const mechaItemsHTML = faction.mechaList.map((m, mIdx) => {
+      const specRows = m.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
+      // 各部族の1体目をデフォルトで開く
+      const openClass = (fIdx === 0 && mIdx === 0) ? 'open' : '';
+      const itemId = `m-item-${fIdx}-${mIdx}`;
+      return `
+        <div class="mecha-accordion-item ${openClass}" id="${itemId}">
+          <div class="accordion-header" onclick="toggleAccordion('${itemId}')">
+            <span class="m-name">▶ ${m.name}</span>
+            <span class="toggle-icon">▼</span>
           </div>
-          <div class="mecha-info-block">
-            <table class="spec-table">
-              ${specRows}
-            </table>
-            <div class="doctrine-box">
-              <strong>${m.doctrineTitle}</strong><br>
-              ${m.doctrineText}
+          <div class="accordion-body">
+            <div class="image-frame" onclick="openModal('${m.image}', '${m.name}')">
+              <img src="${m.image}" alt="${m.name}" onerror="this.outerHTML='<div class=\\'placeholder\\'>[ ${m.name} // 画像未設定 ]</div>'">
+            </div>
+            <div class="mecha-info-block">
+              <table class="spec-table">
+                ${specRows}
+              </table>
+              <div class="doctrine-box">
+                <strong>${m.doctrineTitle}</strong><br>
+                ${m.doctrineText}
+              </div>
             </div>
           </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="subfaction-block">
+        <div class="subfaction-header">
+          <span class="subfaction-code">${faction.factionCode}</span>
+          <h3 class="subfaction-title">${faction.factionName}</h3>
+        </div>
+        <div class="subfaction-mecha-list">
+          ${mechaItemsHTML}
         </div>
       </div>
     `;
@@ -94,8 +111,8 @@ function selectSector(sectorId) {
         <button class="back-btn" onclick="showOverview()">◀ 全体概要に戻る</button>
       </div>
 
-      <div class="mecha-list-section">
-        ${mechaItemsHTML}
+      <div class="sector-factions-container">
+        ${subFactionsHTML}
       </div>
 
       <div class="story-card">
@@ -215,7 +232,7 @@ SECTORS_DATA.forEach(sec => {
   globeGroup.add(pin);
   pinObjects.push(pin);
 
-  const ringMat = new THREE.MeshBasicMaterial({ color: 0xe5b95f, side: THREE.DoubleSide });
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0xd4af37, side: THREE.DoubleSide });
   const ring = new THREE.Mesh(ringGeo, ringMat);
   ring.position.copy(pos.clone().multiplyScalar(1.005));
   ring.lookAt(pos.clone().multiplyScalar(2));
