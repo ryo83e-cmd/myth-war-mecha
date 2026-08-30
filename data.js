@@ -56,16 +56,16 @@ const SECTORS_DATA = [
     ],
     story: {
       tag: "REGION SURVEY // SECTOR-01 OVERVIEW",
-      title: "地中海域 オリオンポス地層調査総括",
+      title: "地中海域 ギリシャ地層調査総括",
       text: "エーゲ海およびバルカン半島全域の古代地層から出土する機体群は、共通して「精神波フィールドの連結・集団戦」を前提とした工学設計が施されている。個の暴威を誇る他地域の遺物と異なり、都市国家（ポリス）を防衛・統制するための高度な組織戦術思想が色濃く残る。"
     }
   },
   {
     id: "sector-norse",
     mythBadge: "NORSE MYTH",
-    btnLabel: "北欧",
+    btnLabel: "スウェーデン",
     sectorTag: "SECTOR 02 // SCANDINAVIA",
-    sectorName: "北欧",
+    sectorName: "スウェーデン",
     lat: 60.0,
     lon: 15.0,
     subFactions: [
@@ -120,16 +120,16 @@ const SECTORS_DATA = [
     ],
     story: {
       tag: "REGION SURVEY // SECTOR-02 OVERVIEW",
-      title: "極北氷床 北欧系生体金属層調査総括",
+      title: "極北氷床 スカンディナヴィア生体金属層調査総括",
       text: "スカンディナヴィア半島の氷層深部に眠る機体群は、高出力な人工筋肉弾性素子を全身に張り巡らせている。ルーン刻印による出力制御と、装甲を展開させて過熱を逃す「バーサーカー機構」が全機体に共通する特徴である。"
     }
   },
   {
-    id: "sector-taoism",
+    id: "sector-china",
     mythBadge: "TAOISM MYTH",
-    btnLabel: "道教",
+    btnLabel: "中国",
     sectorTag: "SECTOR 03 // EAST ASIA",
-    sectorName: "道教",
+    sectorName: "中国",
     lat: 35.8,
     lon: 94.0,
     subFactions: [
@@ -203,16 +203,16 @@ const SECTORS_DATA = [
     ],
     story: {
       tag: "REGION SURVEY // SECTOR-03 OVERVIEW",
-      title: "東亜大陸 仙界法宝・生体工学調査総括",
-      text: "東亜地域では、法宝による空間制御を極めた「闡教（崑崙系）」と、霊獣や器物の仙骨をコアとして抽出し一般兵の操縦を可能にした「截教（金鰲島系）」という、対照的な二大技術体系が発掘されている。"
+      title: "中国大陸 仙界法宝・生体工学調査総括",
+      text: "中国大陸地域では、法宝による空間制御を極めた「闡教（崑崙系）」と、霊獣や器物の仙骨をコアとして抽出し一般兵の操縦を可能にした「截教（金鰲島系）」という、対照的な二大技術体系が発掘されている。"
     }
   },
   {
-    id: "sector-mesopotamia",
+    id: "sector-iraq",
     mythBadge: "MESOPOTAMIA MYTH",
-    btnLabel: "メソポタミア",
+    btnLabel: "イラク",
     sectorTag: "SECTOR 04 // MESOPOTAMIA",
-    sectorName: "メソポタミア",
+    sectorName: "イラク",
     lat: 33.3,
     lon: 44.3,
     subFactions: [
@@ -242,7 +242,7 @@ const SECTORS_DATA = [
     ],
     story: {
       tag: "REGION SURVEY // SECTOR-04 OVERVIEW",
-      title: "メソポタミア 楔形重装甲群調査総括",
+      title: "イラク メソポタミア楔形重装甲群調査総括",
       text: "チグリス・ユーフラテス川流域の古代地層から発掘される遺物は、機動性を度外視した圧倒的な装甲厚を備えている。要塞や神殿の守護を目的とした「動く防壁」としての設計思想が顕著である。"
     }
   },
@@ -281,7 +281,7 @@ const SECTORS_DATA = [
     ],
     story: {
       tag: "REGION SURVEY // SECTOR-05 OVERVIEW",
-      title: "ナイル流域 王権守護航空機体調査総括",
+      title: "ナイル流域 エジプト王権守護航空機体調査総括",
       text: "ピラミッドや神殿地下から発見される機体群は、金箔とラピスラズリでコーティングされた極めて高精度な空力・光学制御構造を持つ。王権の象徴としての威容と、砂漠の上空から戦局を俯瞰・急襲する制空思想が一体化している。"
     }
   },
@@ -320,16 +320,16 @@ const SECTORS_DATA = [
     ],
     story: {
       tag: "REGION SURVEY // SECTOR-06 OVERVIEW",
-      title: "インダス水系 プラーナ循環遺物調査総括",
+      title: "インダス水系 インド・プラーナ循環遺物調査総括",
       text: "インド亜大陸の超古代層から出土する機体は、外部からのエネルギー補給を必要とせず、大気中の霊気（プラーナ）を吸排・循環させる自己完結型の熱流体システムを備えている。"
     }
   },
   {
-    id: "sector-mesoamerica",
+    id: "sector-mexico",
     mythBadge: "MESOAMERICA",
-    btnLabel: "メソアメリカ",
+    btnLabel: "メキシコ",
     sectorTag: "SECTOR 07 // MESOAMERICA",
-    sectorName: "メソアメリカ",
+    sectorName: "メキシコ",
     lat: 19.4,
     lon: -99.1,
     subFactions: [
@@ -359,7 +359,7 @@ const SECTORS_DATA = [
     ],
     story: {
       tag: "REGION SURVEY // SECTOR-07 OVERVIEW",
-      title: "中央アメリカ 太陽暦・群体生体兵器調査総括",
+      title: "メキシコ熱帯雨林 太陽暦・群体生体兵器調査総括",
       text: "熱帯雨林地帯の遺跡群から発掘された機体は、単騎の打撃力ではなく、自律群体ユニットの展開による空間掌握と自己修復フィールドの形成に特化している。"
     }
   },
@@ -393,14 +393,75 @@ const SECTORS_DATA = [
               title: "淡路岩戸の白磁一枚甲",
               text: "淡路島深層の巨石岩戸より出土。貫頭衣を模した白磁の装甲下から伸びる注連縄状のパイプ群は、発掘から数十年を経た現在もなお微弱な神気を放出し続けている。"
             }
+          },
+          {
+            name: "天手力男 [AMENOTAJIKARAO]",
+            image: "tajikarao.png",
+            specs: [
+              { label: "世代 / 所属", value: "天津神系譜 第二世代機 / 天津神軍・機動神兵群" },
+              { label: "全高 / 重量", value: "14.0m / 32.6t" },
+              { label: "主な役割", value: "突破・投擲・組み付き戦闘（怪力特化型重装フレーム）" },
+              { label: "動力", value: "神力増幅機構 ＋ 外部動力源パイプ" },
+              { label: "操者", value: "力自慢の者（高出力適性必須）" },
+              { label: "機体思想", value: "武器を持たず、全身の質量を推進力・衝撃力に変換する素手格闘特化" }
+            ],
+            doctrineTitle: "運用ドクトリン: 重装格闘・質量粉砕",
+            doctrineText: "怪力特化型重装フレーム。前世代の思想を継承しつつ駆動系を大幅に強化。武器を持たないことにより両腕と全身の自由度と出力を最大化し、組み付き・掴み・投擲・押し込み・叩き潰すなどの白兵戦において圧倒的な怪力を発揮する。",
+            relicStory: {
+              tag: "INDIVIDUAL LOG // TAJIKARAO-02",
+              title: "岩戸を抉る巨甲の剛腕",
+              text: "高千穂峡深部の崩落岩盤下より発掘。武器を保持するマニピュレータを持たず、岩塊をそのまま握り潰したかのような掌部装甲の圧壊痕が確認された。背部の太い動力源パイプは、稼働時に周囲の空間圧力を急上昇させる。"
+            }
           }
         ]
       }
     ],
     story: {
       tag: "REGION SURVEY // SECTOR-08 OVERVIEW",
-      title: "極東列島 日ノ本神代素体調査総括",
+      title: "日本列島 日ノ本神代素体調査総括",
       text: "日本列島の深層岩戸から発掘された機体群は、他国の重装甲機と異なり、前面一枚の貫頭衣装甲と背面の剥き出し素体という特異な構造を持つ。閉ループパイプが特徴である。"
+    }
+  },
+  {
+    id: "sector-nigeria",
+    mythBadge: "YORUBA MYTH",
+    btnLabel: "ナイジェリア",
+    sectorTag: "SECTOR 09 // WEST AFRICA",
+    sectorName: "ナイジェリア",
+    lat: 9.0,
+    lon: 7.5,
+    subFactions: [
+      {
+        factionName: "オリシャ系 (ヨルバ)",
+        factionCode: "DIV-09-A // ORISHA YORUBA",
+        mechaList: [
+          {
+            name: "オグン [OGUN]",
+            image: "ogun.png",
+            specs: [
+              { label: "所属 / 主神", value: "西アフリカ神話体系（ヨルバ） / 鉄と鍛冶・戦争と開拓の主神" },
+              { label: "全高 / 重量", value: "14.0m / 23.8t" },
+              { label: "主動力", value: "術者の精神波・生体エネルギー" },
+              { label: "出力補助", value: "機体内蔵導増幅炉（非可視）" },
+              { label: "操者", value: "鍛冶神官（オグンの選定者）" },
+              { label: "主兵装", value: "開拓複合兵装（マチェーテ・モード ➔ アックス・モード）" },
+              { label: "特殊機能", value: "電磁誘導赤熱エッジ / 打撃自己鍛造 / 背面鉄床（アンビル）" }
+            ],
+            doctrineTitle: "運用ドクトリン: 開拓と破壊・自己鍛造近接戦",
+            doctrineText: "紀元前1000〜500年頃、石器から鉄器へと一気に飛躍した西アフリカ製鉄文化の始祖の力を体現。「鍛えることそのものを戦いとする」思想を持ち、打撃の衝撃熱と圧力で金属組織が密に鍛え直され、硬度と切れ味が持続的に向上する自己鍛造機構を備える。原生林を切り拓き、戦場に新たな道を穿つ。",
+            relicStory: {
+              tag: "INDIVIDUAL LOG // OGUN-01",
+              title: "ノク土層の黒皮鋼と赤熱の刃",
+              text: "ナイジェリア・ノク文化圏の古代製鉄炉跡深層より発掘。円筒形の頭部バイザーとテラコッタ幾何学レリーフを纏った黒皮鋼の巨躯は、発掘時の通電テストにおいて刃先を自発的に赤熱させ、周囲の鉄鉱石を瞬時に融解・再結晶化させた。"
+            }
+          }
+        ]
+      }
+    ],
+    story: {
+      tag: "REGION SURVEY // SECTOR-09 OVERVIEW",
+      title: "ナイジェリア ノク・ヨルバ製鉄文明調査総括",
+      text: "ナイジェリア周辺のサバナ・熱帯雨林帯から出土する機体群は、超古代における製鉄技術の飛躍的特異点を象徴している。粘土装甲（テラコッタ）と黒皮鋼フレームの複合構造を持つ。"
     }
   }
 ];
