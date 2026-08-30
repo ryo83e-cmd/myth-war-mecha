@@ -1,5 +1,5 @@
 // =========================================================================
-// UI DISPLAY & ACCORDION CONTROL (3-TIER SUB-FACTION SUPPORT)
+// UI DISPLAY & ACCORDION CONTROL (DUAL STORY SUPPORT)
 // =========================================================================
 const mainPanel = document.getElementById('main-content-panel');
 const navContainer = document.getElementById('nav-buttons-container');
@@ -29,7 +29,7 @@ function showOverview() {
       </p>
       <p>
         解析の結果、世界各国に口伝・記述されてきた「神話」とは、かつてこの星で繰り広げられた文明間最終戦争の記録であることが判明。
-        上の地球儀、またはナビゲーションボタンから各発掘地域（セクター）を選択することで、所属部族・系統別の詳細諸元および発掘記録ログを閲覧できます。
+        上の地球儀、またはナビゲーションボタンから各発掘地域（セクター）を選択することで、所属部族・系統別の詳細諸元、個別機体発掘記録、および地域調査白書を閲覧できます。
       </p>
       <div class="overview-meta-grid">
         <div class="overview-meta-item">
@@ -49,7 +49,7 @@ function showOverview() {
   `;
 }
 
-// セクター選択表示（3層構造：セクター ➔ 部族・系統 ➔ 機体）
+// セクター選択表示
 function selectSector(sectorId) {
   const sec = SECTORS_DATA.find(s => s.id === sectorId);
   if (!sec) return;
@@ -61,9 +61,18 @@ function selectSector(sectorId) {
   const subFactionsHTML = sec.subFactions.map((faction, fIdx) => {
     const mechaItemsHTML = faction.mechaList.map((m, mIdx) => {
       const specRows = m.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
-      // 各部族の1体目をデフォルトで開く
       const openClass = (fIdx === 0 && mIdx === 0) ? 'open' : '';
       const itemId = `m-item-${fIdx}-${mIdx}`;
+      
+      // 機体個別ストーリーのHTML
+      const relicStoryHTML = m.relicStory ? `
+        <div class="mecha-relic-log">
+          <div class="relic-log-tag">// ${m.relicStory.tag}</div>
+          <div class="relic-log-title">${m.relicStory.title}</div>
+          <div class="relic-log-text">"${m.relicStory.text}"</div>
+        </div>
+      ` : '';
+
       return `
         <div class="mecha-accordion-item ${openClass}" id="${itemId}">
           <div class="accordion-header" onclick="toggleAccordion('${itemId}')">
@@ -82,6 +91,7 @@ function selectSector(sectorId) {
                 <strong>${m.doctrineTitle}</strong><br>
                 ${m.doctrineText}
               </div>
+              ${relicStoryHTML}
             </div>
           </div>
         </div>
@@ -115,8 +125,9 @@ function selectSector(sectorId) {
         ${subFactionsHTML}
       </div>
 
+      <!-- 地域全体の発掘総括レポート -->
       <div class="story-card">
-        <div class="tag">// ARCHIVE REPORT: ${sec.story.tag}</div>
+        <div class="tag">// ${sec.story.tag}</div>
         <div class="title">${sec.story.title}</div>
         <div class="text">"${sec.story.text}"</div>
       </div>
