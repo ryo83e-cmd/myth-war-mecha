@@ -970,3 +970,91 @@ body {
   color: var(--mil-amber);
   opacity: 0.85;
 }
+
+/* =========================================================================
+   CULTURE-SPECIFIC GEOMETRIC PATTERN LIBRARY (文明幾何学パターン)
+   ========================================================================= */
+
+/* 1. 日本：二重螺旋・渦状循環 (pattern-spiral) */
+.sector-view.pattern-spiral .display-panel {
+  background: 
+    linear-gradient(rgba(13, 17, 24, 0.96), rgba(8, 11, 16, 0.98)),
+    radial-gradient(circle at 100% 0%, rgba(201, 160, 99, 0.08) 0%, transparent 60%),
+    repeating-radial-gradient(circle at 0% 100%, transparent, transparent 18px, rgba(201, 160, 99, 0.03) 20px);
+  border-top-color: var(--sector-accent, #c9a063);
+}
+
+/* 2. ギリシャ・中国：直角回廊・雷文 (pattern-meander) */
+.sector-view.pattern-meander .display-panel {
+  background: 
+    linear-gradient(rgba(13, 17, 24, 0.96), rgba(8, 11, 16, 0.98)),
+    repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(63, 168, 184, 0.03) 30px),
+    repeating-linear-gradient(90deg, transparent, transparent 29px, rgba(63, 168, 184, 0.03) 30px);
+  border-top-color: var(--sector-accent, #3fa8b8);
+}
+
+/* 3. スウェーデン：筋繊維スリット・生体金属ハッチ (pattern-fiber-hatch) */
+.sector-view.pattern-fiber-hatch .display-panel {
+  background: 
+    linear-gradient(rgba(13, 17, 24, 0.96), rgba(8, 11, 16, 0.98)),
+    repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(96, 165, 250, 0.025) 15px);
+  border-top-color: var(--sector-accent, #60a5fa);
+}
+
+/* 4. イラク・メキシコ：ジグラット・ピラミッド積層ブロック (pattern-stepped) */
+.sector-view.pattern-stepped .display-panel {
+  background: 
+    linear-gradient(rgba(13, 17, 24, 0.96), rgba(8, 11, 16, 0.98)),
+    repeating-linear-gradient(135deg, transparent, transparent 24px, rgba(180, 83, 9, 0.03) 25px);
+  border-top-color: var(--sector-accent, #b45309);
+}
+
+/* 5. インド：マンダラ・多層円環放射 (pattern-mandala) */
+.sector-view.pattern-mandala .display-panel {
+  background: 
+    linear-gradient(rgba(13, 17, 24, 0.96), rgba(8, 11, 16, 0.98)),
+    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.06) 0%, transparent 65%),
+    repeating-radial-gradient(circle at 50% 50%, transparent, transparent 28px, rgba(168, 85, 247, 0.03) 30px);
+  border-top-color: var(--sector-accent, #a855f7);
+}
+
+/* 6. エジプト：カルトゥーシュ・太陽放射 (pattern-cartouche) */
+.sector-view.pattern-cartouche .display-panel {
+  background: 
+    linear-gradient(rgba(13, 17, 24, 0.96), rgba(8, 11, 16, 0.98)),
+    radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.07) 0%, transparent 70%);
+  border-top-color: var(--sector-accent, #f59e0b);
+}
+
+/* 7. ナイジェリア・アボリジニ：ノク土器・点描マトリクス (pattern-dot-concentric) */
+.sector-view.pattern-dot-concentric .display-panel {
+  background: 
+    linear-gradient(rgba(13, 17, 24, 0.96), rgba(8, 11, 16, 0.98)),
+    radial-gradient(rgba(234, 88, 12, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 20px 20px;
+  border-top-color: var(--sector-accent, #ea580c);
+}
+
+/* 8. 将来用・ハワイ/ポリネシア：鋸歯トライバル (pattern-chevron-tribal) */
+.sector-view.pattern-chevron-tribal .display-panel {
+  background: 
+    linear-gradient(rgba(13, 17, 24, 0.96), rgba(8, 11, 16, 0.98)),
+    repeating-linear-gradient(60deg, transparent, transparent 18px, rgba(6, 182, 212, 0.03) 20px),
+    repeating-linear-gradient(-60deg, transparent, transparent 18px, rgba(6, 182, 212, 0.03) 20px);
+  border-top-color: var(--sector-accent, #06b6d4);
+}
+
+/* 背景に微かに浮かぶ透かし文字・シンボル */
+.sector-watermark-symbol {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 4.5rem;
+  line-height: 1;
+  color: var(--sector-accent, var(--accent-gold));
+  opacity: 0.04;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
