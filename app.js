@@ -51,6 +51,10 @@ function selectSector(sectorId) {
 
   updateActiveNav(sectorId);
 
+  // テーマ変数の適用
+  const theme = sec.theme || { accent: "#d4af37", pattern: "", symbol: "", code: "DEFAULT" };
+  const patternClass = theme.pattern || "";
+  
   const subFactionsHTML = sec.subFactions.map((faction, fIdx) => {
     const mechaItemsHTML = faction.mechaList.map((m, mIdx) => {
       const specRows = m.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
