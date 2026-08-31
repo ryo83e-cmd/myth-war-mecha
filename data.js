@@ -142,8 +142,8 @@ const SECTORS_DATA = [
     btnLabel: "中国",
     sectorTag: "SECTOR 03 // EAST ASIA",
     sectorName: "中国",
-    lat: 35.8,
-    lon: 94.0,
+    lat: 36.1,  // 変更：中央平原（中原・安陽/殷墟付近）
+    lon: 114.3, // 変更：東経114度台へ移動
     theme: {
       accent: "#d97724",
       pattern: "pattern-meander",
