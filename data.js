@@ -314,7 +314,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             id: "seth-03",
-            name: "セト（セト獣神機） [SETH / THIRD GEN]",
+            name: "セト [SETH]",
             image: "seth.png",
             specs: [
               { label: "全高 / 分類", value: "14.0m / 乱戦・攪乱・暗殺・混沌戦" },
