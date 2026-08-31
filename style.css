@@ -755,6 +755,163 @@ body {
 }
 
 /* =========================================================================
+   TACTICAL MINI GLOBE HUD (常時表示ミニ地球儀)
+   ========================================================================= */
+#mini-globe-hud {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 120px;
+  height: 140px;
+  z-index: 100;
+  cursor: pointer;
+  background: rgba(8, 11, 16, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+}
+
+#mini-globe-hud:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-gold);
+}
+
+.hud-frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0.2rem;
+}
+
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.08em;
+}
+
+#mini-globe-canvas {
+  width: 100px;
+  height: 95px;
+}
+
+.hud-tap-hint {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  color: var(--mil-amber);
+  letter-spacing: 0.05em;
+  animation: blinkHint 2s infinite ease-in-out;
+}
+
+@keyframes blinkHint {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* 戦術HUD四隅の装飾 */
+.hud-corner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--accent-gold);
+}
+.hud-corner.tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+.hud-corner.tr { top: -1px; right: -1px; border-left: none; border-bottom: none; }
+.hud-corner.bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
+.hud-corner.br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+/* スマホ用ミニHUDサイズ調整 */
+@media (max-width: 600px) {
+  #mini-globe-hud {
+    bottom: 1rem;
+    right: 1rem;
+    width: 95px;
+    height: 115px;
+  }
+  #mini-globe-canvas {
+    width: 80px;
+    height: 75px;
+  }
+}
+
+/* =========================================================================
+   EXPANDED 3D GLOBE MODAL (全画面ホログラム展開)
+   ========================================================================= */
+#globe-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 7, 10, 0.94);
+  backdrop-filter: blur(14px);
+  z-index: 500;
+  flex-direction: column;
+  animation: fadeIn 0.25s ease;
+}
+
+#globe-modal.active {
+  display: flex;
+}
+
+.globe-modal-header {
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(8, 11, 16, 0.9);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.globe-modal-title {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--accent-gold);
+  letter-spacing: 0.12em;
+}
+
+.globe-modal-sub {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.globe-modal-close {
+  background: rgba(217, 119, 36, 0.15);
+  border: 1px solid var(--mil-amber);
+  color: #fff;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.globe-modal-close:hover {
+  background: var(--mil-amber);
+}
+
+#modal-globe-canvas {
+  width: 100%;
+  flex: 1;
+  outline: none;
+  cursor: grab;
+  touch-action: none;
+}
+
+#modal-globe-canvas:active {
+  cursor: grabbing;
+}
+/* =========================================================================
    TACTICAL FOOTER
    ========================================================================= */
 .tactical-footer {
