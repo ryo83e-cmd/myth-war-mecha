@@ -307,7 +307,29 @@ const SECTORS_DATA = [
             }
           }
         ]
-      }
+      },
+      {
+        factionCode: "DIV-05-B // SETH",
+        factionName: "エジプト神系・セト派閥",
+        mechaList: [
+          {
+            id: "seth-03",
+            name: "セト（セト獣神機） [SETH / THIRD GEN]",
+            image: "seth.png",
+            specs: [
+              { label: "全高 / 分類", value: "14.0m / 乱戦・攪乱・暗殺・混沌戦" },
+              { label: "重量", value: "29.6t" },
+              { label: "主動力", value: "神力機関・外部補助動力パイプ" },
+              { label: "武装", value: "短槍 / マニピュレーター・クロー" }
+            ],
+            doctrineTitle: "砂塵支配・近接破壊ドクトリン",
+            doctrineText: "セト獣の身体特性を継承した人型機体。ホルス機と同一の基本骨格を持ち、S字逆反り姿勢と逆関節脚により俊敏な突進と跳躍を可能とする。肩甲骨部のサンドストーム・ジェネレーターで戦域を砂塵で支配し、混乱の中で敵を狩る。",
+            relicStory: {
+              tag: "INDIVIDUAL LOG // SETH-01",
+              title: "砂漠の深層に潜む混沌の爪",
+              text: "「砂漠の深層地下遺跡より出土。肩甲骨の排出ダクトから高圧で局所的な砂塵の嵐を発生させ、前腕部から大型クローを展開して装甲を裂き、フレームを握り潰す。」"
+            }
+          }
     ],
     story: {
       tag: "REGION SURVEY // SECTOR-05 OVERVIEW",
