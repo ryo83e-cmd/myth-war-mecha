@@ -975,65 +975,74 @@ body {
    CULTURE-SPECIFIC GEOMETRIC PATTERN LIBRARY (文明幾何学パターン)
    ========================================================================= */
 
-.sector-view.pattern-spiral .display-panel {
+
+/* 1. 日本：二重螺旋・渦状循環 (pattern-spiral) */
+.display-panel.pattern-spiral {
   background: 
-    linear-gradient(rgba(13, 17, 24, 0.94), rgba(8, 11, 16, 0.97)),
-    radial-gradient(circle at 100% 0%, rgba(201, 160, 99, 0.15) 0%, transparent 60%),
-    repeating-radial-gradient(circle at 0% 100%, transparent, transparent 18px, rgba(201, 160, 99, 0.08) 20px);
-  border-top-color: var(--sector-accent, #c9a063);
+    linear-gradient(rgba(13, 17, 24, 0.92), rgba(8, 11, 16, 0.95)),
+    radial-gradient(circle at 100% 0%, rgba(201, 160, 99, 0.22) 0%, transparent 55%),
+    repeating-radial-gradient(circle at 0% 100%, transparent, transparent 16px, rgba(201, 160, 99, 0.1) 18px) !important;
+  border-top: 2px solid var(--sector-accent, #c9a063);
 }
 
-.sector-view.pattern-meander .display-panel {
+/* 2. ギリシャ・中国：直角回廊・雷文 (pattern-meander) */
+.display-panel.pattern-meander {
   background: 
-    linear-gradient(rgba(13, 17, 24, 0.94), rgba(8, 11, 16, 0.97)),
-    repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(63, 168, 184, 0.08) 30px),
-    repeating-linear-gradient(90deg, transparent, transparent 29px, rgba(63, 168, 184, 0.08) 30px);
-  border-top-color: var(--sector-accent, #3fa8b8);
+    linear-gradient(rgba(13, 17, 24, 0.92), rgba(8, 11, 16, 0.95)),
+    repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(63, 168, 184, 0.12) 25px),
+    repeating-linear-gradient(90deg, transparent, transparent 24px, rgba(63, 168, 184, 0.12) 25px) !important;
+  border-top: 2px solid var(--sector-accent, #3fa8b8);
 }
 
-.sector-view.pattern-fiber-hatch .display-panel {
+/* 3. スウェーデン：筋繊維スリット (pattern-fiber-hatch) */
+.display-panel.pattern-fiber-hatch {
   background: 
-    linear-gradient(rgba(13, 17, 24, 0.94), rgba(8, 11, 16, 0.97)),
-    repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(96, 165, 250, 0.07) 15px);
-  border-top-color: var(--sector-accent, #60a5fa);
+    linear-gradient(rgba(13, 17, 24, 0.92), rgba(8, 11, 16, 0.95)),
+    repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(96, 165, 250, 0.1) 14px) !important;
+  border-top: 2px solid var(--sector-accent, #60a5fa);
 }
 
-.sector-view.pattern-stepped .display-panel {
+/* 4. イラク・メキシコ：積層ブロック (pattern-stepped) */
+.display-panel.pattern-stepped {
   background: 
-    linear-gradient(rgba(13, 17, 24, 0.94), rgba(8, 11, 16, 0.97)),
-    repeating-linear-gradient(135deg, transparent, transparent 24px, rgba(180, 83, 9, 0.08) 25px);
-  border-top-color: var(--sector-accent, #b45309);
+    linear-gradient(rgba(13, 17, 24, 0.92), rgba(8, 11, 16, 0.95)),
+    repeating-linear-gradient(135deg, transparent, transparent 20px, rgba(180, 83, 9, 0.12) 22px) !important;
+  border-top: 2px solid var(--sector-accent, #b45309);
 }
 
-.sector-view.pattern-mandala .display-panel {
+/* 5. インド：マンダラ・放射同心円 (pattern-mandala) */
+.display-panel.pattern-mandala {
   background: 
-    linear-gradient(rgba(13, 17, 24, 0.94), rgba(8, 11, 16, 0.97)),
-    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.12) 0%, transparent 65%),
-    repeating-radial-gradient(circle at 50% 50%, transparent, transparent 28px, rgba(168, 85, 247, 0.07) 30px);
-  border-top-color: var(--sector-accent, #a855f7);
+    linear-gradient(rgba(13, 17, 24, 0.92), rgba(8, 11, 16, 0.95)),
+    radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.2) 0%, transparent 60%),
+    repeating-radial-gradient(circle at 50% 50%, transparent, transparent 24px, rgba(168, 85, 247, 0.1) 26px) !important;
+  border-top: 2px solid var(--sector-accent, #a855f7);
 }
 
-.sector-view.pattern-cartouche .display-panel {
+/* 6. エジプト：カルトゥーシュ・太陽放射 (pattern-cartouche) */
+.display-panel.pattern-cartouche {
   background: 
-    linear-gradient(rgba(13, 17, 24, 0.94), rgba(8, 11, 16, 0.97)),
-    radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
-  border-top-color: var(--sector-accent, #f59e0b);
+    linear-gradient(rgba(13, 17, 24, 0.92), rgba(8, 11, 16, 0.95)),
+    radial-gradient(ellipse at 50% 0%, rgba(245, 158, 11, 0.22) 0%, transparent 65%) !important;
+  border-top: 2px solid var(--sector-accent, #f59e0b);
 }
 
-.sector-view.pattern-dot-concentric .display-panel {
+/* 7. ナイジェリア：ドットマトリクス (pattern-dot-concentric) */
+.display-panel.pattern-dot-concentric {
   background: 
-    linear-gradient(rgba(13, 17, 24, 0.94), rgba(8, 11, 16, 0.97)),
-    radial-gradient(rgba(234, 88, 12, 0.2) 1.5px, transparent 1.5px);
-  background-size: 100% 100%, 18px 18px;
-  border-top-color: var(--sector-accent, #ea580c);
+    linear-gradient(rgba(13, 17, 24, 0.92), rgba(8, 11, 16, 0.95)),
+    radial-gradient(rgba(234, 88, 12, 0.3) 2px, transparent 2px) !important;
+  background-size: 100% 100%, 16px 16px !important;
+  border-top: 2px solid var(--sector-accent, #ea580c);
 }
 
-.sector-view.pattern-chevron-tribal .display-panel {
+/* 8. ハワイなど：鋸歯トライバル (pattern-chevron-tribal) */
+.display-panel.pattern-chevron-tribal {
   background: 
-    linear-gradient(rgba(13, 17, 24, 0.94), rgba(8, 11, 16, 0.97)),
-    repeating-linear-gradient(60deg, transparent, transparent 18px, rgba(6, 182, 212, 0.08) 20px),
-    repeating-linear-gradient(-60deg, transparent, transparent 18px, rgba(6, 182, 212, 0.08) 20px);
-  border-top-color: var(--sector-accent, #06b6d4);
+    linear-gradient(rgba(13, 17, 24, 0.92), rgba(8, 11, 16, 0.95)),
+    repeating-linear-gradient(60deg, transparent, transparent 16px, rgba(6, 182, 212, 0.12) 18px),
+    repeating-linear-gradient(-60deg, transparent, transparent 16px, rgba(6, 182, 212, 0.12) 18px) !important;
+  border-top: 2px solid var(--sector-accent, #06b6d4);
 }
 
 /* =========================================================================
