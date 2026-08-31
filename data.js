@@ -142,8 +142,8 @@ const SECTORS_DATA = [
     btnLabel: "中国",
     sectorTag: "SECTOR 03 // EAST ASIA",
     sectorName: "中国",
-    lat: 36.1,  // 変更：中央平原（中原・安陽/殷墟付近）
-    lon: 114.3, // 変更：東経114度台へ移動
+    lat: 36.1,  // 殷墟・中原（河南省安陽付近）
+    lon: 114.3,
     theme: {
       accent: "#d97724",
       pattern: "pattern-meander",
@@ -309,8 +309,8 @@ const SECTORS_DATA = [
         ]
       },
       {
-        factionCode: "DIV-05-B // SETH",
         factionName: "エジプト神系・セト派閥",
+        factionCode: "DIV-05-B // SETH",
         mechaList: [
           {
             id: "seth-03",
@@ -330,6 +330,8 @@ const SECTORS_DATA = [
               text: "「砂漠の深層地下遺跡より出土。肩甲骨の排出ダクトから高圧で局所的な砂塵の嵐を発生させ、前腕部から大型クローを展開して装甲を裂き、フレームを握り潰す。」"
             }
           }
+        ]
+      }
     ],
     story: {
       tag: "REGION SURVEY // SECTOR-05 OVERVIEW",
@@ -343,8 +345,8 @@ const SECTORS_DATA = [
     btnLabel: "インド",
     sectorTag: "SECTOR 06 // INDUS VALLEY",
     sectorName: "インド",
-    lat: 30.1,  // 変更：ヴェーダ発祥の地（パンジャーブ・サラスヴァティー流域付近）
-    lon: 76.8,  // 変更：北西部へ移動
+    lat: 30.1,  // ヴェーダ発祥の地（パンジャーブ・サラスヴァティー流域）
+    lon: 76.8,
     theme: {
       accent: "#a855f7",
       pattern: "pattern-mandala",
