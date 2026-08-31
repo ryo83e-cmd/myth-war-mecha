@@ -1,5 +1,5 @@
 // =========================================================================
-// MYTHEOGONICA // SECTOR & MECHA MASTER DATABASE (3-TIER + DUAL STORY HIERARCHY)
+// MYTHEOGONICA // SECTOR & MECHA MASTER DATABASE (DATA-DRIVEN THEME SUPPORT)
 // =========================================================================
 const SECTORS_DATA = [
   {
@@ -10,6 +10,12 @@ const SECTORS_DATA = [
     sectorName: "ギリシャ",
     lat: 38.0,
     lon: 23.7,
+    theme: {
+      accent: "#3fa8b8",
+      pattern: "pattern-meander",
+      symbol: "☵",
+      code: "MEANDER_GRID"
+    },
     subFactions: [
       {
         factionName: "オリュンポス系",
@@ -68,6 +74,12 @@ const SECTORS_DATA = [
     sectorName: "スウェーデン",
     lat: 60.0,
     lon: 15.0,
+    theme: {
+      accent: "#60a5fa",
+      pattern: "pattern-fiber-hatch",
+      symbol: "ᛏ",
+      code: "FIBER_RUNE"
+    },
     subFactions: [
       {
         factionName: "アース神族 (AESIR)",
@@ -132,6 +144,12 @@ const SECTORS_DATA = [
     sectorName: "中国",
     lat: 35.8,
     lon: 94.0,
+    theme: {
+      accent: "#d97724",
+      pattern: "pattern-meander",
+      symbol: "☰",
+      code: "BAGUA_SEAL"
+    },
     subFactions: [
       {
         factionName: "闡教・崑崙系",
@@ -215,6 +233,12 @@ const SECTORS_DATA = [
     sectorName: "イラク",
     lat: 33.3,
     lon: 44.3,
+    theme: {
+      accent: "#b45309",
+      pattern: "pattern-stepped",
+      symbol: "▼",
+      code: "ZIGGURAT_LAYER"
+    },
     subFactions: [
       {
         factionName: "アヌンナキ神権序列",
@@ -254,6 +278,12 @@ const SECTORS_DATA = [
     sectorName: "エジプト",
     lat: 26.8,
     lon: 30.8,
+    theme: {
+      accent: "#f59e0b",
+      pattern: "pattern-cartouche",
+      symbol: "☥",
+      code: "SOLAR_DISC"
+    },
     subFactions: [
       {
         factionName: "ヘリオポリス",
@@ -293,6 +323,12 @@ const SECTORS_DATA = [
     sectorName: "インド",
     lat: 20.5,
     lon: 78.9,
+    theme: {
+      accent: "#a855f7",
+      pattern: "pattern-mandala",
+      symbol: "☸",
+      code: "PRANA_CHAKRA"
+    },
     subFactions: [
       {
         factionName: "ヴェーダ",
@@ -332,6 +368,12 @@ const SECTORS_DATA = [
     sectorName: "メキシコ",
     lat: 19.4,
     lon: -99.1,
+    theme: {
+      accent: "#10b981",
+      pattern: "pattern-stepped",
+      symbol: "❖",
+      code: "SOLAR_CALENDAR"
+    },
     subFactions: [
       {
         factionName: "創造神格系",
@@ -371,6 +413,12 @@ const SECTORS_DATA = [
     sectorName: "日本",
     lat: 35.0,
     lon: 135.7,
+    theme: {
+      accent: "#c9a063",
+      pattern: "pattern-spiral",
+      symbol: "◎",
+      code: "SHIMENAWA_SPIRAL"
+    },
     subFactions: [
       {
         factionName: "天津神系",
@@ -430,6 +478,12 @@ const SECTORS_DATA = [
     sectorName: "ナイジェリア",
     lat: 9.0,
     lon: 7.5,
+    theme: {
+      accent: "#ea580c",
+      pattern: "pattern-dot-concentric",
+      symbol: "⚙",
+      code: "NOK_FORGE"
+    },
     subFactions: [
       {
         factionName: "オリシャ系 (ヨルバ)",
