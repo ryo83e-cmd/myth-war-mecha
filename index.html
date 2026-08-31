@@ -6,7 +6,6 @@
   <title>MYTHEOGONICA // 神話神格機体 構造考証・発掘戦術全書</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-  <!-- 碑文フォント Cinzel ＆ 計器・等幅フォント Share Tech Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Share+Tech+Mono&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
@@ -50,12 +49,7 @@
     </div>
   </header>
 
-  <!-- 3D GLOBE NAVIGATION SECTION -->
-  <section id="globe-section">
-    <div id="globe-canvas"></div>
-  </section>
-
-  <!-- SECTOR SELECTOR NAV -->
+  <!-- SECTOR SELECTOR NAV (上部に直接配置) -->
   <nav class="sector-nav-bar" id="nav-buttons-container">
     <button class="nav-btn overview-btn active" onclick="showOverview()">OVERVIEW (全体概要)</button>
   </nav>
@@ -80,6 +74,29 @@
       </div>
     </div>
   </footer>
+
+  <!-- 常時画面右下に浮かぶ戦術ミニ地球儀HUD -->
+  <div id="mini-globe-hud" onclick="openGlobeModal()">
+    <div class="hud-frame">
+      <div class="hud-corner tl"></div>
+      <div class="hud-corner tr"></div>
+      <div class="hud-corner bl"></div>
+      <div class="hud-corner br"></div>
+      <div class="hud-label">// TACTICAL GLOBE</div>
+      <div id="mini-globe-canvas"></div>
+      <div class="hud-tap-hint">TAP TO EXPAND</div>
+    </div>
+  </div>
+
+  <!-- タップ時に展開される全画面3D地球儀モーダル -->
+  <div id="globe-modal">
+    <div class="globe-modal-header">
+      <div class="globe-modal-title">// 3D SECTOR TACTICAL MAP</div>
+      <div class="globe-modal-sub">ドラッグで回転 / ピンをタップしてセクターへ移動</div>
+      <button class="globe-modal-close" onclick="closeGlobeModal()">✕ CLOSE</button>
+    </div>
+    <div id="modal-globe-canvas"></div>
+  </div>
 
   <!-- IMAGE MODAL -->
   <div id="image-modal" onclick="closeModal()">
