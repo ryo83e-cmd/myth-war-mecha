@@ -142,8 +142,8 @@ const SECTORS_DATA = [
     btnLabel: "中国",
     sectorTag: "SECTOR 03 // EAST ASIA",
     sectorName: "中国",
-    lat: 36.1,  // 殷墟・中原（河南省安陽付近）
-    lon: 114.3,
+    lat: 36.1,  // 変更：中央平原（中原・安陽/殷墟付近）
+    lon: 114.3, // 変更：東経114度台へ移動
     theme: {
       accent: "#d97724",
       pattern: "pattern-meander",
@@ -345,8 +345,8 @@ const SECTORS_DATA = [
     btnLabel: "インド",
     sectorTag: "SECTOR 06 // INDUS VALLEY",
     sectorName: "インド",
-    lat: 30.1,  // ヴェーダ発祥の地（パンジャーブ・サラスヴァティー流域）
-    lon: 76.8,
+    lat: 30.1,  // 変更：ヴェーダ発祥の地（パンジャーブ・サラスヴァティー流域付近）
+    lon: 76.8,  // 変更：北西部へ移動
     theme: {
       accent: "#a855f7",
       pattern: "pattern-mandala",
