@@ -1,5 +1,5 @@
 // =========================================================================
-// UI DISPLAY & ACCORDION CONTROL
+// UI DISPLAY & ACCORDION CONTROL (DATA-DRIVEN THEME SUPPORT)
 // =========================================================================
 const mainPanel = document.getElementById('main-content-panel');
 const navContainer = document.getElementById('nav-buttons-container');
@@ -14,6 +14,7 @@ SECTORS_DATA.forEach(sec => {
   navContainer.appendChild(btn);
 });
 
+// 全体概要表示
 function showOverview() {
   updateActiveNav('overview');
   mainPanel.innerHTML = `
@@ -45,16 +46,17 @@ function showOverview() {
   `;
 }
 
+// セクター選択表示（data.js の theme 定義を動的反映）
 function selectSector(sectorId) {
   const sec = SECTORS_DATA.find(s => s.id === sectorId);
   if (!sec) return;
 
   updateActiveNav(sectorId);
 
-  // テーマ変数の適用
+  // テーマデータの取得（未定義の場合はデフォルト値）
   const theme = sec.theme || { accent: "#d4af37", pattern: "", symbol: "", code: "DEFAULT" };
   const patternClass = theme.pattern || "";
-  
+
   const subFactionsHTML = sec.subFactions.map((faction, fIdx) => {
     const mechaItemsHTML = faction.mechaList.map((m, mIdx) => {
       const specRows = m.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
@@ -108,11 +110,12 @@ function selectSector(sectorId) {
   }).join('');
 
   mainPanel.innerHTML = `
-    <div class="sector-view">
+    <div class="sector-view ${patternClass}" style="--sector-accent: ${theme.accent};">
+      <div class="sector-watermark-symbol">${theme.symbol}</div>
       <div class="sector-header-flex">
         <div class="sector-title-group">
-          <span class="tag">${sec.sectorTag}</span>
-          <h2>${sec.sectorName} <span class="hud-badge" style="margin-left:0.5rem;">${sec.mythBadge}</span></h2>
+          <span class="tag">${sec.sectorTag} // ${theme.code}</span>
+          <h2>${sec.sectorName} <span class="hud-badge" style="margin-left:0.5rem; border-color:${theme.accent}; color:${theme.accent};">${sec.mythBadge}</span></h2>
         </div>
         <button class="back-btn" onclick="showOverview()">◀ 全体概要に戻る</button>
       </div>
@@ -121,7 +124,7 @@ function selectSector(sectorId) {
         ${subFactionsHTML}
       </div>
 
-      <div class="story-card">
+      <div class="story-card" style="border-left-color: ${theme.accent};">
         <div class="tag">// ${sec.story.tag}</div>
         <div class="title">${sec.story.title}</div>
         <div class="text">"${sec.story.text}"</div>
@@ -195,7 +198,6 @@ const miniSun = new THREE.DirectionalLight(0xffffff, 1.2);
 miniSun.position.set(100, 50, 100);
 miniScene.add(miniSun);
 
-// ミニ地球儀上の発掘点（ポチ）
 const miniPinGeo = new THREE.SphereGeometry(1.8, 8, 8);
 const miniPinMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
 SECTORS_DATA.forEach(sec => {
