@@ -1036,19 +1036,41 @@ body {
   border-top-color: var(--sector-accent, #06b6d4);
 }
 
-/* 透かしシンボルの視認性を大幅向上（薄すぎ問題を解消） */
+/* =========================================================================
+   SECTOR TITLE & WATERMARK INTEGRATION (見出し統合型透かし)
+   ========================================================================= */
+
+/* セクタータイトルの親コンテナ（相対配置の基準） */
+.sector-title-group {
+  position: relative;
+  display: inline-block;
+  padding: 0.2rem 0;
+  z-index: 1;
+}
+
+/* タイトルエリアに重ねる文明シンボル（ウォーターマーク） */
 .sector-watermark-symbol {
   position: absolute;
-  top: 1rem;
-  right: 1.5rem;
+  right: -1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
   font-family: var(--font-serif);
-  font-size: 5rem;
+  font-size: 4rem;
   line-height: 1;
   color: var(--sector-accent, var(--accent-gold));
-  opacity: 0.14; /* 0.04から約3.5倍に引き上げ */
-  text-shadow: 0 0 15px var(--sector-accent, var(--accent-gold)); /* ほのかに発光させて存在感を出す */
+  opacity: 0.15; /* 視認しやすい絶妙な濃さ */
+  text-shadow: 0 0 12px var(--sector-accent, var(--accent-gold));
   pointer-events: none;
   user-select: none;
-  z-index: 0;
+  z-index: -1; /* 文字の背面に配置 */
+}
+
+/* スマホ等でタイトルと重なりすぎないよう微調整 */
+@media (max-width: 600px) {
+  .sector-watermark-symbol {
+    font-size: 3.2rem;
+    right: -1rem;
+    opacity: 0.18;
+  }
 }
 
