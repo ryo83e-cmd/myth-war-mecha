@@ -56,6 +56,10 @@ function selectSector(sectorId) {
   const theme = sec.theme || { accent: "#d4af37", pattern: "", symbol: "", code: "DEFAULT" };
   const patternClass = theme.pattern || "";
 
+  // mainPanel（display-panel）に直接パターンクラスとCSS変数をセット
+  mainPanel.className = `display-panel ${patternClass}`;
+  mainPanel.style.setProperty('--sector-accent', theme.accent);
+
   const subFactionsHTML = sec.subFactions.map((faction, fIdx) => {
     const mechaItemsHTML = faction.mechaList.map((m, mIdx) => {
       const specRows = m.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
@@ -108,14 +112,12 @@ function selectSector(sectorId) {
     `;
   }).join('');
 
-  // h2見出しの横（または背後）にシンボルを統合配置
   mainPanel.innerHTML = `
-    <div class="sector-view ${patternClass}" style="--sector-accent: ${theme.accent};">
+    <div class="sector-view">
       <div class="sector-header-flex">
         <div class="sector-title-group">
           <span class="tag">${sec.sectorTag} // ${theme.code}</span>
           <h2>${sec.sectorName} <span class="hud-badge" style="margin-left:0.5rem; border-color:${theme.accent}; color:${theme.accent};">${sec.mythBadge}</span></h2>
-          <!-- セクター名の近くに重なるように配置される統合ウォーターマーク -->
           <div class="sector-watermark-symbol">${theme.symbol}</div>
         </div>
         <button class="back-btn" onclick="showOverview()">◀ 全体概要に戻る</button>
