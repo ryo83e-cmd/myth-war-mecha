@@ -1,5 +1,5 @@
 // =========================================================================
-// UI DISPLAY & ACCORDION CONTROL (DUAL STORY SUPPORT)
+// UI DISPLAY & ACCORDION CONTROL
 // =========================================================================
 const mainPanel = document.getElementById('main-content-panel');
 const navContainer = document.getElementById('nav-buttons-container');
@@ -14,12 +14,8 @@ SECTORS_DATA.forEach(sec => {
   navContainer.appendChild(btn);
 });
 
-// 全体概要表示
 function showOverview() {
   updateActiveNav('overview');
-  autoRotate = true;
-  targetRotation = null;
-
   mainPanel.innerHTML = `
     <div class="overview-view">
       <div class="panel-tag">// GLOBAL BRIEFING // プロジェクト概要</div>
@@ -29,7 +25,7 @@ function showOverview() {
       </p>
       <p>
         解析の結果、世界各国に口伝・記述されてきた「神話」とは、かつてこの星で繰り広げられた文明間最終戦争の記録であることが判明。
-        上の地球儀、またはナビゲーションボタンから各発掘地域（セクター）を選択することで、所属部族・系統別の詳細諸元、個別機体発掘記録、および地域調査白書を閲覧できます。
+        上の発掘国ボタン、または画面右下の戦術地球儀から各発掘地域を選択することで、所属部族・系統別の詳細諸元、個別機体発掘記録、および地域調査白書を閲覧できます。
       </p>
       <div class="overview-meta-grid">
         <div class="overview-meta-item">
@@ -49,22 +45,18 @@ function showOverview() {
   `;
 }
 
-// セクター選択表示
 function selectSector(sectorId) {
   const sec = SECTORS_DATA.find(s => s.id === sectorId);
   if (!sec) return;
 
   updateActiveNav(sectorId);
-  rotateGlobeTo(sec.lat, sec.lon);
 
-  // 部族（Sub-faction）ごとのブロックを組み立てる
   const subFactionsHTML = sec.subFactions.map((faction, fIdx) => {
     const mechaItemsHTML = faction.mechaList.map((m, mIdx) => {
       const specRows = m.specs.map(s => `<tr><th>${s.label}</th><td>${s.value}</td></tr>`).join('');
       const openClass = (fIdx === 0 && mIdx === 0) ? 'open' : '';
       const itemId = `m-item-${fIdx}-${mIdx}`;
       
-      // 機体個別ストーリーのHTML
       const relicStoryHTML = m.relicStory ? `
         <div class="mecha-relic-log">
           <div class="relic-log-tag">// ${m.relicStory.tag}</div>
@@ -125,7 +117,6 @@ function selectSector(sectorId) {
         ${subFactionsHTML}
       </div>
 
-      <!-- 地域全体の発掘総括レポート -->
       <div class="story-card">
         <div class="tag">// ${sec.story.tag}</div>
         <div class="title">${sec.story.title}</div>
@@ -137,9 +128,7 @@ function selectSector(sectorId) {
 
 function toggleAccordion(id) {
   const item = document.getElementById(id);
-  if (item) {
-    item.classList.toggle('open');
-  }
+  if (item) item.classList.toggle('open');
 }
 
 function updateActiveNav(activeId) {
@@ -154,71 +143,14 @@ function updateActiveNav(activeId) {
 }
 
 // =========================================================================
-// THREE.JS 3D GLOBE
+// THREE.JS GLOBE SETUP (SHARED FACTORY)
 // =========================================================================
-const container = document.getElementById('globe-canvas');
-const width = container.clientWidth;
-const height = container.clientHeight;
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-camera.position.z = 200;
-
-const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-renderer.setSize(width, height);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-container.appendChild(renderer.domElement);
-
-const globeGroup = new THREE.Group();
-scene.add(globeGroup);
-
 const textureLoader = new THREE.TextureLoader();
 textureLoader.setCrossOrigin('anonymous');
-
 const earthMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_atmos_2048.jpg');
 const earthBump = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_normal_2048.jpg');
 const earthSpec = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_specular_2048.jpg');
-
-const earthMat = new THREE.MeshPhongMaterial({
-  map: earthMap,
-  bumpMap: earthBump,
-  bumpScale: 0.05,
-  specularMap: earthSpec,
-  specular: new THREE.Color(0x223344),
-  shininess: 15
-});
-const earthMesh = new THREE.Mesh(new THREE.SphereGeometry(68, 64, 64), earthMat);
-globeGroup.add(earthMesh);
-
 const cloudsMap = textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@r128/examples/textures/planets/earth_clouds_1024.png');
-const cloudsMat = new THREE.MeshLambertMaterial({
-  map: cloudsMap,
-  transparent: true,
-  opacity: 0.35,
-  blending: THREE.AdditiveBlending
-});
-const cloudsMesh = new THREE.Mesh(new THREE.SphereGeometry(68.8, 64, 64), cloudsMat);
-globeGroup.add(cloudsMesh);
-
-const atmosphereMat = new THREE.MeshBasicMaterial({
-  color: 0x00d4ff,
-  side: THREE.BackSide,
-  transparent: true,
-  opacity: 0.18
-});
-const atmosphereMesh = new THREE.Mesh(new THREE.SphereGeometry(72.5, 64, 64), atmosphereMat);
-scene.add(atmosphereMesh);
-
-const ambientLight = new THREE.AmbientLight(0x404855, 1.2);
-scene.add(ambientLight);
-
-const sunLight = new THREE.DirectionalLight(0xffffff, 1.5);
-sunLight.position.set(180, 80, 150);
-scene.add(sunLight);
-
-const rimLight = new THREE.DirectionalLight(0x00f0ff, 0.6);
-rimLight.position.set(-180, -50, -100);
-scene.add(rimLight);
 
 function latLonToVector3(lat, lon, radius) {
   const phi = (90 - lat) * (Math.PI / 180);
@@ -229,98 +161,184 @@ function latLonToVector3(lat, lon, radius) {
   return new THREE.Vector3(x, y, z);
 }
 
-const pinObjects = [];
-const pinGeo = new THREE.SphereGeometry(1.8, 16, 16);
-const ringGeo = new THREE.RingGeometry(2.6, 3.6, 24);
+// --- 1. ミニ地球儀（右下HUD） ---
+const miniContainer = document.getElementById('mini-globe-canvas');
+const miniScene = new THREE.Scene();
+const miniCamera = new THREE.PerspectiveCamera(45, miniContainer.clientWidth / miniContainer.clientHeight, 0.1, 500);
+miniCamera.position.z = 175;
+
+const miniRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+miniRenderer.setSize(miniContainer.clientWidth, miniContainer.clientHeight);
+miniContainer.appendChild(miniRenderer.domElement);
+
+const miniGroup = new THREE.Group();
+miniScene.add(miniGroup);
+
+const miniEarth = new THREE.Mesh(
+  new THREE.SphereGeometry(60, 32, 32),
+  new THREE.MeshPhongMaterial({ map: earthMap, bumpMap: earthBump, bumpScale: 0.05, shininess: 10 })
+);
+miniGroup.add(miniEarth);
+
+const miniClouds = new THREE.Mesh(
+  new THREE.SphereGeometry(60.8, 32, 32),
+  new THREE.MeshLambertMaterial({ map: cloudsMap, transparent: true, opacity: 0.35, blending: THREE.AdditiveBlending })
+);
+miniGroup.add(miniClouds);
+
+miniScene.add(new THREE.AmbientLight(0xffffff, 1.2));
+const miniSun = new THREE.DirectionalLight(0xffffff, 1.2);
+miniSun.position.set(100, 50, 100);
+miniScene.add(miniSun);
+
+// ミニ地球儀上の発掘点（ポチ）
+const miniPinGeo = new THREE.SphereGeometry(1.8, 8, 8);
+const miniPinMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
+SECTORS_DATA.forEach(sec => {
+  const pos = latLonToVector3(sec.lat, sec.lon, 61.2);
+  const p = new THREE.Mesh(miniPinGeo, miniPinMat);
+  p.position.copy(pos);
+  miniGroup.add(p);
+});
+
+// --- 2. モーダル展開用・全画面地球儀 ---
+const modalContainer = document.getElementById('modal-globe-canvas');
+const modalScene = new THREE.Scene();
+const modalCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+modalCamera.position.z = 200;
+
+const modalRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+modalContainer.appendChild(modalRenderer.domElement);
+
+const modalGroup = new THREE.Group();
+modalScene.add(modalGroup);
+
+const modalEarth = new THREE.Mesh(
+  new THREE.SphereGeometry(68, 64, 64),
+  new THREE.MeshPhongMaterial({ map: earthMap, bumpMap: earthBump, bumpScale: 0.05, specularMap: earthSpec, specular: new THREE.Color(0x223344), shininess: 15 })
+);
+modalGroup.add(modalEarth);
+
+const modalClouds = new THREE.Mesh(
+  new THREE.SphereGeometry(68.8, 64, 64),
+  new THREE.MeshLambertMaterial({ map: cloudsMap, transparent: true, opacity: 0.35, blending: THREE.AdditiveBlending })
+);
+modalGroup.add(modalClouds);
+
+const modalAtmosphere = new THREE.Mesh(
+  new THREE.SphereGeometry(72.5, 64, 64),
+  new THREE.MeshBasicMaterial({ color: 0x00d4ff, side: THREE.BackSide, transparent: true, opacity: 0.18 })
+);
+modalScene.add(modalAtmosphere);
+
+modalScene.add(new THREE.AmbientLight(0x404855, 1.2));
+const modalSun = new THREE.DirectionalLight(0xffffff, 1.5);
+modalSun.position.set(180, 80, 150);
+modalScene.add(modalSun);
+
+const modalPinObjects = [];
+const modalPinGeo = new THREE.SphereGeometry(2.0, 16, 16);
+const modalRingGeo = new THREE.RingGeometry(2.8, 4.0, 24);
 
 SECTORS_DATA.forEach(sec => {
   const pos = latLonToVector3(sec.lat, sec.lon, 69.5);
-
-  const pinMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff });
-  const pin = new THREE.Mesh(pinGeo, pinMat);
+  const pin = new THREE.Mesh(modalPinGeo, new THREE.MeshBasicMaterial({ color: 0x00f0ff }));
   pin.position.copy(pos);
   pin.userData = { targetId: sec.id };
-  globeGroup.add(pin);
-  pinObjects.push(pin);
+  modalGroup.add(pin);
+  modalPinObjects.push(pin);
 
-  const ringMat = new THREE.MeshBasicMaterial({ color: 0xd4af37, side: THREE.DoubleSide });
-  const ring = new THREE.Mesh(ringGeo, ringMat);
+  const ring = new THREE.Mesh(modalRingGeo, new THREE.MeshBasicMaterial({ color: 0xd4af37, side: THREE.DoubleSide }));
   ring.position.copy(pos.clone().multiplyScalar(1.005));
   ring.lookAt(pos.clone().multiplyScalar(2));
-  globeGroup.add(ring);
+  modalGroup.add(ring);
 });
 
-globeGroup.rotation.y = -Math.PI / 2;
-
+// モーダル操作制御
 let isDragging = false;
 let prevPos = { x: 0, y: 0 };
-let autoRotate = true;
-let targetRotation = null;
+let autoRotateModal = true;
 
-container.addEventListener('pointerdown', e => {
+modalContainer.addEventListener('pointerdown', e => {
   isDragging = true;
-  autoRotate = false;
-  targetRotation = null;
+  autoRotateModal = false;
   prevPos = { x: e.clientX, y: e.clientY };
 });
 
 window.addEventListener('pointerup', () => { isDragging = false; });
 
-container.addEventListener('pointermove', e => {
+modalContainer.addEventListener('pointermove', e => {
   if (isDragging) {
     const deltaX = e.clientX - prevPos.x;
     const deltaY = e.clientY - prevPos.y;
-    globeGroup.rotation.y += deltaX * 0.005;
-    globeGroup.rotation.x += deltaY * 0.005;
+    modalGroup.rotation.y += deltaX * 0.005;
+    modalGroup.rotation.x += deltaY * 0.005;
     prevPos = { x: e.clientX, y: e.clientY };
   }
 });
 
-function rotateGlobeTo(lat, lon) {
-  autoRotate = false;
-  const targetY = - (lon + 90) * (Math.PI / 180);
-  const targetX = (lat) * (Math.PI / 180) * 0.3;
-  targetRotation = { x: targetX, y: targetY };
-}
-
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-container.addEventListener('click', e => {
-  const rect = container.getBoundingClientRect();
-  mouse.x = ((e.clientX - rect.left) / container.clientWidth) * 2 - 1;
-  mouse.y = -((e.clientY - rect.top) / container.clientHeight) * 2 + 1;
+modalContainer.addEventListener('click', e => {
+  const rect = modalContainer.getBoundingClientRect();
+  mouse.x = ((e.clientX - rect.left) / modalContainer.clientWidth) * 2 - 1;
+  mouse.y = -((e.clientY - rect.top) / modalContainer.clientHeight) * 2 + 1;
 
-  raycaster.setFromCamera(mouse, camera);
-  const intersects = raycaster.intersectObjects(pinObjects);
+  raycaster.setFromCamera(mouse, modalCamera);
+  const intersects = raycaster.intersectObjects(modalPinObjects);
 
   if (intersects.length > 0) {
     const targetId = intersects[0].object.userData.targetId;
+    closeGlobeModal();
     selectSector(targetId);
   }
 });
 
+// モーダル開閉
+function openGlobeModal() {
+  const modal = document.getElementById('globe-modal');
+  modal.classList.add('active');
+  resizeModalGlobe();
+  autoRotateModal = true;
+}
+
+function closeGlobeModal() {
+  document.getElementById('globe-modal').classList.remove('active');
+}
+
+function resizeModalGlobe() {
+  const w = modalContainer.clientWidth;
+  const h = modalContainer.clientHeight;
+  if (w && h) {
+    modalCamera.aspect = w / h;
+    modalCamera.updateProjectionMatrix();
+    modalRenderer.setSize(w, h);
+  }
+}
+
+// アニメーションループ
 function animate() {
   requestAnimationFrame(animate);
 
-  if (targetRotation) {
-    globeGroup.rotation.y += (targetRotation.y - globeGroup.rotation.y) * 0.06;
-    globeGroup.rotation.x += (targetRotation.x - globeGroup.rotation.x) * 0.06;
-  } else if (!isDragging && autoRotate) {
-    globeGroup.rotation.y += 0.0012;
-    cloudsMesh.rotation.y += 0.0018;
-  }
+  // ミニ地球儀の自転
+  miniGroup.rotation.y += 0.004;
+  miniClouds.rotation.y += 0.006;
+  miniRenderer.render(miniScene, miniCamera);
 
-  renderer.render(scene, camera);
+  // モーダル地球儀の自転 / 描画
+  if (document.getElementById('globe-modal').classList.contains('active')) {
+    if (!isDragging && autoRotateModal) {
+      modalGroup.rotation.y += 0.0015;
+      modalClouds.rotation.y += 0.0022;
+    }
+    modalRenderer.render(modalScene, modalCamera);
+  }
 }
 animate();
 
 window.addEventListener('resize', () => {
-  const w = container.clientWidth;
-  const h = container.clientHeight;
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
-  renderer.setSize(w, h);
+  resizeModalGlobe();
 });
 
 // =========================================================================
@@ -339,5 +357,5 @@ function closeModal() {
   document.getElementById('image-modal').classList.remove('active');
 }
 
-// 起動時初期化
+// 初期表示
 showOverview();
