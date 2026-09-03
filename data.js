@@ -355,7 +355,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             id: "seth-03",
-            name: "セト（セト獣神機） [SETH / THIRD GEN]",
+            name: "セト [SETH]",
             image: "seth.png",
             specs: [
               { label: "全高 / 分類", value: "14.0m / 乱戦・攪乱・暗殺・混沌戦" },
@@ -419,7 +419,7 @@ const SECTORS_DATA = [
         ]
       },
       {
-        factionName: "ドゥルガー系機体",
+        factionName: "ドゥルガー系",
         factionCode: "DIV-06-B // DURGA",
         mechaList: [
           {
@@ -469,7 +469,7 @@ const SECTORS_DATA = [
         factionCode: "DIV-07 // CREATOR CLASS",
         mechaList: [
           {
-            name: "ケツァルコアルト [QUETZALCOATL]",
+            name: "ケツァルコアルトル [QUETZALCOATL]",
             image: "quetzalcoatl.png",
             specs: [
               { label: "全高 (頭頂部)", value: "14.0m / 重量: 不明" },
@@ -661,32 +661,14 @@ const SECTORS_DATA = [
     theme: {
       accent: "#e11d48",
       pattern: "pattern-mandala",
-      symbol: "❖",
+      symbol: "🔥",
       code: "AHURA_MAINYU"
     },
     subFactions: [
       {
-        factionName: "二元神格系",
+        factionName: "ゾロアスター",
         factionCode: "DIV-10 // ZOROASTER",
         mechaList: [
-          {
-            name: "アンラ・マンユ [ANRA MAINYU]",
-            image: "anra_mainyu.png",
-            specs: [
-              { label: "分類", value: "対神兵器 / 侵食型" },
-              { label: "全高 / 重量", value: "14.0m / 不明" },
-              { label: "動力源", value: "不明（超越的）" },
-              { label: "乗員", value: "1名（胸部コックピット）" },
-              { label: "装甲表面", value: "黒真珠塗層（微細なパール粒子による干渉色）" }
-            ],
-            doctrineTitle: "運用ドクトリン: 侵食同化・静かな支配",
-            doctrineText: "アンラ・マンユは、完成された秩序を象徴する漆黒の巨人。その存在は悪そのものではない。あらゆるものに「浸食」し、同化し、本来の姿を塗り替えていく。触れた者の構造・機能・意志にまで干渉し、自身の性質へと変質させる。それは破壊ではなく、静かな支配。",
-            relicStory: {
-              tag: "INDIVIDUAL LOG // ANRA-01",
-              title: "破壊の精神・侵食の意志",
-              text: "「アンラ・マンユの技術は『書き換え』の技術である。それは物質だけでなく、情報、機能、場合によっては彼の目的は破壊ではなく、世界を静かに“自分の形”へ浸食し、再構成することにある。」"
-            }
-          },
           {
             name: "アフラ・マズダ [AHURA MAZDA]",
             image: "ahura_mazda.png",
@@ -703,6 +685,24 @@ const SECTORS_DATA = [
               tag: "INDIVIDUAL LOG // AHURA-01",
               title: "秩序の神機",
               text: "「『秩序』の概念 —— 自己不変の理 —— アフラ・マズダの秩序により、絶対に折れず、曲がらず、欠けることもない。滑らかな曲面から、人体には存在し得ない鋭角的な装甲が自然に突出す。"
+            }
+          },
+          {
+            name: "アンラ・マンユ [ANRA MAINYU]",
+            image: "anra_mainyu.png",
+            specs: [
+              { label: "分類", value: "対神兵器 / 侵食型" },
+              { label: "全高 / 重量", value: "14.0m / 不明" },
+              { label: "動力源", value: "不明（超越的）" },
+              { label: "乗員", value: "1名（胸部コックピット）" },
+              { label: "装甲表面", value: "黒真珠塗層（微細なパール粒子による干渉色）" }
+            ],
+            doctrineTitle: "運用ドクトリン: 侵食同化・静かな支配",
+            doctrineText: "アンラ・マンユは、完成された秩序を象徴する漆黒の巨人。その存在は悪そのものではない。あらゆるものに「浸食」し、同化し、本来の姿を塗り替えていく。触れた者の構造・機能・意志にまで干渉し、自身の性質へと変質させる。それは破壊ではなく、静かな支配。",
+            relicStory: {
+              tag: "INDIVIDUAL LOG // ANRA-01",
+              title: "破壊の精神・侵食の意志",
+              text: "「アンラ・マンユの技術は『書き換え』の技術である。それは物質だけでなく、情報、機能、場合によっては彼の目的は破壊ではなく、世界を静かに“自分の形”へ浸食し、再構成することにある。」"
             }
           }
         ]
@@ -730,7 +730,7 @@ const SECTORS_DATA = [
     },
     subFactions: [
       {
-        factionName: "ポリネシアン同盟",
+        factionName: "ポリネシア",
         factionCode: "DIV-11 // POLYNESIAN ALLIANCE",
         mechaList: [
           {
