@@ -194,10 +194,8 @@ const SECTORS_DATA = [
               title: "崑崙山鍾乳洞の天印浮遊核",
               text: "崑崙山地下鍾乳洞にて、局所的な重力異常を放つ状態で発見。手掌サイズの金印型法宝から展開される質量固定フィールドは、周囲数十メートルの岩盤を完全に圧壊させていた。"
             }
-          }
-        ]
-      },
-      {
+          },
+          {
             name: "玉鼎真人 [GYOKUTEI SHINJIN]",
             image: "gyokuteishinjin.png",
             specs: [
@@ -375,7 +373,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             id: "seth-03",
-            name: "セト [SETH]",
+            name: "セト（セト獣神機） [SETH / THIRD GEN]",
             image: "seth.png",
             specs: [
               { label: "全高 / 分類", value: "14.0m / 乱戦・攪乱・暗殺・混沌戦" },
@@ -439,7 +437,7 @@ const SECTORS_DATA = [
         ]
       },
       {
-        factionName: "ドゥルガー系",
+        factionName: "ドゥルガー系機体",
         factionCode: "DIV-06-B // DURGA",
         mechaList: [
           {
@@ -489,7 +487,7 @@ const SECTORS_DATA = [
         factionCode: "DIV-07 // CREATOR CLASS",
         mechaList: [
           {
-            name: "ケツァルコアルトル [QUETZALCOATL]",
+            name: "ケツァルコアルト [QUETZALCOATL]",
             image: "quetzalcoatl.png",
             specs: [
               { label: "全高 (頭頂部)", value: "14.0m / 重量: 不明" },
