@@ -198,6 +198,26 @@ const SECTORS_DATA = [
         ]
       },
       {
+            name: "玉鼎真人 [GYOKUTEI SHINJIN]",
+            image: "gyokuteishinjin.png",
+            specs: [
+              { label: "全高 / 重量", value: "14.1m / 17.9t" },
+              { label: "動力", value: "霊気炉「護衡心」改" },
+              { label: "主素材", value: "崑崙神鉄・星辰玉髄" },
+              { label: "所属", value: "玉虚宮・崑崙山金光洞" },
+              { label: "主要法宝", value: "斬仙剣（レーザー切断ファンネル）" }
+            ],
+            doctrineTitle: "運用ドクトリン: 切断・精密制圧",
+            doctrineText: "広成子の春天印が「圧塊・質量制圧」を主とするのに対し、玉鼎真人は「切断・精密制圧」を主眼とする。多数の斬仙剣を同時制御する術式回路を全身に内蔵し、闘域を刃線で支配する。",
+            relicStory: {
+              tag: "INDIVIDUAL LOG // GYOKUTEI-01",
+              title: "崑崙十二仙・玉鼎門弟子",
+              text: "「玉虚宮の高弟にして、斬仙剣の使い手。斬仙剣を数多く翳起し、自在に操りて敵を切断する遠距離戦闘を得意とする。広成子と同じく、崑崙十二仙の一人として数多の戦いに参した。」"
+            }
+          }
+        ]
+      },
+      {
         factionName: "截教・金鰲島系",
         factionCode: "DIV-03-B // JIEJIAO JIN'AO",
         mechaList: [
