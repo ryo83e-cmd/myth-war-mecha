@@ -829,5 +829,50 @@ const SECTORS_DATA = [
       title: "ハワイ諸島 マナ循環・タトゥー装甲調査総括",
       text: "ハワイおよびポリネシア全域の海底・火山層から発掘された機体群は、巨体と圧倒的な重量級フレームを特徴とする。全身に刻まれた幾何学的なタトゥーモールドは、マナ（生命エネルギー）の流動を制御する高度な導電路として機能する。"
     }
+  },
+  {
+    id: "sector-celtic",
+    mythBadge: "CELTIC MYTH",
+    btnLabel: "アイルランド",
+    sectorTag: "SECTOR 12 // BRITISH ISLES",
+    sectorName: "アイルランド",
+    lat: 53.3498,
+    lon: -6.2603,
+    theme: {
+      accent: "#22c55e",
+      pattern: "pattern-celtic-knot",
+      symbol: "꩜",
+      code: "TRISKELION_CORE"
+    },
+    subFactions: [
+      {
+        factionName: "ダーナ神族",
+        factionCode: "DIV-12 // TUATHA DE DANNAN",
+        mechaList: [
+          {
+            name: "ルー [LUGH]",
+            image: "lugh.png",
+            specs: [
+              { label: "全高 / 重量", value: "約32m級（推定） / 不明" },
+              { label: "分類", value: "ケルト神話系・神機" },
+              { label: "搭乗数", value: "1機" },
+              { label: "主武装", value: "アサル（万能の槍） / ラウンドシールド（左肩装着）" }
+            ],
+            doctrineTitle: "運用ドクトリン: 攻防一体・万能槍自律運用",
+            doctrineText: "古代ケルトの鎧と装飾文様を現代の神機技術で再構成した多機能・万能型の機体。主武装「アサル」の投擲・伸縮・自律運用（ドローン形態）と、左肩のラウンドシールドを駆使した攻防一体の戦術スタイルを持つ。",
+            relicStory: {
+              tag: "INDIVIDUAL LOG // LUGH-01",
+              title: "光を運び、世界を繋ぐ万能の神",
+              text: "ケルトの三つ巴（トリスケリオン）や結び目文様（インターレース）、唐草模様が装甲に刻印された32m級の超大型機体。首元には神聖さと威厳を強調する円環状の装飾「トルク」を備える。主武装のアサルは伸縮自在であり、手持ち武器としてだけでなく、分離してドローンとして自律飛翔し、帰還・収束までを単一の兵装で実現する。"
+            }
+          }
+        ]
+      }
+    ],
+    story: {
+      tag: "REGION SURVEY // SECTOR-12 OVERVIEW",
+      title: "ブリテン諸島 ケルト神話遺構調査総括",
+      text: "アイルランドからブリテン島にかけての深層遺跡から発掘された機体群。独特の結び目文様（インターレース）とトリスケリオンの意匠を持ち、自然との調和や高度な自律兵装運用技術（ドローン兵器など）を特徴とする。"
+    }
   }
 ];
