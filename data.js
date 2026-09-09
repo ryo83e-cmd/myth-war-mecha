@@ -656,7 +656,7 @@ const SECTORS_DATA = [
             }
           },
           {
-            name: "コトワカノオ [KOTOWAKANOO]",
+            name: "事解男命 [KOTOSAKANOO]",
             image: "kotowakanoo.png",
             specs: [
               { label: "全高 / 重量", value: "約14.6m / 約48.5t" },
@@ -666,7 +666,7 @@ const SECTORS_DATA = [
               { label: "主兵装", value: "断界大鉄（コトサカノハサミ）" }
             ],
             doctrineTitle: "運用ドクトリン: 接近断絶・近接斬滅特化",
-            doctrineText: "境界を断ち、繋がりを絶つ。それが、我が神業。世界に満ちる結界、動力、精神の繋がり――その全てを、鋏で断つ。断絶の神、コトワカノオ。",
+            doctrineText: "境界を断ち、繋がりを絶つ。それが、我が神業。世界に満ちる結界、動力、精神の繋がり――その全てを、鋏で断つ。断絶の神、コトサカノオ。",
             relicStory: {
               tag: "INDIVIDUAL LOG // KOTOWAKANOO-01",
               title: "断るは物だけではない、世界の繋がりだ",
