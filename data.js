@@ -196,7 +196,7 @@ const SECTORS_DATA = [
             }
           },
           {
-            name: "玉鼎真人 [GYOKUTEI SHINJIN]",
+            name: "玉鼎真人 [Yùdǐng Zhēnrén]",
             image: "gyokuteishinjin.png",
             specs: [
               { label: "全高 / 重量", value: "14.1m / 17.9t" },
