@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MYTHEOGONICA // FIELD ARCHIVE</title>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            font-family: sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .flavor-sidebar {
+            width: 320px;
+            background: #111827;
+            border-right: 1px solid #1f2937;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .flavor-sidebar h2 {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            letter-spacing: 0.1em;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .flavor-nav-item {
+            display: block;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #1f2937;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #d1d5db;
+            transition: 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .flavor-nav-item:hover,
+        .flavor-nav-item.active {
+            background: #1e293b;
+            color: #fff;
+            border-left-color: #3b82f6;
+        }
+
+        .nav-name {
+            display: block;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 3px;
+        }
+
+        .nav-sector {
+            display: block;
+            font-size: 0.75rem;
+            color: #60a5fa;
+            opacity: 0.9;
+        }
+
+        .flavor-main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .flavor-card {
+            max-width: 1000px;
+            width: 100%;
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .flavor-header {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 15px;
+        }
+
+        .flavor-header h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            color: #f3f4f6;
+        }
+
+        .flavor-meta {
+            font-size: 0.85rem;
+            color: #60a5fa;
+            margin-top: 5px;
+            font-family: monospace;
+            letter-spacing: 0.05em;
+        }
+
+        .flavor-image-box {
+            width: 100%;
+            max-height: 600px;
+            background: #000;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flavor-image-box img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .flavor-text-box {
+            background: #1f2937;
+            padding: 20px;
+            border-left: 4px solid #3b82f6;
+            border-radius: 0 4px 4px 0;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #e5e7eb;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- サイドバー：レポート一覧 -->
+    <aside class="flavor-sidebar">
+        <h2>FIELD ARCHIVES</h2>
+        <div id="flavor-nav-list">
+            <!-- JavaScriptで動的生成 -->
+        </div>
+    </aside>
+
+    <!-- メインビュー：調査報告書 -->
+    <main class="flavor-main">
+        <div style="width: 100%; max-width: 1000px;">
+            <a href="../index.html" class="back-link">← メインデータベースへ戻る</a>
+        </div>
+
+        <div class="flavor-card">
+            <div class="flavor-header">
+                <h1 id="flavor-title">読み込み中...</h1>
+                <div id="flavor-meta" class="flavor-meta">--</div>
+            </div>
+
+            <div class="flavor-image-box">
+                <img id="flavor-img" src="" alt="Flavor Image">
+            </div>
+
+            <div class="flavor-text-box">
+                <p id="flavor-text">データを取得しています...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="flavor.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+[
+    {
+        "flavorId": "lugh-excavation-01",
+        "mechaId": "lugh",
+        "title": "アイルランド西岸・巨石群発掘現場",
+        "sector": "アイルランド（ケルト）",
+        "json": "lugh_excavation.json"
+    },
+    {
+        "flavorId": "nakisawame-hangar-01",
+        "mechaId": "nakisawame",
+        "title": "陸上自衛隊 第3即応機動連隊格納庫",
+        "sector": "日本（天津神系）",
+        "json": "nakisawame_hangar.json"
+    },
+    {
+        "flavorId": "kotowakanoo-night-01",
+        "mechaId": "kotowakanoo",
+        "title": "臨海工業地帯 夜間配備テスト",
+        "sector": "日本（天津神系）",
+        "json": "kotowakanoo_night.json"
+    },
+    {
+        "flavorId": "tlaloc-storm-01",
+        "mechaId": "tlaloc",
+        "title": "メキシコ湾岸 暴風雨下での前線展開",
+        "sector": "メキシコ（メソアメリカ）",
+        "json": "tlaloc_storm.json"
+    }
+]
