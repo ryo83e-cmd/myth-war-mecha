@@ -23,8 +23,29 @@
     {
         "flavorId": "tlaloc-storm-01",
         "mechaId": "tlaloc",
-        "title": "メキシコ湾岸 暴風雨下での前線展開",
+        "title": "サン・ミゲル要塞近縁海上 慣熟訓練",
         "sector": "メキシコ（メソアメリカ）",
         "json": "tlaloc_storm.json"
+    },
+    {
+        "flavorId": "nezha-hangar-01",
+        "mechaId": "nezha",
+        "title": "中国軍事格納庫 起動・整備レポート",
+        "sector": "中国（道教・闡教）",
+        "json": "nezha_hangar.json"
+    },
+    {
+        "flavorId": "garuda-flight-01",
+        "mechaId": "garuda",
+        "title": "インド領空 飛行演習レポート",
+        "sector": "インド（ヴェーダ）",
+        "json": "garuda_flight.json"
+    },
+    {
+        "flavorId": "seth-test-01",
+        "mechaId": "seth",
+        "title": "砂漠遺跡発掘・起動テストレポート",
+        "sector": "エジプト（ヘリオポリス）",
+        "json": "seth_test.json"
     }
 ]
