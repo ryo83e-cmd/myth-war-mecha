@@ -23,7 +23,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "アテナ [PALLAS ATHENA]",
-            image: "athena.png",
+            image: "img/athena.png",
             specs: [
               { label: "全高 / 重量", value: "14.2m / 23.6t" },
               { label: "動力", value: "精神波インターフェース型神経炉" },
@@ -40,7 +40,7 @@ const SECTORS_DATA = [
           },
           {
             name: "アレス [ARES]",
-            image: "ares.png",
+            image: "img/ares.png",
             specs: [
               { label: "所属 / 主神", value: "ギリシャ神話体系 / 軍神アレス" },
               { label: "全高 / 重量", value: "13.9m / 26.8t" },
@@ -65,7 +65,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "ヘリオス [HELIOS]",
-            image: "helios.png",
+            image: "img/helios.png",
             specs: [
               { label: "全高 / 分類", value: "15.8m / 単騎戦闘特化型機体（ティターン神族）" },
               { label: "重量", value: "不明（推定：中量級）" },
@@ -110,7 +110,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "テュール [TÝR]",
-            image: "tyr.png",
+            image: "img/tyr.png",
             specs: [
               { label: "分類 / 神格", value: "アース神族 基準機・万能型 / 正義・契約・勇気・勝利の神" },
               { label: "全高 / 重量", value: "14.2m / 38.7t" },
@@ -135,7 +135,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "フレイ [FREYR]",
-            image: "freyr.png",
+            image: "img/freyr.png",
             specs: [
               { label: "全高 / 重量", value: "14.3m / 41.7t" },
               { label: "動力", value: "北欧系人工筋肉弾性素子" },
@@ -180,7 +180,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "広成子 [GUANGCHENGZI]",
-            image: "kouseishi.png",
+            image: "img/kouseishi.png",
             specs: [
               { label: "全高 / 重量", value: "14.1m / 18.4t" },
               { label: "動力", value: "霊気炉「乾元」" },
@@ -197,7 +197,7 @@ const SECTORS_DATA = [
           },
           {
             name: "玉鼎真人 [Yùdǐng Zhēnrén]",
-            image: "gyokuteishinjin.png",
+            image: "img/gyokuteishinjin.png",
             specs: [
               { label: "全高 / 重量", value: "14.1m / 17.9t" },
               { label: "動力", value: "霊気炉「護衡心」改" },
@@ -215,7 +215,7 @@ const SECTORS_DATA = [
           },
           {
             name: "哪吒 [NEZHA]",
-            image: "nezha.png",
+            image: "img/nezha.png",
             specs: [
               { label: "全高 / 重量", value: "11.8m / 16.7t" },
               { label: "動力", value: "精神波・生体エネルギー増幅炉（地脈励起対応）" },
@@ -240,7 +240,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "金光仙 [JIN GUANG XIAN]",
-            image: "jinguangxian.png",
+            image: "img/jinguangxian.png",
             specs: [
               { label: "分類 / 所属", value: "截教 基本機 / 金鰲島・截教" },
               { label: "全高 / 重量", value: "14.2m / 28.6t" },
@@ -259,7 +259,7 @@ const SECTORS_DATA = [
           },
           {
             name: "王貴人 [WÁNG GUÌRÉN]",
-            image: "wangguiren.png",
+            image: "img/wangguiren.png",
             specs: [
               { label: "所属 / 操者", value: "金鰲島・截教 / 無仙骨者（人間）" },
               { label: "正体 / 全高", value: "玉石琵琶精 / 13.8m" },
@@ -306,7 +306,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "エンリル [ENLIL]",
-            image: "enlil.png",
+            image: "img/enlil.png",
             specs: [
               { label: "全高 / 重量", value: "14.0m / 不明（重戦闘型）" },
               { label: "装甲構造", value: "積層装甲構造（大判蛇腹状装甲）" },
@@ -323,7 +323,7 @@ const SECTORS_DATA = [
           },
           {
             name: "ヌスク [NUSKU / NUSKA]",
-            image: "nusku.png",
+            image: "img/nusku.png",
             specs: [
               { label: "全高 / 分類", value: "13.2m / メソポタミア神格機・神使機（sukkal）" },
               { label: "重量", value: "不明（推定：中重量級）" },
@@ -369,7 +369,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "ホルス [HORUS]",
-            image: "horus.png",
+            image: "img/horus.png",
             specs: [
               { label: "全高 / 分類", value: "14.0m / 天空戦・高機動型" },
               { label: "主武装", value: "ホルスの槍 / 羽型ハンド（エネルギー刃）" },
@@ -386,7 +386,7 @@ const SECTORS_DATA = [
           },
           {
             name: "バステト [BASTET]",
-            image: "bastet.png",
+            image: "img/bastet.png",
             specs: [
               { label: "全高 / 分類", value: "14.0m（想定） / 女性型シルエット・猫科の運動性能" },
               { label: "重量", value: "28.5t（想定）" },
@@ -429,7 +429,7 @@ const SECTORS_DATA = [
           {
             id: "seth-03",
             name: "セト（セト獣神機） [SETH / THIRD GEN]",
-            image: "seth.png",
+            image: "img/seth.png",
             specs: [
               { label: "全高 / 分類", value: "14.0m / 乱戦・攪乱・暗殺・混沌戦" },
               { label: "重量", value: "29.6t" },
@@ -474,7 +474,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "ヴァーユ [VAYU]",
-            image: "vayu.png",
+            image: "img/vayu.png",
             specs: [
               { label: "全高 / 分類", value: "14.0m / 天空神・風神・気神" },
               { label: "主能力", value: "風の運用・気流操作・バリア展開" },
@@ -491,7 +491,7 @@ const SECTORS_DATA = [
           },
           {
             name: "ヴァルナ [VARUNA]",
-            image: "varuna.png",
+            image: "img/varuna.png",
             specs: [
               { label: "全高 / 分類", value: "14.0m / 天空神・水神・監視神（インド神話体系）" },
               { label: "主武装", value: "流体金属ウルミン（軟剣・鞭刃）" },
@@ -508,7 +508,7 @@ const SECTORS_DATA = [
           },
           {
             name: "アグニ [AGNI]",
-            image: "agni.png",
+            image: "img/agni.png",
             specs: [
               { label: "全高 / 分類", value: "14.0m / 天空神・火神・燃焼神（インド神話体系）" },
               { label: "主武装", value: "三鉤杵剣（さんこうしょけん） / 高周波振動加熱装置（左前腕）" },
@@ -525,7 +525,7 @@ const SECTORS_DATA = [
           },
           {
             name: "ガルーダ [GARUDA]",
-            image: "garuda.png",
+            image: "img/garuda.png",
             specs: [
               { label: "全高 / 翼長", value: "約40m級 / 翼長 約80〜100m級" },
               { label: "分類", value: "インド神話系・神獣型特化機 / ヴァーハーナ（乗り物）" },
@@ -548,7 +548,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "カーリー [KÄLĪ]",
-            image: "kali.png",
+            image: "img/kali.png",
             specs: [
               { label: "全高 / 重量", value: "14.0m / 33.6t" },
               { label: "所属", value: "ドゥルガー系・アスラ派閥 異端朧讃機体フレーム" },
@@ -611,7 +611,7 @@ const SECTORS_DATA = [
             }
           }, {
             name: "ケツァルコアルト [QUETZALCOATL]",
-            image: "quetzalcoatl.png",
+            image: "img/quetzalcoatl.png",
             specs: [
               { label: "全高 (頭頂部)", value: "14.0m / 重量: 不明" },
               { label: "機体方式", value: "精神波同期式コアドライブ" },
@@ -628,7 +628,7 @@ const SECTORS_DATA = [
           },
           {
             name: "トラロック [TLALOC]",
-            image: "tlaloc.png",
+            image: "img/tlaloc.png",
             specs: [
               { label: "全高 / 分類", value: "14.0m / 雨神・雷神機" },
               { label: "所属", value: "メソアメリカ神話圏 / 第三の太陽の雨神" },
@@ -674,7 +674,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "イザナギ [IZANAGI]",
-            image: "izanagi.png",
+            image: "img/izanagi.png",
             specs: [
               { label: "分類 / 全高", value: "日本系 基準機 / 18.2m" },
               { label: "重量", value: "63.8t" },
@@ -692,7 +692,7 @@ const SECTORS_DATA = [
           },
           {
             name: "天手力男 [AMENOTAJIKARAO]",
-            image: "tajikarao.png",
+            image: "img/tajikarao.png",
             specs: [
               { label: "世代 / 所属", value: "天津神系譜 第二世代機 / 天津神軍・機動神兵群" },
               { label: "全高 / 重量", value: "14.0m / 32.6t" },
@@ -711,7 +711,7 @@ const SECTORS_DATA = [
           },
           {
             name: "ナキサワメ [NAKISAWAME]",
-            image: "nakisawame.png",
+            image: "img/nakisawame.png",
             specs: [
               { label: "全高 / 重量", value: "約18.2m / 約61.7t" },
               { label: "分類", value: "女神・涙・哀傷" },
@@ -729,7 +729,7 @@ const SECTORS_DATA = [
           },
           {
             name: "コトワカノオ [KOTOWAKANOO]",
-            image: "kotowakanoo.png",
+            image: "img/kotowakanoo.png",
             specs: [
               { label: "全高 / 重量", value: "約14.6m / 約48.5t" },
               { label: "分類", value: "男神・断界・斬滅" },
@@ -753,7 +753,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "猿田彦 [SARUTAHIKO]",
-            image: "sarutahiko.png",
+            image: "img/sarutahiko.png",
             specs: [
               { label: "分類 / 世代", value: "国津神系譜 第一世代機 / 日本系 基準機" },
               { label: "全高 / 重量", value: "16.8m / 58.7t" },
@@ -800,7 +800,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "オグン [OGUN]",
-            image: "ogun.png",
+            image: "img/ogun.png",
             specs: [
               { label: "所属 / 主神", value: "西アフリカ神話体系（ヨルバ） / 鉄と鍛冶・戦争と開拓の主神" },
               { label: "全高 / 重量", value: "14.0m / 23.8t" },
@@ -865,7 +865,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "アフラ・マズダ [AHURA MAZDA]",
-            image: "ahura_mazda.png",
+            image: "img/ahura_mazda.png",
             specs: [
               { label: "分類", value: "神機兵器 / 秩序型" },
               { label: "全高 / 重量", value: "14.0m / 不明" },
@@ -883,7 +883,7 @@ const SECTORS_DATA = [
           },
           {
             name: "アンラ・マンユ [ANRA MAINYU]",
-            image: "anra_mainyu.png",
+            image: "img/anra_mainyu.png",
             specs: [
               { label: "分類", value: "対神兵器 / 侵食型" },
               { label: "全高 / 重量", value: "14.0m / 不明" },
@@ -929,7 +929,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "クー [KŪ]",
-            image: "ku.png",
+            image: "img/ku.png",
             specs: [
               { label: "分類 / 神格", value: "ハワイセクター 基準機 / ハワイ神話 戦神・政治神" },
               { label: "全高 / 重量", value: "19.2m / 78.4t" },
@@ -976,7 +976,7 @@ const SECTORS_DATA = [
         mechaList: [
           {
             name: "ルー [LUGH]",
-            image: "lugh.png",
+            image: "img/lugh.png",
             specs: [
               { label: "全高 / 重量", value: "約32m級（推定） / 不明" },
               { label: "分類", value: "ケルト神話系・神機" },
